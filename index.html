@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Noora Alhajeri — Sketch Journey Portfolio</title>
+    <meta name="description"
+        content="A continuous, scroll-driven sketch portfolio where you walk a hand-drawn path through About, Projects, Sketchbook, Photos, and Research." />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --paper: #fbfaf7;
+            --ink: #181818;
+            --pencil: #8b8b8b;
+            --accent: #ff7a00;
+            --accent2: #4f46e5;
+            --card: #fff;
+            --shadow: rgba(0, 0, 0, .08);
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root {
+                --paper: #0e1116;
+                --ink: #f1f2f6;
+                --card: #10141b;
+                --pencil: #9aa0a6;
+                --shadow: rgba(0, 0, 0, .45);
+            }
+        }
+
+        html,
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Inter, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+            line-height: 1.6
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(0, 0, 0, .05), transparent 40%),
+                radial-gradient(circle at 80% 0%, rgba(0, 0, 0, .04), transparent 45%),
+                linear-gradient(transparent 97%, rgba(0, 0, 0, .05) 100%);
+            mix-blend-mode: multiply;
+            pointer-events: none
+        }
+
+        .squiggle,
+        svg {
+            filter: url(#squiggleFilter)
+        }
+
+        .topbar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 10px;
+            z-index: 30;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .bar {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            background: var(--card);
+            border: 2px solid var(--ink);
+            border-radius: 14px;
+            box-shadow: 6px 6px 0 0 var(--ink), 0 8px 22px var(--shadow);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px dashed var(--pencil);
+            background: conic-gradient(from 200deg, #ddd, #f6f6f6, #ececec, #ddd);
+            position: relative
+        }
+
+        .avatar::after {
+            content: "✎";
+            position: absolute;
+            right: 4px;
+            bottom: -2px;
+            font-family: Patrick Hand;
+            color: var(--pencil)
+        }
+
+        .brand {
+            font-family: Caveat, cursive;
+            font-size: 22px;
+            margin: 0
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-left: 10px
+        }
+
+        .tab {
+            font-family: Patrick Hand, cursive;
+            font-size: 16px;
+            padding: 8px 10px;
+            background: var(--card);
+            border: 2px solid var(--ink);
+            border-radius: 12px;
+            cursor: pointer
+        }
+
+        .tab.active {
+            background: #fff7ee;
+            border-color: var(--accent);
+            box-shadow: 2px 2px 0 0 var(--accent)
+        }
+
+        .tab:hover {
+            transform: translate(-1px, -1px) rotate(-.2deg)
+        }
+
+        .journey {
+            position: relative;
+            height: 620vh;
+        }
+
+        .sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden
+        }
+
+        .scene {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--ink);
+            border-radius: 18px;
+            background: var(--card);
+            box-shadow: 6px 6px 0 0 var(--ink), 0 12px 30px var(--shadow);
+        }
+
+        .bg path {
+            stroke: currentColor;
+            opacity: .06;
+            fill: none;
+            stroke-width: 2
+        }
+
+        .road-fat {
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 14;
+            opacity: .10
+        }
+
+        .road {
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 6 10
+        }
+
+        .ghost {
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 2;
+            opacity: .22;
+            stroke-dasharray: 3 6
+        }
+
+        .walker {
+            transform-box: fill-box;
+            transform-origin: center
+        }
+
+        .walker .leg {
+            animation: leg .55s ease-in-out infinite alternate
+        }
+
+        .walker .leg.r {
+            animation-delay: .25s
+        }
+
+        @keyframes leg {
+            from {
+                transform: rotate(10deg)
+            }
+
+            to {
+                transform: rotate(-10deg)
+            }
+        }
+
+        .sign text {
+            font-family: Patrick Hand, cursive;
+            font-size: 18px
+        }
+
+        .sign {
+            cursor: pointer;
+            transition: transform .06s
+        }
+
+        .sign:hover {
+            transform: translateY(-2px)
+        }
+
+        .stop {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(960px, 92vw);
+            background: var(--card);
+            border: 2px solid var(--ink);
+            border-radius: 18px;
+            box-shadow: 6px 6px 0 0 var(--ink), 0 12px 30px var(--shadow);
+            padding: clamp(16px, 2vw, 28px);
+        }
+
+        .stop::before {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border: 2px dashed rgba(0, 0, 0, .15);
+            border-radius: 22px;
+            transform: rotate(-.4deg);
+            pointer-events: none
+        }
+
+        .stop h2 {
+            margin: 0 0 10px;
+            font-family: Caveat, cursive;
+            font-size: 36px
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 2px solid var(--ink);
+            border-radius: 14px;
+            background: var(--card);
+            box-shadow: 4px 4px 0 0 var(--ink);
+            font-family: Patrick Hand, cursive;
+            cursor: pointer
+        }
+
+        .btn:hover {
+            transform: translate(-1px, -1px) rotate(-.2deg)
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: Patrick Hand, cursive;
+            font-size: 14px;
+            padding: 2px 8px;
+            border: 2px solid var(--ink);
+            border-radius: 999px;
+            background: #fff7ee;
+            margin-right: 6px
+        }
+
+        .muted {
+            color: var(--pencil)
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .grid.projects {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))
+        }
+
+        .card {
+            border: 2px solid var(--ink);
+            border-radius: 16px;
+            padding: 14px 14px 18px;
+            background: linear-gradient(180deg, var(--card), rgba(255, 255, 255, .7));
+            box-shadow: 5px 5px 0 0 var(--ink)
+        }
+
+        .card h3 {
+            margin: 0 0 6px;
+            font-family: Patrick Hand, cursive;
+            font-size: 22px
+        }
+
+        .card p {
+            margin: 0 0 10px
+        }
+
+        .cover {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 0 var(--ink);
+            margin-bottom: 10px;
+            background: #e5e7eb
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid var(--ink);
+            box-shadow: 4px 4px 0 0 var(--ink);
+            cursor: zoom-in;
+            background: #e5e7eb
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50
+        }
+
+        .lightbox.active {
+            display: flex
+        }
+
+        .lightbox img {
+            max-width: min(92vw, 1100px);
+            max-height: 86vh;
+            border-radius: 16px;
+            border: 2px solid var(--ink);
+            box-shadow: 10px 10px 0 0 var(--ink)
+        }
+
+        .stop.about {
+            top: 65vh;
+        }
+
+        .stop.projects {
+            top: 220vh;
+        }
+
+        .stop.art {
+            top: 360vh;
+        }
+
+        .stop.photos {
+            top: 460vh;
+        }
+
+        .stop.research {
+            top: 560vh;
+        }
+    </style>
+</head>
+
+<body>
+    <svg width="0" height="0" style="position:absolute">
+        <filter id="squiggleFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" seed="4" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <div class="topbar squiggle">
+        <div class="bar">
+            <div class="avatar" aria-hidden="true"></div>
+            <p class="brand">Noora Alhajeri</p>
+            <nav class="tabs" role="tablist" aria-label="Sections">
+                <button class="tab active" data-jump="0">Home</button>
+                <button class="tab" data-jump="65">About</button>
+                <button class="tab" data-jump="220">Projects</button>
+                <button class="tab" data-jump="360">Sketchbook</button>
+                <button class="tab" data-jump="460">Photos</button>
+                <button class="tab" data-jump="560">Research</button>
+            </nav>
+        </div>
+    </div>
+
+    <section class="journey" id="journey">
+        <div class="sticky">
+            <svg id="scene" class="scene" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice"
+                aria-hidden="true">
+                <g class="bg">
+                    <path d="M80 120 c120 -60 220 60 340 0 120 -60 220 60 340 0 120 -60 220 60 340 0" />
+                    <path d="M60 640 c120 -60 220 60 340 0 120 -60 220 60 340 0 120 -60 220 60 340 0" />
+                </g>
+                <path id="road-fat" class="road-fat" d="M 60 620 Q 280 140 540 320 T 1140 540" />
+                <path id="road" class="road" d="M 60 620 Q 280 140 540 320 T 1140 540" />
+                <path class="ghost" d="M 60 620 Q 280 140 540 320 T 1140 540" />
+                <g class="sign" data-stop="65" transform="translate(300,240)">
+                    <line x1="0" y1="0" x2="0" y2="44" stroke="currentColor" stroke-width="3" />
+                    <rect x="-36" y="-24" width="88" height="28" rx="6" fill="white" stroke="currentColor"
+                        stroke-width="3" />
+                    <text x="-18" y="-5">About</text>
+                </g>
+                <g class="sign" data-stop="220" transform="translate(600,340)">
+                    <line x1="0" y1="0" x2="0" y2="44" stroke="currentColor" stroke-width="3" />
+                    <rect x="-44" y="-24" width="104" height="28" rx="6" fill="white" stroke="currentColor"
+                        stroke-width="3" />
+                    <text x="-26" y="-5">Projects</text>
+                </g>
+                <g class="sign" data-stop="360" transform="translate(880,460)">
+                    <line x1="0" y1="0" x2="0" y2="44" stroke="currentColor" stroke-width="3" />
+                    <rect x="-52" y="-24" width="120" height="28" rx="6" fill="white" stroke="currentColor"
+                        stroke-width="3" />
+                    <text x="-38" y="-5">Sketchbook</text>
+                </g>
+                <g id="walker" class="walker">
+                    <circle cx="0" cy="-18" r="8" fill="none" stroke="currentColor" stroke-width="3" />
+                    <line x1="0" y1="-10" x2="0" y2="12" stroke="currentColor" stroke-width="3" />
+                    <line class="leg" x1="0" y1="12" x2="-8" y2="28" stroke="currentColor" stroke-width="3" />
+                    <line class="leg r" x1="0" y1="12" x2="8" y2="28" stroke="currentColor" stroke-width="3" />
+                    <line x1="0" y1="2" x2="12" y2="-6" stroke="currentColor" stroke-width="3" />
+                    <line x1="0" y1="2" x2="-12" y2="-6" stroke="currentColor" stroke-width="3" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="stop about" id="about">
+            <h2>About</h2>
+            <p>I’m a Robotics MSc student at MBZUAI and a biomedical engineer focused on humanoids, HRI, prosthetics,
+                motion control, and human body modeling. Currently a Visiting Student Researcher at Khalifa University,
+                building a low-cost tendon-driven bionic hand with photonic tactile sensing and modular control
+                pathways.</p>
+            <div class="row">
+                <a class="btn" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn" href="https://linkedin.com/in/nsh019" target="_blank" rel="noopener">LinkedIn</a>
+                <a class="btn" href="mailto:n.s3eedalhajeri@gmail.com">Email</a>
+                <a class="btn" href="assets/Noora_Alhajeri_CV.pdf" target="_blank" rel="noopener">Resume</a>
+            </div>
+            <p class="muted">Tools: Python • C++ • MATLAB • ROS • PyTorch • OpenCV • Arduino • Raspberry Pi • React •
+                Next.js • Flask • Figma</p>
+        </div>
+
+        <div class="stop projects" id="projects">
+            <h2>Projects</h2>
+            <div id="projects-status" class="muted">Loading projects…</div>
+            <div class="grid projects" id="projects-grid"></div>
+        </div>
+
+        <div class="stop art" id="art">
+            <h2>Sketchbook</h2>
+            <p class="muted">From notebooks to code — click to zoom.</p>
+            <div class="gallery" id="art-gallery"></div>
+        </div>
+
+        <div class="stop photos" id="photos">
+            <h2>Photos</h2>
+            <p class="muted">Street, texture, and accidental geometry.</p>
+            <div class="gallery" id="photo-gallery"></div>
+        </div>
+
+        <div class="stop research" id="research">
+            <h2>Research</h2>
+            <ul>
+                <li>MSc Robotics @ MBZUAI (Aug 2024–Present).</li>
+                <li>Visiting Student Researcher @ Khalifa University (Jun 2025–Present), Biomechanics, Rehabilitation &
+                    Biodesign Lab.</li>
+                <li>Journal: Interactive GUI for Advanced Visualization and Volume Rendering of MRI Data (2024).</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Image viewer">
+        <img id="lightbox-img" alt="Expanded media" />
+    </div>
+
+    <svg width="0" height="0" style="position:absolute">
+        <filter id="squiggleFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" seed="4" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <script>
+        // --- Scroll engine: walker + road
+        const journey = document.getElementById('journey');
+        const road = document.getElementById('road');
+        const walker = document.getElementById('walker');
+        let len = 0;
+        function setupPath() {
+            try { len = road.getTotalLength(); } catch (e) { len = 2000; }
+            road.style.strokeDasharray = len; road.style.strokeDashoffset = len; onScroll();
+        }
+        function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+        function onScroll() {
+            const vh = innerHeight; const total = journey.clientHeight - vh;
+            const scrolled = clamp(scrollY - journey.offsetTop, 0, total);
+            const progress = clamp(scrolled / total, 0, 1);
+            const dash = len * (1 - progress); road.style.strokeDashoffset = dash;
+            const p = road.getPointAtLength(len * progress);
+            walker.setAttribute('transform', `translate(${p.x},${p.y})`);
+        }
+        addEventListener('scroll', onScroll, { passive: true });
+        addEventListener('resize', onScroll);
+        addEventListener('load', setupPath);
+
+        // tabs & signposts jump
+        document.querySelectorAll('.tab,[data-stop]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const pct = el.dataset.jump || el.dataset.stop; if (!pct) return;
+                const vh = innerHeight; const y = journey.offsetTop + parseFloat(pct) * vh / 100;
+                scrollTo({ top: y, behavior: 'smooth' }); e.preventDefault();
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                const match = document.querySelector(`.tab[data-jump="${pct}"]`); match && match.classList.add('active');
+            });
+        });
+
+        // --- GitHub projects with fallback
+        const GH_USER = 'Noora-Alhajeri';
+        const STATUS = document.getElementById('projects-status');
+        const GRID = document.getElementById('projects-grid');
+        const FALLBACK = [{ name: 'BSc-Thesis-Telemedicine-Stethoscope', desc: 'TeleSound — telemedicine stethoscope (WebRTC + pose + Dobot).', topics: ['WebRTC', 'TensorFlow', 'Robotics'] },
+        { name: 'sport-motion-retargeting', desc: 'Motion retargeting experiments.', topics: ['CV', 'Pose'] },
+        { name: 'My-Mobile-Robot', desc: 'Mobile robot platform & control.', topics: ['Robotics', 'Embedded'] },
+        { name: 'GUI-for-the-Visualization-and-Volume-Rendering-of-MRI-Data', desc: 'MRI visualization GUI.', topics: ['MATLAB', 'Med Imaging'] },
+        { name: 'ECG-Simulator-Device', desc: 'ECG simulator HW+SW.', topics: ['Biomedical', 'Embedded'] },
+        { name: 'Smart-Camera', desc: 'Detection/streaming pipeline.', topics: ['OpenCV', 'Edge'] },
+        { name: 'Wearable-IoT-Based-Device-for-Critical-Care-Alzheimer-s-Patients', desc: 'Wearable monitoring.', topics: ['IoT', 'Healthcare'] },
+        { name: 'IoT-Syringe-Pump', desc: 'Networked syringe pump.', topics: ['IoT', 'Control'] },
+        { name: 'bahar', desc: 'Arabic LLM Chatbot (JAIS-13).', topics: ['NLP', 'PyTorch', 'Next.js'] }];
+        const card = ({ title, desc, tags, href, cover }) => `<article class="card">
+    <img class="cover" alt="${title} preview" src="${cover}"/>
+    <h3>${title}</h3><p>${desc || '—'}</p>
+    <div>${(tags || []).map(t => `<span class="tag">${t}</span>`).join('')}</div></article>`;
+        const titleize = n => n.replace(/[-_]/g, ' ').replace(/\b([a-z])/g, m => m.toUpperCase());
+        const tags = r => { const t = []; if (r.language) t.push(r.language); if (r.topics) t.push(...r.topics.slice(0, 3)); return t; }
+        async function j(url, h = {}) {
+            const c = new AbortController(); const id = setTimeout(() => c.abort(), 8000);
+            try {
+                const r = await fetch(url, { headers: { 'Accept': 'application/vnd.github+json', ...h }, mode: 'cors', cache: 'no-store', signal: c.signal });
+                if (!r.ok) throw new Error('GitHub ' + r.status); return await r.json();
+            } finally { clearTimeout(id) }
+        }
+        async function repos() { return await j(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`) }
+        async function cover(r) {
+            for (const d of ['figures', 'images', 'media', 'assets', 'docs']) {
+                try {
+                    const items = await j(`https://api.github.com/repos/${GH_USER}/${r.name}/contents/${d}?ref=${r.default_branch}`);
+                    const f = (items || []).find(x => x.type === 'file' && /\.(png|jpe?g|gif|webp)$/i.test(x.name));
+                    if (f) return `https://raw.githubusercontent.com/${GH_USER}/${r.name}/${r.default_branch}/${d}/${encodeURIComponent(f.name)}`;
+                } catch { }
+            }
+            return `https://opengraph.githubassets.com/1/${GH_USER}/${r.name}`;
+        }
+        async function live() {
+            STATUS.textContent = 'Loading projects from GitHub…';
+            const rs = await repos();
+            await Promise.all(rs.map(async r => { try { const t = await j(`https://api.github.com/repos/${GH_USER}/${r.name}/topics`); r.topics = t.names || [] } catch { r.topics = [] } }));
+            const order = FALLBACK.map(x => x.name);
+            rs.sort((a, b) => {
+                const ia = order.indexOf(a.name), ib = order.indexOf(b.name);
+                if (ia !== -1 && ib !== -1) return ia - ib; if (ia !== -1) return -1; if (ib !== -1) return 1; return new Date(b.pushed_at) - new Date(a.pushed_at)
+            });
+            GRID.innerHTML = '';
+            for (const r of rs) {
+                GRID.insertAdjacentHTML('beforeend',
+                    card({ title: titleize(r.name), desc: r.description || '', tags: tags(r), href: r.html_url, cover: await cover(r) }));
+            }
+            STATUS.textContent = `Loaded ${rs.length} projects.`;
+        }
+        function fallback(reason) {
+            GRID.innerHTML = ''; FALLBACK.forEach(r => GRID.insertAdjacentHTML('beforeend',
+                card({ title: titleize(r.name), desc: r.desc, tags: r.topics, href: `https://github.com/${GH_USER}/${r.name}`, cover: `https://opengraph.githubassets.com/1/${GH_USER}/${r.name}` })));
+            STATUS.textContent = `Showing curated set (live API unavailable${reason ? `: ${reason}` : ''}).`;
+            const b = document.createElement('button'); b.className = 'btn'; b.textContent = 'Retry'; b.onclick = () => init(true); STATUS.append(' ', b);
+        }
+        async function init(force) { try { if (!navigator.onLine) throw new Error('Offline'); await live(); } catch (e) { if (!force && location.protocol === 'file:') fallback('file:// origin'); else fallback(e.message || 'fetch failed'); } }
+        init();
+
+        // Lightbox & galleries (fill arrays after you copy images into /assets)
+        const artImages = []; const photoImages = [];
+        function lightboxOpen(src) { const lb = document.getElementById('lightbox'); const img = document.getElementById('lightbox-img'); img.src = src; lb.classList.add('active'); lb.onclick = () => lb.classList.remove('active'); }
+        function renderGallery(id, arr) { const wrap = document.getElementById(id); wrap.innerHTML = ''; arr.forEach(src => { const im = new Image(); im.loading = 'lazy'; im.src = src; im.alt = 'gallery item'; im.onclick = () => lightboxOpen(src); wrap.appendChild(im); }); }
+        renderGallery('art-gallery', artImages); renderGallery('photo-gallery', photoImages);
+    </script>
+</body>
+
+</html>
