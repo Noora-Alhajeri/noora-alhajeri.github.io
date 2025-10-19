@@ -3,30 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Noora Alhajeri &middot; Front-End Developer</title>
+    <title>Noora Saeed Alhajeri &middot; Creative Technologist</title>
     <meta
       name="description"
-      content="Portfolio for Noora Alhajeri - a front-end developer crafting immersive, thoughtful web experiences inspired by clean Japanese design."
+      content="Portfolio of Noora Saeed Alhajeri &mdash; creative technologist, front-end developer, and robotics researcher crafting sketch-inspired digital experiences."
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Zen+Kurenaido&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #070b16;
-        --bg-alt: #11182f;
-        --bg-card: rgba(19, 26, 44, 0.82);
-        --text: #f1f2f7;
-        --muted: #9da4c1;
-        --accent: #ff4c4c;
-        --accent-soft: rgba(255, 91, 91, 0.25);
-        --accent-secondary: #ffc46b;
-        --border: rgba(255, 255, 255, 0.12);
-        --shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
-        --max-width: 1120px;
-        --card-blur: blur(16px);
+        --canvas: #f7f3ea;
+        --canvas-alt: #f2ede1;
+        --ink: #1c1c1c;
+        --ink-soft: #303030;
+        --muted: #5a5852;
+        --accent: #ff6b4a;
+        --accent-soft: rgba(255, 107, 74, 0.18);
+        --accent-2: #4281ff;
+        --accent-3: #ffe152;
+        --paper-shadow: 0 28px 45px rgba(28, 28, 28, 0.16);
+        --card-shadow: 0 18px 36px rgba(28, 28, 28, 0.12);
+        --border: rgba(28, 28, 28, 0.16);
+        --max-width: 1180px;
         --transition: 180ms ease;
+        color-scheme: only light;
       }
 
       *,
@@ -35,29 +37,35 @@
         box-sizing: border-box;
       }
 
+      html,
       body {
         margin: 0;
-        color: var(--text);
-        background: radial-gradient(circle at -10% -10%, rgba(231, 90, 90, 0.35) 0, rgba(255, 65, 65, 0.12) 22%, transparent 55%), radial-gradient(circle at 110% 20%, rgba(255, 196, 107, 0.28) 0, transparent 55%), radial-gradient(circle at 50% 110%, rgba(78, 90, 255, 0.22) 0, transparent 55%), linear-gradient(160deg, var(--bg) 0%, var(--bg-alt) 65%, #04060c 100%);
-        font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.6;
-        min-height: 100vh;
-        position: relative;
+        font-family: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background-color: var(--canvas);
+        line-height: 1.65;
       }
 
-      body::after {
+      body {
+        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0 12px, transparent 12px),
+          linear-gradient(90deg, rgba(236, 229, 214, 0.28) 1px, transparent 1px);
+        background-size: 100% 24px, 24px 100%;
+        position: relative;
+        min-height: 100vh;
+        padding-bottom: 120px;
+      }
+
+      body::before {
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
-        background-image: linear-gradient(120deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.04) 35%, transparent 55%), url("data:image/svg+xml,%3Csvg width='152' height='152' viewBox='0 0 152 152' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='wave' height='152' width='152' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 76c25-24.5 50-24.5 76 0s51 24.5 76 0M0 0c25-24.5 50-24.5 76 0s51 24.5 76 0' fill='transparent' stroke='rgba(255,255,255,0.06)' stroke-width='4'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='152' height='152' fill='url(%23wave)'/%3E%3C/svg%3E");
-        opacity: 0.65;
+        background: radial-gradient(circle at 12% 18%, rgba(255, 224, 120, 0.45), transparent 54%),
+          radial-gradient(circle at 88% 10%, rgba(66, 129, 255, 0.23), transparent 55%),
+          radial-gradient(circle at 12% 75%, rgba(255, 107, 74, 0.23), transparent 56%);
+        opacity: 0.75;
+        mix-blend-mode: multiply;
         z-index: 0;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
       }
 
       .page {
@@ -68,576 +76,457 @@
       header {
         max-width: var(--max-width);
         margin: 0 auto;
-        padding: 28px 24px 12px;
+        padding: 40px 24px 0;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         gap: 32px;
       }
 
       .brand {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        position: relative;
+        display: grid;
+        gap: 6px;
       }
 
-      .brand::before {
-        content: "";
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, rgba(255, 88, 91, 0.85), rgba(255, 88, 91, 0) 70%);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.25);
+      .brand__name {
+        font-family: "Kalam", cursive;
+        font-size: clamp(2rem, 3vw, 2.5rem);
+        letter-spacing: 0.05em;
+      }
+
+      .brand__tagline {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--muted);
       }
 
       nav {
         display: flex;
-        align-items: center;
-        gap: 24px;
+        gap: 18px;
+        flex-wrap: wrap;
         font-size: 0.95rem;
-        color: var(--muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
       nav a {
+        color: var(--ink);
+        padding: 6px 10px;
+        border-radius: 12px;
         position: relative;
-        transition: color var(--transition);
+        transition: transform var(--transition);
       }
 
       nav a::after {
         content: "";
         position: absolute;
-        bottom: -6px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent-secondary), var(--accent));
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 220ms ease;
+        inset: 0;
+        border-radius: 12px;
+        border: 1.5px dashed rgba(28, 28, 28, 0.35);
+        opacity: 0;
+        transform: rotate(-2deg);
+        transition: opacity var(--transition);
       }
 
-      
       nav a:hover,
       nav a:focus-visible {
-        color: var(--text);
+        transform: translateY(-3px);
       }
 
       nav a:hover::after,
       nav a:focus-visible::after {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
-
-      .button {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 12px 20px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        background: linear-gradient(135deg, rgba(255, 72, 72, 0.92), rgba(255, 124, 88, 0.72));
-        color: #0a101f;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        box-shadow: 0 14px 24px rgba(255, 83, 83, 0.25);
-        transition: transform var(--transition), box-shadow var(--transition);
-      }
-
-      .button:hover,
-      .button:focus-visible {
-        transform: translateY(-2px);
-        box-shadow: 0 16px 28px rgba(255, 83, 83, 0.35);
-      }
-
-      .hero {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 96px 24px 140px;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 60px;
-        align-items: center;
-      }
-
-      .hero-text h1 {
-        font-family: "Zen Kurenaido", sans-serif;
-        font-weight: 400;
-        font-size: clamp(3rem, 6vw, 4.75rem);
-        letter-spacing: 0.08em;
-        margin: 0 0 24px;
-        text-transform: uppercase;
-      }
-
-      .hero-text p {
-        color: var(--muted);
-        font-size: 1.04rem;
-        max-width: 520px;
-      }
-
-      .hero-cta {
-        margin-top: 32px;
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        flex-wrap: wrap;
-      }
-
-      .link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--accent-secondary);
-        font-weight: 600;
-        position: relative;
-      }
-
-      .link::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 999px;
-        padding: 2px;
-        background: linear-gradient(120deg, rgba(255, 196, 107, 0.4), rgba(255, 88, 88, 0.4));
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity var(--transition);
-      }
-
-      .link:hover::after,
-      .link:focus-visible::after {
         opacity: 1;
       }
 
-      .hero-visual {
-        position: relative;
-        isolation: isolate;
+      .contact-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 20px;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 10px 12px 0 rgba(28, 28, 28, 0.18);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-weight: 700;
+        transition: transform var(--transition), box-shadow var(--transition);
+      }
+
+      .contact-cta:hover,
+      .contact-cta:focus-visible {
+        transform: translate(-3px, -3px);
+        box-shadow: 16px 16px 0 rgba(66, 129, 255, 0.25);
+      }
+
+      main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 64px 24px 0;
         display: grid;
-        place-items: center;
-        padding: 32px;
+        gap: 120px;
       }
 
-      .hero-visual::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 50% 35%, rgba(255, 82, 82, 0.65), rgba(255, 82, 82, 0) 65%), linear-gradient(200deg, rgba(21, 28, 52, 0.9) 0%, rgba(4, 8, 18, 0.9) 70%);
-        filter: blur(32px);
-        opacity: 0.75;
-        z-index: -2;
-      }
-
-      .hero-card {
-        width: clamp(280px, 42vw, 420px);
-        aspect-ratio: 3 / 4;
-        border-radius: 28px;
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        box-shadow: var(--shadow);
+      section {
         position: relative;
-        overflow: hidden;
-        padding: 28px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        backdrop-filter: blur(20px);
       }
 
-      .hero-card::before,
-      .hero-card::after {
+      .section__header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 42px;
+      }
+
+      .section__title {
+        font-family: "Kalam", cursive;
+        font-size: clamp(2.3rem, 5vw, 3.2rem);
+        letter-spacing: 0.04em;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+      }
+
+      .section__title::after {
         content: "";
         position: absolute;
-        inset: 0;
-        border-radius: inherit;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 12px;
+        background-image: url("data:image/svg+xml,%3Csvg width='120' height='12' viewBox='0 0 120 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 10c18-6 36-6 56 0s38 6 56 0' stroke='%23ff6b4a' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+        background-repeat: repeat-x;
+        background-size: 120px 12px;
+        opacity: 0.8;
+      }
+
+      .section__lede {
+        max-width: 420px;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .hero {
+        display: grid;
+        gap: 48px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: center;
+      }
+
+      .hero__intro {
+        display: grid;
+        gap: 24px;
+      }
+
+      .hero__intro h1 {
+        margin: 0;
+        font-size: clamp(3rem, 6vw, 4rem);
+        font-family: "Kalam", cursive;
+        letter-spacing: 0.06em;
+      }
+
+      .hero__intro p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .hero__details {
+        display: grid;
+        gap: 16px;
+        font-size: 0.95rem;
+      }
+
+      .hero__details strong {
+        font-weight: 600;
+        color: var(--ink-soft);
+      }
+
+      .hero__card {
+        position: relative;
+        padding: 32px;
+        border-radius: 28px;
+        background: var(--canvas-alt);
+        border: 2px solid var(--ink);
+        box-shadow: var(--paper-shadow);
+        transform: rotate(-2.5deg);
+      }
+
+      .hero__card::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border: 1.5px dashed rgba(28, 28, 28, 0.25);
+        border-radius: 22px;
         pointer-events: none;
       }
 
-      .hero-card::before {
-        background: linear-gradient(120deg, rgba(255, 196, 107, 0.35), rgba(255, 80, 80, 0.12));
-        mix-blend-mode: screen;
-        opacity: 0.75;
-      }
-
-      .hero-card::after {
-        background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1'%3E%3Cpath d='M0 120c40-40 80-40 120 0M0 60c40-40 80-40 120 0M0 0c40-40 80-40 120 0'/%3E%3C/g%3E%3C/svg%3E");
-        opacity: 0.65;
-      }
-
-      .hero-card__title {
-        font-size: 1.125rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .hero-card__subtitle {
-        font-size: 0.95rem;
-        color: var(--muted);
-      }
-
-      .hero-card__footer {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        font-size: 0.92rem;
-      }
-
-      .hero-card__stack {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-
-      .chip {
-        padding: 6px 14px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: var(--text);
-        font-size: 0.78rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-      }
-
-      .section {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 24px 132px;
-      }
-
-      .section__heading {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        margin-bottom: 48px;
-        gap: 24px;
-      }
-
-      .section__heading h2 {
-        font-family: "Zen Kurenaido", sans-serif;
-        font-size: clamp(2rem, 5vw, 3rem);
-        letter-spacing: 0.14em;
-        margin: 0;
-        text-transform: uppercase;
-      }
-
-      .section__heading p {
-        color: var(--muted);
-        max-width: 420px;
-        margin: 0;
-      }
-
-      .about {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 48px;
-      }
-
-      .about__card {
-        background: var(--bg-card);
-        border-radius: 24px;
-        border: 1px solid var(--border);
-        padding: 32px;
-        box-shadow: var(--shadow);
-        backdrop-filter: var(--card-blur);
-      }
-
-      .about__card p {
-        color: var(--muted);
+      .hero__card-title {
+        font-family: "Kalam", cursive;
+        font-size: 1.9rem;
         margin: 0 0 18px;
+        letter-spacing: 0.08em;
       }
 
-      .about__card strong {
-        color: var(--text);
-      }
-
-      .about__grid {
+      .hero__grid {
         display: grid;
         gap: 18px;
       }
 
-      .highlight {
-        padding: 16px 20px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04);
-        color: var(--muted);
-        font-size: 0.93rem;
+      .hero__scribble {
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        top: -52px;
+        right: -32px;
+        background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234281ff' stroke-width='6' stroke-linecap='round'%3E%3Cpath d='M12 35c22-12 44-12 66 0s44 12 66 0' opacity='0.7'/%3E%3Cpath d='M12 75c22-12 44-12 66 0s44 12 66 0'/%3E%3Cpath d='M12 115c22-12 44-12 66 0s44 12 66 0' opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
       }
 
-      .highlight span {
-        display: inline-block;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--accent-secondary);
-        margin-bottom: 8px;
-      }
-
-      .skills {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      }
-
-      .skills__group {
-        padding: 28px;
-        border-radius: 20px;
-        background: rgba(13, 18, 34, 0.8);
-        border: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
-      }
-
-      .skills__group h3 {
-        margin: 0;
-        font-size: 1rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-weight: 600;
-      }
-
-      .skills__group .chip {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.18);
-      }
-
-      .skills__stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .projects-grid {
-        display: grid;
-        gap: 32px;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      }
-
-      .card {
-        background: var(--bg-card);
-        border-radius: 22px;
-        border: 1px solid var(--border);
-        padding: 28px;
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        position: relative;
-        box-shadow: var(--shadow);
-        backdrop-filter: var(--card-blur);
-        transform: translateY(0);
-        transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-      }
-
-      .card:hover {
-        transform: translateY(-6px);
-        border-color: rgba(255, 196, 107, 0.45);
-        box-shadow: 0 22px 46px rgba(0, 0, 0, 0.6);
-      }
-
-      .card__badge {
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--accent-secondary);
-      }
-
-      .card h3 {
-        margin: 8px 0 0;
-        font-size: 1.2rem;
-        letter-spacing: 0.05em;
-      }
-
-      .card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.95rem;
-        flex: 1;
-      }
-
-      .card__footer {
-        display: flex;
+      .badge {
+        display: inline-flex;
         align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      .timeline {
-        display: grid;
-        gap: 28px;
-        position: relative;
-        padding-left: 22px;
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 6px;
-        top: 4px;
-        bottom: 8px;
-        width: 2px;
-        background: linear-gradient(180deg, rgba(255, 196, 107, 0.65), rgba(255, 76, 76, 0.45));
-      }
-
-      .timeline__item {
-        position: relative;
-        padding: 20px 26px;
-        border-radius: 20px;
-        background: rgba(16, 21, 37, 0.85);
-        border: 1px solid var(--border);
-        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.4);
-        display: grid;
         gap: 8px;
-      }
-
-      .timeline__item::before {
-        content: "";
-        position: absolute;
-        left: -21px;
-        top: 24px;
-        width: 12px;
-        height: 12px;
-        background: linear-gradient(135deg, var(--accent-secondary), var(--accent));
-        border-radius: 50%;
-        box-shadow: 0 0 0 4px rgba(255, 87, 87, 0.22);
-      }
-
-      .timeline__meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 18px;
-        font-size: 0.85rem;
-        color: var(--accent-secondary);
-        letter-spacing: 0.08em;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--ink);
+        background: rgba(255, 255, 255, 0.86);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-      }
-
-      .timeline__role {
-        font-size: 1.08rem;
         font-weight: 600;
-        letter-spacing: 0.05em;
-        margin: 4px 0;
       }
 
-      .timeline__desc {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .contact {
-        margin-top: 80px;
-        padding: 48px 36px;
-        border-radius: 32px;
-        background: linear-gradient(135deg, rgba(255, 76, 76, 0.75), rgba(255, 196, 107, 0.65));
-        color: #0f121c;
+      .grid {
         display: grid;
         gap: 24px;
-        box-shadow: 0 26px 64px rgba(0, 0, 0, 0.45);
       }
 
-      .contact h3 {
-        margin: 0;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-size: 1.35rem;
+      .grid--cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .contact p {
-        margin: 0;
-        font-size: 1rem;
-        max-width: 560px;
+      .grid--cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .contact .button {
-        background: #0d1328;
-        color: var(--text);
-        border-color: rgba(12, 18, 42, 0.45);
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
-      }
-
-      footer {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 42px 24px 64px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      .footer-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        flex-wrap: wrap;
-      }
-
-      .footer-links a {
-        color: var(--text);
-        font-weight: 500;
-        letter-spacing: 0.04em;
-      }
-
-      @media (max-width: 980px) {
-        .hero {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-
-        .hero-text p {
-          margin: 0 auto;
-        }
-
-        .hero-cta {
-          justify-content: center;
-        }
-
-        .hero-card {
-          margin: 0 auto;
-        }
-
-        .about {
+      @media (max-width: 960px) {
+        .hero,
+        .grid--cols-2,
+        .grid--cols-3 {
           grid-template-columns: 1fr;
         }
-      }
 
-      @media (max-width: 720px) {
+        .hero__card {
+          transform: rotate(0deg);
+        }
+
         header {
           flex-direction: column;
         }
 
         nav {
-          flex-wrap: wrap;
           justify-content: center;
         }
+      }
 
-        .section {
-          padding-bottom: 96px;
+      .card {
+        position: relative;
+        padding: 28px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1.6px solid rgba(28, 28, 28, 0.12);
+        box-shadow: var(--card-shadow);
+        transition: transform var(--transition), box-shadow var(--transition);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 18px;
+        border: 1.5px dashed rgba(28, 28, 28, 0.22);
+        pointer-events: none;
+        opacity: 0.7;
+      }
+
+      .card:hover,
+      .card:focus-within {
+        transform: translateY(-6px) rotate(-0.5deg);
+        box-shadow: 0 26px 48px rgba(28, 28, 28, 0.2);
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        font-family: "Kalam", cursive;
+        font-size: 1.6rem;
+      }
+
+      .card h4 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .card ul {
+        margin: 12px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .twocol {
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      }
+
+      @media (max-width: 900px) {
+        .twocol {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .timeline {
+        display: grid;
+        gap: 24px;
+      }
+
+      .timeline__item {
+        position: relative;
+        padding: 24px 24px 24px 40px;
+        border-left: 3px solid var(--accent);
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 18px;
+        box-shadow: var(--card-shadow);
+      }
+
+      .timeline__item::before {
+        content: "";
+        position: absolute;
+        left: -12px;
+        top: 28px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid var(--ink);
+        background: var(--accent-3);
+        box-shadow: 6px 6px 0 rgba(255, 107, 74, 0.25);
+      }
+
+      .timeline__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .timeline__role {
+        font-family: "Kalam", cursive;
+        font-size: 1.4rem;
+        margin: 0 0 8px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1.5px dashed rgba(28, 28, 28, 0.32);
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .project-card {
+        display: grid;
+        gap: 14px;
+      }
+
+      .links {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.84rem;
+        color: var(--ink);
+      }
+
+      .links span {
+        display: inline-block;
+        transform: translateY(-2px);
+      }
+
+      footer {
+        max-width: var(--max-width);
+        margin: 120px auto 0;
+        padding: 0 24px 64px;
+        display: grid;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      footer .links {
+        color: var(--accent);
+      }
+
+      .floating-note {
+        position: absolute;
+        top: -46px;
+        right: 18%;
+        background: var(--accent-soft);
+        border: 2px solid var(--accent);
+        border-radius: 16px;
+        padding: 16px 20px;
+        font-family: "Kalam", cursive;
+        font-size: 1.1rem;
+        box-shadow: 12px 12px 0 rgba(255, 224, 120, 0.45);
+        transform: rotate(4deg);
+      }
+
+      @media (max-width: 720px) {
+        header {
+          align-items: center;
+          text-align: center;
         }
 
-        .section__heading {
+        .floating-note {
+          position: relative;
+          top: auto;
+          right: auto;
+          margin: 20px auto 0;
+          transform: rotate(0deg);
+        }
+
+        .section__header {
           flex-direction: column;
           align-items: flex-start;
-        }
-
-        .projects-grid {
-          gap: 24px;
-        }
-
-        .contact {
-          padding: 40px 28px;
         }
       }
     </style>
@@ -646,233 +535,345 @@
     <div class="page">
       <header>
         <div class="brand">
-          <span>NA</span>
-          <span>Noora Alhajeri</span>
+          <div class="brand__name">Noora Saeed Alhajeri</div>
+          <div class="brand__tagline">Creative technologist &middot; Front-end developer &middot; Robotics researcher</div>
         </div>
         <nav aria-label="Primary">
           <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
+          <a href="#focus">Focus</a>
+          <a href="#education">Education</a>
           <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a class="button" href="https://github.com/" target="_blank" rel="noreferrer noopener">View GitHub</a>
+        <a class="contact-cta" href="mailto:n.s3eedalhajeri@gmail.com">Let's talk</a>
       </header>
 
       <main>
-        <section class="hero" aria-labelledby="hero-title">
-          <div class="hero-text">
-            <h1 id="hero-title">Designer &middot; Developer &middot; Dreamer</h1>
+        <section class="hero" id="about" aria-labelledby="hero-title">
+          <div class="hero__intro">
+            <span class="badge">Currently in Abu Dhabi &middot; Open to collaborations</span>
+            <h1 id="hero-title">Sketching human-centered futures through robotics and web experiences.</h1>
             <p>
-              I build immersive digital experiences with intent, precision, and empathy. My work blends modern interaction design with
-              Japanese minimalism to create web products that feel as good as they look.
+              I blend biomedical engineering, robotics research, and product design to craft interfaces that feel tactile and alive. From humanoid
+              motion control labs to playful digital storytelling, I explore how technology can adapt to the people it serves.
             </p>
-            <div class="hero-cta">
-              <a class="button" href="#projects">Explore Projects</a>
-              <a class="link" href="#contact">Let's Collaborate &rarr;</a>
-            </div>
-          </div>
-          <div class="hero-visual">
-            <div class="hero-card" role="presentation" aria-hidden="true">
+            <div class="hero__details">
+              <div><strong>Call:</strong> <a href="tel:+971545566092">+971 54 556 6092</a></div>
+              <div><strong>Email:</strong> <a href="mailto:n.s3eedalhajeri@gmail.com">n.s3eedalhajeri@gmail.com</a></div>
               <div>
-                <div class="hero-card__title">Product UI Moodboard</div>
-                <div class="hero-card__subtitle">Explorations in typography rhythm &amp; kinetic gradients</div>
+                <strong>Elsewhere:</strong>
+                <a href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">LinkedIn</a> &middot;
+                <a href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">GitHub</a>
               </div>
-              <div class="hero-card__footer">
-                <div class="hero-card__stack">
-                  <span class="chip">Next.js</span>
-                  <span class="chip">Typescript</span>
-                  <span class="chip">GSAP</span>
-                  <span class="chip">Three.js</span>
-                </div>
-                <p class="hero-card__subtitle">Optimized for motion-rich storytelling &amp; high performance.</p>
+            </div>
+          </div>
+          <div class="hero__card">
+            <div class="hero__scribble" aria-hidden="true"></div>
+            <h2 class="hero__card-title">Creative Sketchbook</h2>
+            <div class="hero__grid">
+              <div>
+                <h4>What I am shaping</h4>
+                <p>
+                  Designing a tendon-driven bionic upper-limb prosthesis with photonic tactile sensing as visiting researcher at Khalifa University.
+                </p>
+              </div>
+              <div>
+                <h4>Research Threads</h4>
+                <p>Humanoid robotics, human-robot interaction, assistive technology, motion planning, and embodied AI interfaces.</p>
+              </div>
+              <div>
+                <h4>Creative Fuel</h4>
+                <p>Tokyo sketchbooks, kinetic typography, and building front-ends that carry the warmth of hand-drawn details.</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="about" class="section" aria-labelledby="about-title">
-          <div class="section__heading">
-            <h2 id="about-title">About</h2>
-            <p>
-              Blending human-centered design with a front-end engineering mindset, I help brands bring ideas to life through thoughtful
-              storytelling, animation, and accessible code.
+        <section id="focus" aria-labelledby="focus-title">
+          <div class="section__header">
+            <h2 class="section__title" id="focus-title">Focus Areas</h2>
+            <p class="section__lede">
+              Multi-disciplinary practice focused on robotics research, tactile interfaces, and the craft of expressive, accessible web products.
             </p>
           </div>
-          <div class="about">
-            <article class="about__card">
-              <p>
-                Hi, I'm <strong>Noora</strong> &mdash; a front-end developer with a deep appreciation for intentional design systems and
-                immersive interaction patterns. I craft responsive, performant experiences that balance aesthetics with usability.
-              </p>
-              <p>
-                From rapid prototypes to production-ready platforms, I work closely with teams to shape what users feel, see, and remember.
-              </p>
-            </article>
-            <div class="about__grid" role="list">
-              <div class="highlight" role="listitem">
-                <span>Philosophy</span>
-                Design for clarity, build for resilience, and infuse delight where it matters.
-              </div>
-              <div class="highlight" role="listitem">
-                <span>Focus Areas</span>
-                Creative front-ends, design systems, interactive storytelling, performance tuning.
-              </div>
-              <div class="highlight" role="listitem">
-                <span>Currently Exploring</span>
-                WebGL shaders, generative UI, and tangible ways to express culture through motion.
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="skills" class="section" aria-labelledby="skills-title">
-          <div class="section__heading">
-            <h2 id="skills-title">Skills</h2>
-            <p>A curated selection of tools, frameworks, and processes I use to deliver polished front-end experiences.</p>
-          </div>
-          <div class="skills">
-            <article class="skills__group">
-              <h3>Core Stack</h3>
-              <div class="skills__stack">
-                <span class="chip">HTML</span>
-                <span class="chip">CSS</span>
-                <span class="chip">JavaScript</span>
-                <span class="chip">TypeScript</span>
-                <span class="chip">React</span>
-                <span class="chip">Next.js</span>
-              </div>
-            </article>
-            <article class="skills__group">
-              <h3>Designcraft</h3>
-              <div class="skills__stack">
-                <span class="chip">Figma</span>
-                <span class="chip">Prototyping</span>
-                <span class="chip">Motion</span>
-                <span class="chip">Design Systems</span>
-              </div>
-            </article>
-            <article class="skills__group">
-              <h3>Experience</h3>
-              <div class="skills__stack">
-                <span class="chip">Accessibility</span>
-                <span class="chip">Localization</span>
-                <span class="chip">Testing</span>
-                <span class="chip">Performance</span>
-                <span class="chip">CI/CD</span>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section id="projects" class="section" aria-labelledby="projects-title">
-          <div class="section__heading">
-            <h2 id="projects-title">Projects</h2>
-            <p>Hand-selected case studies that showcase my love for storytelling through interaction and robust front-end engineering.</p>
-          </div>
-          <div class="projects-grid">
+          <div class="grid grid--cols-3">
             <article class="card">
-              <div class="card__badge">Feature Build</div>
-              <h3>Aurora Wellness</h3>
+              <h3>Robotics &amp; HRI</h3>
               <p>
-                A serene wellness platform blending immersive motion, multi-language support, and modular design systems to scale content
-                faster.
+                Humanoid locomotion, prosthetic design, motion control, and sensory feedback systems to augment human capability while staying
+                empathetic to real-world contexts.
               </p>
-              <div class="card__footer">
-                <div class="chip">Next.js</div>
-                <a class="link" href="https://github.com/" target="_blank" rel="noreferrer noopener">Case Study &rarr;</a>
-              </div>
             </article>
             <article class="card">
-              <div class="card__badge">Experimental</div>
-              <h3>Hikari Atlas</h3>
+              <h3>Creative Front-Ends</h3>
               <p>
-                Interactive data narratives for exploring Japanese art districts, pairing real-time animation with ambient storytelling cues.
+                Responsive storytelling with HTML, CSS, JavaScript, React, and Angular &mdash; weaving motion, accessibility, and localization into
+                every build.
               </p>
-              <div class="card__footer">
-                <div class="chip">SvelteKit</div>
-                <a class="link" href="https://github.com/" target="_blank" rel="noreferrer noopener">View Prototype &rarr;</a>
-              </div>
             </article>
             <article class="card">
-              <div class="card__badge">Client Launch</div>
-              <h3>Pulse Insight</h3>
+              <h3>UX Research &amp; Design</h3>
               <p>
-                Analytics dashboard for innovators, featuring adaptive theming, live collaboration workflows, and delightful micro-animations.
+                UX research, rapid prototyping, and design systems that bridge complex AI workflows with intuitive human experiences across
+                devices.
               </p>
-              <div class="card__footer">
-                <div class="chip">React</div>
-                <a class="link" href="https://github.com/" target="_blank" rel="noreferrer noopener">View Repo &rarr;</a>
-              </div>
             </article>
           </div>
+          <div class="floating-note" aria-hidden="true">Always prototyping &middot; forever learning</div>
         </section>
 
-        <section id="experience" class="section" aria-labelledby="experience-title">
-          <div class="section__heading">
-            <h2 id="experience-title">Experience</h2>
-            <p>Highlights of recent collaborations across product teams, creative studios, and community-led initiatives.</p>
+        <section id="education" aria-labelledby="education-title">
+          <div class="section__header">
+            <h2 class="section__title" id="education-title">Education Journey</h2>
+            <p class="section__lede">
+              A path that stretches from biomedical engineering to advanced robotics, grounded in teaching, accessibility, and experimentation.
+            </p>
           </div>
           <div class="timeline">
             <article class="timeline__item">
               <div class="timeline__meta">
-                <span>2023 &mdash; Present</span>
-                <span>Remote &middot; Hybrid</span>
+                <span>Aug 2024 &mdash; Present</span>
+                <span>Abu Dhabi</span>
               </div>
-              <div class="timeline__role">Lead Front-End @ Kumo Lab</div>
-              <p class="timeline__desc">
-                Spearheaded the evolution of a multi-brand design system, reducing component duplication by 38% while improving accessibility
-                coverage across markets.
+              <div class="timeline__role">MSc Robotics, Mohamed bin Zayed University of Artificial Intelligence</div>
+              <p>
+                Studying foundations of AI, machine learning, robotic vision, localization, and human-robot interaction under Prof. Yoshihiko
+                Nakamura while researching assistive and humanoid systems.
               </p>
             </article>
             <article class="timeline__item">
               <div class="timeline__meta">
-                <span>2021 &mdash; 2023</span>
-                <span>Tokyo, JP</span>
+                <span>Feb 2024 &mdash; Present</span>
+                <span>Abu Dhabi</span>
               </div>
-              <div class="timeline__role">Senior UI Engineer @ Hanabi Studio</div>
-              <p class="timeline__desc">
-                Built marketing experiences for consumer launches, leading the motion strategy and delivering sub-1s page loads worldwide.
+              <div class="timeline__role">Postgraduate Diploma in Teaching (Hons), Abu Dhabi University</div>
+              <p>
+                Exploring STEM pedagogy, educational tech, and inclusive learning while mentoring students in engineering-focused programs.
               </p>
             </article>
             <article class="timeline__item">
               <div class="timeline__meta">
-                <span>2019 &mdash; 2021</span>
-                <span>Kuwait City</span>
+                <span>Dec 2023 &mdash; Apr 2024</span>
+                <span>Online</span>
               </div>
-              <div class="timeline__role">Product Designer &amp; Developer</div>
-              <p class="timeline__desc">
-                Designed and coded responsive sites for cultural programs, art residencies, and educational initiatives across the Gulf.
+              <div class="timeline__role">Nanodegree: UX Design, Udacity</div>
+              <p>
+                Learned UX research, low to high-fidelity prototyping, and crafting narrative-driven case studies that bring products to life.
+              </p>
+            </article>
+            <article class="timeline__item">
+              <div class="timeline__meta">
+                <span>Aug 2019 &mdash; Jul 2023</span>
+                <span>Abu Dhabi</span>
+              </div>
+              <div class="timeline__role">BSc Biomedical Engineering (Hons), Abu Dhabi University</div>
+              <p>
+                Integrated medical instrumentation, computer vision, and control systems to develop human-centered health technologies under
+                Prof. Mohammad Ghazal.
               </p>
             </article>
           </div>
         </section>
 
-        <section id="contact" class="section" aria-labelledby="contact-title">
-          <div class="contact">
-            <div>
-              <h3 id="contact-title">Let's build something meaningful</h3>
+        <section id="experience" aria-labelledby="experience-title">
+          <div class="section__header">
+            <h2 class="section__title" id="experience-title">Selected Experience</h2>
+            <p class="section__lede">
+              Building assistive prototypes, delivering medical technology, and scaling AI-led products alongside interdisciplinary teams.
+            </p>
+          </div>
+          <div class="grid grid--cols-2">
+            <article class="card">
+              <h3>Khalifa University, Biomechanics &amp; Biodesign Lab</h3>
+              <h4>Visiting Student Researcher &middot; Jun 2025 &mdash; Present</h4>
               <p>
-                Whether you need a partner for product sprints, a collaborator for experimental experiences, or a thoughtful front-end lead,
-                I'd love to hear from you.
+                Designing a low-cost bionic upper-limb prosthesis from anatomical modeling to additive manufacturing, integrating tendon-driven
+                actuation and photonic tactile sensors for modular, human-friendly use.
               </p>
+              <ul>
+                <li>Shaping universal fit prototypes with sustainable PLA materials.</li>
+                <li>Coordinating cross-disciplinary research on sensor fusion and future myoelectric control.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Philips Middle East</h3>
+              <h4>Biomedical Electronic Engineer &middot; Nov 2023 &mdash; Jul 2024</h4>
+              <p>
+                Supported maintenance of MRI, X-ray, and ultrasound systems while leading technical training for clinicians on safe, efficient
+                operations within high-stakes clinical environments.
+              </p>
+            </article>
+            <article class="card">
+              <h3>MBZUAI</h3>
+              <h4>AI Trainee &middot; Jan 2024 &mdash; Feb 2024</h4>
+              <p>
+                Co-built "Bahar", an Arabic-language chatbot powered by JAIS-13, aligning large-language-model research with responsive web
+                interfaces and production-ready deployment.
+              </p>
+              <ul>
+                <li>Developed Next.js interfaces and Flask APIs to bridge users with the model.</li>
+                <li>Automated deployment via Docker and GitHub Actions for scalable performance.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Sheikh Shakhbout Medical City</h3>
+              <h4>Biomedical Engineer Intern &middot; Jan 2023 &mdash; Mar 2023</h4>
+              <p>
+                Managed corrective and preventive maintenance workflows while supporting patient care requests within the home-care robotics
+                workshop.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+          <div class="section__header">
+            <h2 class="section__title" id="projects-title">Projects &amp; Experiments</h2>
+            <p class="section__lede">
+              Interfaces and prototypes that merge robotics, AI, and human stories &mdash; each documented like a sketchbook page.
+            </p>
+          </div>
+          <div class="grid grid--cols-3">
+            <article class="card project-card">
+              <div class="badge">Robotics &middot; 2025</div>
+              <h3>Bionic Upper-Limb Prosthesis</h3>
+              <p>
+                Tendon-driven prosthetic arm with photonic tactile feedback, modular components, and sustainability-first manufacturing
+                pipeline.
+              </p>
+              <div class="chips">
+                <span class="chip">CAD</span>
+                <span class="chip">Additive Manufacturing</span>
+                <span class="chip">Sensor Fusion</span>
+              </div>
+            </article>
+            <article class="card project-card">
+              <div class="badge">AI &middot; 2024</div>
+              <h3>Bahar Chatbot</h3>
+              <p>
+                JAIS-powered Arabic conversational agent with custom interface, responsive UX, and cloud deployment tuned for high availability.
+              </p>
+              <div class="chips">
+                <span class="chip">Next.js</span>
+                <span class="chip">Flask</span>
+                <span class="chip">PyTorch</span>
+                <span class="chip">DevOps</span>
+              </div>
+              <a class="links" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener"
+                >View highlights <span>&rarr;</span></a
+              >
+            </article>
+            <article class="card project-card">
+              <div class="badge">Health Tech &middot; 2023</div>
+              <h3>TeleSound Stethoscope</h3>
+              <p>
+                Telemedicine device using WebRTC streaming, pose detection, and robotic arm integration to power remote diagnostics with near-zero
+                latency.
+              </p>
+              <div class="chips">
+                <span class="chip">React</span>
+                <span class="chip">TensorFlow</span>
+                <span class="chip">Robotics</span>
+              </div>
+            </article>
+            <article class="card project-card">
+              <div class="badge">Computer Vision &middot; 2022</div>
+              <h3>Particle Attacks in BMDF</h3>
+              <p>
+                Award-winning NYU biochip hackathon project improving detection accuracy through TensorFlow-powered analysis of microfluidic data.
+              </p>
+              <div class="chips">
+                <span class="chip">OpenCV</span>
+                <span class="chip">TensorFlow</span>
+                <span class="chip">Reverse Engineering</span>
+              </div>
+            </article>
+            <article class="card project-card">
+              <div class="badge">Visualization &middot; 2024</div>
+              <h3>MRI Volume Explorer</h3>
+              <p>
+                MATLAB-based GUI for advanced visualization and volume rendering of medical imaging, published in the International Journal of
+                Applied Technology in Medical Sciences.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="extras" aria-labelledby="extras-title">
+          <div class="section__header">
+            <h2 class="section__title" id="extras-title">Community &amp; Recognition</h2>
+            <p class="section__lede">
+              Mentorship, teaching, and accolades that energize my practice and remind me why people stay at the center of every build.
+            </p>
+          </div>
+          <div class="twocol">
+            <div class="grid">
+              <article class="card">
+                <h3>Mentorship &amp; Volunteering</h3>
+                <ul>
+                  <li>Engineering mentor for sustainability and hackathon teams at Abu Dhabi University (2022 &mdash; 2023).</li>
+                  <li>Academic peer tutor supporting biology, chemistry, calculus, linear algebra, and introductory AI (2019 &mdash; 2022).</li>
+                </ul>
+              </article>
+              <article class="card">
+                <h3>Certificates &amp; Camps</h3>
+                <ul>
+                  <li>Code Foundation for ROS, The Construct (Aug 2024).</li>
+                  <li>ROS Summer Camp 2024: Mastering Robotics with ROS, Dubai Future Foundation (Jul 2024).</li>
+                  <li>Project Management Foundations, LinkedIn Learning (Feb 2024).</li>
+                </ul>
+              </article>
             </div>
-            <div class="footer-links">
-              <a class="button" href="mailto:hello@noora.dev">Email Me</a>
-              <a class="link" href="https://www.linkedin.com/" target="_blank" rel="noreferrer noopener">LinkedIn &rarr;</a>
-              <a class="link" href="https://dribbble.com/" target="_blank" rel="noreferrer noopener">Dribbble &rarr;</a>
+            <div class="grid">
+              <article class="card">
+                <h3>Awards &amp; Honors</h3>
+                <ul>
+                  <li>Top 10 Finalist, Wyakom Initiative, Department of Community Development (Nov 2023).</li>
+                  <li>2nd and 3rd Place, 10th Annual Undergraduate Research Competition, Biomedical Category (May 2023).</li>
+                  <li>Excellence and Creative Engineering Award, Society of Engineers UAE (Jan 2024).</li>
+                  <li>Women in Research Forum, University of Sharjah (Sep 2023).</li>
+                </ul>
+              </article>
             </div>
+          </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <div class="section__header">
+            <h2 class="section__title" id="contact-title">Let's Build Together</h2>
+            <p class="section__lede">
+              From assistive robotics to sketch-inspired digital experiences, I am always excited to collaborate, prototype, and teach.
+            </p>
+          </div>
+          <div class="grid grid--cols-2">
+            <article class="card">
+              <h3>Reach Out</h3>
+              <p>
+                Drop a note about projects, residencies, or research collaborations. I am especially interested in inclusive technology,
+                human-robot interaction, and design-led development.
+              </p>
+              <div class="chips">
+                <a class="links" href="mailto:n.s3eedalhajeri@gmail.com">Email <span>&rarr;</span></a>
+                <a class="links" href="tel:+971545566092">Call <span>&rarr;</span></a>
+              </div>
+            </article>
+            <article class="card">
+              <h3>Follow the Work</h3>
+              <p>Stay close to ongoing explorations, sketches, and prototypes.</p>
+              <div class="chips">
+                <a class="links" href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">LinkedIn <span>&rarr;</span></a>
+                <a class="links" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">GitHub <span>&rarr;</span></a>
+              </div>
+            </article>
           </div>
         </section>
       </main>
 
       <footer>
-        <div>&copy; <span id="year"></span> Noora Alhajeri. Crafted with curiosity and care.</div>
-        <div class="footer-links">
-          <a href="https://github.com/">GitHub</a>
-          <a href="https://www.linkedin.com/">LinkedIn</a>
-          <a href="https://codepen.io/">CodePen</a>
-          <a href="#hero-title">Back to top &uarr;</a>
+        <div>&copy; <span id="year"></span> Noora Saeed Alhajeri. Hand-crafted with curiosity in Abu Dhabi.</div>
+        <div>
+          Built with HTML, CSS, and a love for sketchbook storytelling. Inspired by contemporary Japanese digital art and tactile documentation.
         </div>
       </footer>
     </div>
@@ -882,15 +883,12 @@
         yearEl.textContent = String(new Date().getFullYear());
       }
 
-      // Smooth scroll fallback for browsers without native behavior
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", (event) => {
-          const targetId = anchor.getAttribute("href");
-          if (!targetId || targetId === "#") return;
-          const section = document.querySelector(targetId);
-          if (!section) return;
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const target = document.querySelector(link.getAttribute("href"));
+          if (!target) return;
           event.preventDefault();
-          section.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
     </script>

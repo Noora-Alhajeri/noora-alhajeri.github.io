@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <style>
+      .ink{fill:#f5f7f8}
+      .ring{fill:none;stroke:#f5f7f8;stroke-linecap:round}
+    </style>
+  </defs>
+  <circle cx="150" cy="150" r="138" class="ring" stroke-width="12"/>
+  <circle cx="150" cy="150" r="120" class="ring" stroke-width="6" opacity=".35"/>
+  <g transform="translate(150 150)">
+    <text text-anchor="middle" dominant-baseline="central"
+          font-family="Noto Serif, serif" font-weight="800" font-size="96" class="ink">nsh</text>
+    <path d="M-70,36 C-18,18 8,8 66,14" fill="none" stroke="#f5f7f8" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="68" cy="14" r="7" fill="#e60026"/>
+  </g>
+</svg>
