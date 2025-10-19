@@ -28,7 +28,6 @@
         --border: rgba(28, 28, 28, 0.16);
         --max-width: 1180px;
         --transition: 180ms ease;
-        --stamp-text: "NSH";
         color-scheme: only light;
       }
 
@@ -518,18 +517,15 @@
       }
 
       .wm::after {
-        content: var(--stamp-text);
+        content: "";
         position: absolute;
         right: 12px;
         bottom: 12px;
-        padding: 4px 10px;
-        border: 1.5px solid var(--ink);
-        background: rgba(255, 225, 82, 0.85);
-        font-family: "Kalam", cursive;
-        font-size: 0.9rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        box-shadow: 2px 2px 0 rgba(28, 28, 28, 0.3);
+        width: 64px;
+        height: 64px;
+        background: url("assests/logo/nsh-stamp.svg") center/contain no-repeat;
+        filter: drop-shadow(2px 2px 0 rgba(28, 28, 28, 0.35));
+        pointer-events: none;
       }
 
       code {
