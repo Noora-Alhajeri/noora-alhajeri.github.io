@@ -28,6 +28,7 @@
         --border: rgba(28, 28, 28, 0.16);
         --max-width: 1180px;
         --transition: 180ms ease;
+        --stamp-text: "NSH";
         color-scheme: only light;
       }
 
@@ -53,6 +54,10 @@
         position: relative;
         min-height: 100vh;
         padding-bottom: 120px;
+      }
+
+      img {
+        image-orientation: from-image;
       }
 
       body::before {
@@ -482,6 +487,60 @@
         transform: translateY(-2px);
       }
 
+      .gallery-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        margin-top: 18px;
+      }
+
+      .wm {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 2px solid var(--ink);
+        box-shadow: 6px 6px 0 rgba(28, 28, 28, 0.25);
+        background: rgba(255, 255, 255, 0.6);
+        transition: transform var(--transition), box-shadow var(--transition);
+      }
+
+      .wm:hover {
+        transform: translate(-4px, -4px) rotate(-1.5deg);
+        box-shadow: 12px 12px 0 rgba(66, 129, 255, 0.28);
+      }
+
+      .wm img {
+        display: block;
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        filter: saturate(1.02);
+      }
+
+      .wm::after {
+        content: var(--stamp-text);
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        padding: 4px 10px;
+        border: 1.5px solid var(--ink);
+        background: rgba(255, 225, 82, 0.85);
+        font-family: "Kalam", cursive;
+        font-size: 0.9rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        box-shadow: 2px 2px 0 rgba(28, 28, 28, 0.3);
+      }
+
+      code {
+        font-family: "Work Sans", "Courier New", monospace;
+        font-size: 0.85rem;
+        background: rgba(255, 255, 255, 0.6);
+        padding: 2px 6px;
+        border-radius: 6px;
+        border: 1px dashed rgba(28, 28, 28, 0.25);
+      }
+
       footer {
         max-width: var(--max-width);
         margin: 120px auto 0;
@@ -529,6 +588,43 @@
           align-items: flex-start;
         }
       }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(12, 12, 12, 0.75);
+        display: grid;
+        place-items: center;
+        padding: 40px;
+        z-index: 999;
+      }
+
+      .lightbox[hidden] {
+        display: none;
+      }
+
+      .lightbox img {
+        max-width: min(960px, 90vw);
+        max-height: 80vh;
+        border: 4px solid #fff;
+        border-radius: 18px;
+        box-shadow: 0 32px 70px rgba(0, 0, 0, 0.35);
+      }
+
+      .lightbox__close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        border: none;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 6px 6px 0 rgba(28, 28, 28, 0.25);
+      }
     </style>
   </head>
   <body>
@@ -544,6 +640,7 @@
           <a href="#education">Education</a>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
+          <a href="#art">Sketchbook</a>
           <a href="#contact">Contact</a>
         </nav>
         <a class="contact-cta" href="mailto:n.s3eedalhajeri@gmail.com">Let's talk</a>
@@ -800,6 +897,50 @@
           </div>
         </section>
 
+        <section id="art" aria-labelledby="art-title">
+          <div class="section__header">
+            <h2 class="section__title" id="art-title">Art &amp; Photo Sketchbook</h2>
+            <p class="section__lede">
+              Ink sketches, concept studies, and photography experiments that influence my visual language across interfaces and robotics
+              storytelling.
+            </p>
+          </div>
+          <div class="twocol">
+            <div>
+              <article class="card">
+                <h3>Illustrations &amp; Sketches</h3>
+                <p>
+                  A rotating gallery of notebook scans, Procreate explorations, and stamped monoline experiments inspired by robotics forms,
+                  wearable design, and Tokyo street vignettes.
+                </p>
+                <div class="gallery-grid" id="sketch-gallery" aria-live="polite"></div>
+              </article>
+            </div>
+            <div>
+              <article class="card">
+                <h3>Photography</h3>
+                <p>
+                  Glimpses captured between research sessions and travel &mdash; kinetic architecture, desert light, quiet studio moments. Each
+                  print carries my NSH stamp for authenticity.
+                </p>
+                <div class="gallery-grid" id="photo-gallery" aria-live="polite"></div>
+              </article>
+              <article class="card">
+                <h3>Stamp &amp; File Prep Notes</h3>
+                <ul>
+                  <li>Place photos in <code>assets/photos/</code> and sketches in <code>assets/sketches/</code>.</li>
+                  <li>Export JPGs between 1600&ndash;2000px on the long edge at roughly 80% quality.</li>
+                  <li>Keep filenames lowercase with dashes: <code>studio-study-01.jpg</code>.</li>
+                  <li>Strip GPS EXIF for privacy before publishing.</li>
+                </ul>
+                <p>
+                  Your stamp appears automatically thanks to the overlay watermark. Just update the file arrays below when you add new work.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section id="extras" aria-labelledby="extras-title">
           <div class="section__header">
             <h2 class="section__title" id="extras-title">Community &amp; Recognition</h2>
@@ -877,6 +1018,10 @@
         </div>
       </footer>
     </div>
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" hidden>
+      <button class="lightbox__close" type="button" aria-label="Close preview">&times;</button>
+      <img alt="" id="lightbox-image" />
+    </div>
     <script>
       const yearEl = document.getElementById("year");
       if (yearEl) {
@@ -891,6 +1036,74 @@
           target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
+
+      const sketchImages = [
+        "assets/sketches/robotic-form-study-01.jpg",
+        "assets/sketches/gesture-series-02.jpg",
+        "assets/sketches/motion-panels-03.jpg",
+        "assets/sketches/kinetic-lines-04.jpg"
+      ];
+
+      const photoImages = [
+        "assets/photos/photo01.jpg",
+        "assets/photos/photo02.jpg",
+        "assets/photos/photo03.jpg",
+        "assets/photos/photo04.jpg",
+        "assets/photos/photo05.jpg",
+        "assets/photos/photo06.jpg"
+      ];
+
+      function renderGallery(id, sources) {
+        const wrap = document.getElementById(id);
+        if (!wrap) return;
+        wrap.innerHTML = "";
+        sources.forEach((src) => {
+          const box = document.createElement("div");
+          box.className = "wm";
+          const img = document.createElement("img");
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.src = src;
+          img.alt = "";
+          img.addEventListener("click", () => openLightbox(src));
+          box.appendChild(img);
+          wrap.appendChild(box);
+        });
+      }
+
+      function openLightbox(src) {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-image");
+        if (!lightbox || !lightboxImg) return;
+        lightboxImg.src = src;
+        lightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-image");
+        if (!lightbox || !lightboxImg) return;
+        lightbox.hidden = true;
+        lightboxImg.src = "";
+        document.body.style.overflow = "";
+      }
+
+      const lightboxEl = document.getElementById("lightbox");
+      if (lightboxEl) {
+        lightboxEl.addEventListener("click", (event) => {
+          if (event.target === lightboxEl) {
+            closeLightbox();
+          }
+        });
+        const closeButton = lightboxEl.querySelector(".lightbox__close");
+        if (closeButton) {
+          closeButton.addEventListener("click", closeLightbox);
+        }
+      }
+
+      renderGallery("sketch-gallery", sketchImages);
+      renderGallery("photo-gallery", photoImages);
     </script>
   </body>
 </html>
