@@ -65,6 +65,8 @@
     .torii{position:absolute;left:40px;bottom:22px;opacity:.18}
     .hero-left{padding:34px 34px 34px 44px;display:flex;gap:28px;align-items:flex-end}
     .hero-title{writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-weight:800;font-size:clamp(22px,5vw,36px);margin:0;line-height:1.3;letter-spacing:.12em}
+    .hero-title .emoji { font-size: 0.8em; vertical-align: middle; margin-left: 5px; }
+    .hero-title .pronunciation { font-size: 0.6em; vertical-align: middle; opacity: 0.7; }
     .creative-text, .designer-text, .developer-text {
       font-family: 'Noto Serif JP', serif;
       font-weight: 700;
@@ -101,6 +103,25 @@
     section.card h2{margin:0 0 6px;font-family:'Noto Serif JP',serif;font-weight:700;letter-spacing:.06em}
     .muted{color:var(--muted)}
 
+    /* Timeline */
+    .timeline {
+      position: relative;
+      margin-left: 20px;
+      padding-left: 20px;
+      border-left: 2px solid var(--ink);
+    }
+    .timeline-item {
+      margin-bottom: 20px;
+    }
+    .timeline-date {
+      font-weight: 600;
+      color: var(--vermilion);
+      margin-bottom: 5px;
+    }
+    .timeline-content {
+      color: var(--ink);
+    }
+
     /* Projects grid */
     .grid{display:grid;gap:16px}
     .grid.projects{grid-template-columns:repeat(auto-fit, minmax(260px,1fr))}
@@ -122,6 +143,33 @@
     /* Gallery */
     .gallery{display:grid;grid-template-columns:repeat(auto-fit, minmax(160px,1fr));gap:10px}
     .gallery img{width:100%;height:160px;object-fit:cover;border-radius:12px;border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);cursor:zoom-in;background:#e5e7eb}
+    .gallery figure { margin: 0; }
+    .gallery figcaption { 
+      font-size: 14px; 
+      color: var(--muted); 
+      margin-top: 8px; 
+      text-align: center; 
+    }
+
+    /* Publications */
+    .publication-item {
+      margin-bottom: 30px;
+      border-bottom: 1px dashed var(--muted);
+      padding-bottom: 20px;
+    }
+    .publication-item:last-child {
+      border-bottom: none;
+    }
+    .publication-item h3 {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .publication-item p {
+      margin-bottom: 5px;
+    }
 
     /* Lightbox */
     .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:60}
@@ -165,6 +213,7 @@
         <div class="mon trans" style="filter:url(#wobble)"><span>No</span></div>
         <a href="#about"   class="active trans"><span data-i18n="nav_about">About</span></a>
         <a href="#projects" class="trans"><span data-i18n="nav_projects">Projects</span></a>
+        <a href="#publications" class="trans"><span data-i18n="nav_publications">Publications</span></a>
         <a href="#sketch"   class="trans"><span data-i18n="nav_sketch">Sketch</span></a>
         <a href="#photos"   class="trans"><span data-i18n="nav_photos">Photos</span></a>
         <a href="#contact"  class="trans"><span data-i18n="nav_contact">Contact</span></a>
@@ -200,7 +249,7 @@
           </g>
         </svg>
         <div class="hero-left">
-          <h1 class="hero-title" data-i18n="hero_title">Portfolio | Noora</h1>
+          <h1 class="hero-title" data-i18n="hero_title">Portfolio | Noora <span class="emoji">🍀</span> <span class="pronunciation">/nʊəˈrɑː/</span></h1>
           <div class="creative-text" data-i18n="hero_creative">Creative</div>
           <div class="designer-text" data-i18n="hero_designer">Designer</div>
           <div class="developer-text" data-i18n="hero_developer">Developer</div>
@@ -211,7 +260,7 @@
               <span class="chip trans">React</span><span class="chip trans">Next.js</span><span class="chip trans">MATLAB</span>
             </div>
             <div class="cta">
-              <a class="btn primary magnetic trans" href="#projects"><span data-i18n="cta_view_projects">作品を見る</span> <svg class="icon" width="18" height="18"><use href="#icon-ext"/></svg></a>
+              <a class="btn primary magnetic trans" href="#projects"><span data-i18n="cta_view_projects">View Projects</span> <svg class="icon" width="18" height="18"><use href="#icon-ext"/></svg></a>
               <a class="btn magnetic trans" href="assets/Noora_Alhajeri_CV.pdf" target="_blank" rel="noopener"><span data-i18n="cta_cv">CV</span></a>
             </div>
           </div>
@@ -220,8 +269,25 @@
 
       <!-- ABOUT -->
       <section class="card reveal trans" id="about">
-        <h2 data-i18n="about_heading">略歴 / About</h2>
-        <p data-i18n="about_copy">Robotics MSc (MBZUAI)。Khalifa University にて Visiting Student Researcher。関心: ヒューマノイド、HRI、義手、モーション制御、人体モデリング。低コスト腱駆動バイオニックハンド（フォトニック触覚、モジュール制御）に従事。</p>
+        <h2 data-i18n="about_heading">About</h2>
+        <p data-i18n="about_copy">Robotics MSc (MBZUAI). Visiting Student Researcher at Khalifa University. Interests: Humanoids, HRI, prosthetics, motion control, human body modeling. Worked on low-cost tendon-driven bionic hand (photonic tactile, modular control).</p>
+
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Updates</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">October 2025</div>
+            <div class="timeline-content">Attended IROS 2025 in Hangzhou, China.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">October 2025</div>
+            <div class="timeline-content">Gave a mini-talk at the weekly RoboCoffee seminar at MBZUAI.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">September 2025</div>
+            <div class="timeline-content">Invited to review papers at ICRA 2026 and IEEE RA-L.</div>
+          </div>
+        </div>
+
         <p class="muted"><span data-i18n="about_tools_label">Tools:</span> Python • C++ • MATLAB • ROS • PyTorch • OpenCV • Arduino • Raspberry Pi • React • Next.js • Flask • Figma</p>
         <div class="cta">
           <a class="btn magnetic trans" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noopener"><span>GitHub</span></a>
@@ -232,9 +298,43 @@
 
       <!-- PROJECTS -->
       <section class="card reveal trans" id="projects">
-        <h2 data-i18n="projects_heading">作品 / Projects</h2>
+        <h2 data-i18n="projects_heading">Projects</h2>
         <p class="muted" id="projects-status" data-i18n="projects_loading">Loading projects…</p>
         <div class="grid projects" id="projects-grid"></div>
+      </section>
+
+      <!-- PUBLICATIONS -->
+      <section class="card reveal trans" id="publications">
+        <h2 data-i18n="publications_heading">Publications</h2>
+        <p class="muted" data-i18n="publications_blurb">Selected Perception + Manipulation Planning + Control + Localization + Mapping + Others</p>
+        <div class="publications-list">
+          <div class="publication-item">
+            <h3>Multimodal Reasoning-Aware Generalist Robotic Policies via Teacher-Guided Fine-Tuning</h3>
+            <p class="muted"><em>arXiv (25/05/2025)</em></p>
+            <p>Tuan Van Vo, Quang-Tan Nguyen, Noora Alhajeri, Nhat Xuan Tran, Duy H. M. Nguyen, An Thai Le, Ngo Anh Vien, Minh Nhat Vu.</p>
+            <div class="cta">
+              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>PDF</span></a>
+            </div>
+          </div>
+          <div class="publication-item">
+            <h3>DeGuV: Depth-Guided Visual Reinforcement Learning for Generalization and Interpretability in Manipulation</h3>
+            <p class="muted"><em>arXiv (05/09/2025)</em></p>
+            <p>Tien Pham, Xinyun Chi, Noora Alhajeri, Manfred Huber, Angelo Cangelosi.</p>
+            <div class="cta">
+              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>PDF</span></a>
+            </div>
+          </div>
+          <div class="publication-item">
+            <h3>ExtPerFC: An Efficient 2D & 3D Perception Software-Hardware Framework for Mobile Cobot</h3>
+            <p class="muted"><em>arXiv (08/06/2023)</em></p>
+            <p>Tuan Dang, Noora Alhajeri, Manfred Huber.</p>
+            <div class="cta">
+              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>PDF</span></a>
+              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>CODE</span></a>
+              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>DEMO</span></a>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- SKETCHBOOK -->
@@ -287,25 +387,29 @@
     const langKey='noora-lang'; const langBtn=document.getElementById('langToggle');
     const i18n = {
       ja: {
-        nav_about:'略歴', nav_projects:'作品', nav_sketch:'スケッチ', nav_photos:'写真', nav_contact:'連絡',
-        hero_title:'ポートフォリオ｜ノーラ', hero_blurb:'Robotics × HRI × Biomedical 工学。ミニマルで端正な日本風の紙感と、朱（vermilion）のアクセント。Sketch／写真も展示。',
-        hero_creative:'クリエイティブ', hero_designer:'デザイナー', hero_developer:'デベロッパー',
-        cta_view_projects:'作品を見る', cta_cv:'CV',
-        about_heading:'略歴 / About', about_copy:'Robotics MSc (MBZUAI)。Khalifa University にて Visiting Student Researcher。関心: ヒューマノイド、HRI、義手、モーション制御、人体モデリング。低コスト腱駆動バイオニックハンド（フォトニック触覚、モジュール制御）に従事。', about_tools_label:'Tools:',
-        projects_heading:'作品 / Projects', projects_loading:'プロジェクトを読み込み中…',
-        sketch_heading:'スケッチ / Sketchbook', sketch_blurb:'クリックで拡大。画像は assets/art/ に追加し、下の artImages 配列に列挙してください。',
-        photos_heading:'写真 / Photos', photos_blurb:'ストリート、テクスチャ、ジオメトリ。',
-        contact_heading:'連絡 / Contact', contact_blurb:'コラボ・質問などお気軽に。フォーム（Formspree など）やメールリンクを設置できます。', contact_send_mail:'メールを送る'
-      },
-      en: {
         nav_about:'About', nav_projects:'Projects', nav_sketch:'Sketch', nav_photos:'Photos', nav_contact:'Contact',
+        nav_publications:'Publications',
         hero_title:'Portfolio | Noora', hero_blurb:'Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.',
         hero_creative:'Creative', hero_designer:'Designer', hero_developer:'Developer',
         cta_view_projects:'View Projects', cta_cv:'CV',
         about_heading:'About', about_copy:'Robotics MSc (MBZUAI). Visiting Student Researcher at Khalifa University. Interests: Humanoids, HRI, prosthetics, motion control, human body modeling. Worked on low-cost tendon-driven bionic hand (photonic tactile, modular control).', about_tools_label:'Tools:',
         projects_heading:'Projects', projects_loading:'Loading projects…',
+        publications_heading:'Publications', publications_blurb:'Selected Perception + Manipulation Planning + Control + Localization + Mapping + Others',
         sketch_heading:'Sketchbook', sketch_blurb:'Click to zoom. Add images to assets/art/ and list them in the artImages array below.',
-        photos_heading:'Photos', photos_blurb:'Street, textures, and geometry.',
+        photos_heading:'Photos', photos_blurb:'Street, textures, and accidental geometry.',
+        contact_heading:'Contact', contact_blurb:'Reach out for collaborations or questions. Add a form (Formspree) or use the email link.', contact_send_mail:'Send Mail'
+      },
+      en: {
+        nav_about:'About', nav_projects:'Projects', nav_sketch:'Sketch', nav_photos:'Photos', nav_contact:'Contact',
+        nav_publications:'Publications',
+        hero_title:'Portfolio | Noora', hero_blurb:'Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.',
+        hero_creative:'Creative', hero_designer:'Designer', hero_developer:'Developer',
+        cta_view_projects:'View Projects', cta_cv:'CV',
+        about_heading:'About', about_copy:'Robotics MSc (MBZUAI). Visiting Student Researcher at Khalifa University. Interests: Humanoids, HRI, prosthetics, motion control, human body modeling. Worked on low-cost tendon-driven bionic hand (photonic tactile, modular control).', about_tools_label:'Tools:',
+        projects_heading:'Projects', projects_loading:'Loading projects…',
+        publications_heading:'Publications', publications_blurb:'Selected Perception + Manipulation Planning + Control + Localization + Mapping + Others',
+        sketch_heading:'Sketchbook', sketch_blurb:'Click to zoom. Add images to assets/art/ and list them in the artImages array below.',
+        photos_heading:'Photos', photos_blurb:'Street, textures, and accidental geometry.',
         contact_heading:'Contact', contact_blurb:'Reach out for collaborations or questions. Add a form (Formspree) or use the email link.', contact_send_mail:'Send Mail'
       }
     };
@@ -318,7 +422,7 @@
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
     // Nav active state on scroll
-    const sections = ['about','projects','sketch','photos','contact'];
+    const sections = ['about','projects','publications','sketch','photos','contact'];
     const links = Array.from(document.querySelectorAll('.nav-rail a[href^="#"]'));
     function setActive(id){ links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+id)); }
     const obs = new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting) setActive(ent.target.id); }) }, {rootMargin: '-40% 0px -55% 0px'});
@@ -328,8 +432,20 @@
     function openLightbox(src){ const lb=document.getElementById('lightbox'); const im=document.getElementById('lightbox-img'); im.src=src; lb.classList.add('active'); lb.onclick=()=>lb.classList.remove('active'); }
 
     // Galleries
-    const artImages = [ ]; const photoImages = [ ];
-    function renderGallery(id, arr){ const wrap=document.getElementById(id); wrap.innerHTML=''; arr.forEach(src=>{ const im=new Image(); im.loading='lazy'; im.src=src; im.alt='gallery item'; im.onclick=()=>openLightbox(src); wrap.appendChild(im); }); }
+    const artImages = [ ];
+    const photoImages = [
+      { src: 'assets/photos/sheikh_zayed_grand_mosque.jpg', caption: 'Visited Sheikh Zayed Grand Mosque (2024)' },
+      { src: 'assets/photos/vietnam_summer.jpg', caption: 'Spent summer in Vietnam (2024)' },
+      { src: 'assets/photos/iros_friends.jpg', caption: 'Me and Tuan also met new friends at IROS (2023)' },
+      { src: 'assets/photos/football_snow.jpg', caption: 'First time playing football on snow (2022)' },
+      { src: 'assets/photos/georgia_aquarium.jpg', caption: 'School of fish at Georgia Aquarium (2021)' },
+      { src: 'assets/photos/ptnk_boys.jpg', caption: 'These crazy boys from PTNK I1720 (2020)' },
+      { src: 'assets/photos/wolfram_fieldtrip.jpg', caption: 'Wolfram Summer Research Program fieldtrip (2019)' },
+      { src: 'assets/photos/sister_mba.jpg', caption: 'My sister started her MBA (2018)' },
+      { src: 'assets/photos/nikolskaya_street.jpg', caption: 'At Nikolskaya Street near Red Square (2018)' },
+      { src: 'assets/photos/tdn_maths_team.jpg', caption: 'My boys from TDN Maths Team (2017)' }
+    ];
+    function renderGallery(id, arr){ const wrap=document.getElementById(id); wrap.innerHTML=''; arr.forEach(item=>{ const figure=document.createElement('figure'); const im=new Image(); im.loading='lazy'; im.src=item.src; im.alt=item.caption; im.onclick=()=>openLightbox(item.src); figure.appendChild(im); const figcaption=document.createElement('figcaption'); figcaption.textContent=item.caption; figure.appendChild(figcaption); wrap.appendChild(figure); }); }
     renderGallery('art-gallery', artImages); renderGallery('photo-gallery', photoImages);
 
     // GitHub Projects (robust fetch + skeleton + fallback)
