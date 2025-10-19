@@ -202,9 +202,8 @@
       }
 
       .hero {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 52px;
-        align-items: center;
+        display: grid;
+        gap: 48px;
       }
 
       .badge {
@@ -221,17 +220,116 @@
         background: rgba(0, 0, 0, 0.04);
       }
 
+      .path-scene {
+        position: relative;
+        height: clamp(420px, 60vw, 520px);
+        padding: clamp(28px, 4vw, 60px);
+        border: 1px solid var(--stroke);
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 60px 120px rgba(0, 0, 0, 0.16);
+        display: flex;
+        gap: clamp(16px, 3vw, 36px);
+        align-items: flex-end;
+        background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92) 0%, rgba(244, 241, 236, 0.94) 40%, rgba(224, 218, 210, 0.78) 100%);
+      }
+
+      .path-column {
+        flex: 1;
+        min-width: 180px;
+        height: 100%;
+        border-radius: clamp(22px, 3vw, 30px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%),
+          linear-gradient(180deg, rgba(240, 236, 229, 0.96) 0%, rgba(223, 217, 206, 0.88) 50%, rgba(210, 202, 192, 0.8) 100%);
+        box-shadow: inset 0 40px 60px rgba(255, 255, 255, 0.65), inset 0 -40px 60px rgba(0, 0, 0, 0.08);
+        position: relative;
+        padding: clamp(28px, 3vw, 40px);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .path-column::before {
+        content: attr(data-label);
+        position: absolute;
+        top: clamp(26px, 4vw, 38px);
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.2rem, 2vw, 1.4rem);
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.58);
+      }
+
+      .path-column::after {
+        content: "";
+        position: absolute;
+        inset: 12%;
+        border-radius: clamp(18px, 2.4vw, 26px);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        pointer-events: none;
+      }
+
+      .path-column p {
+        margin: 0;
+        font-size: 0.82rem;
+        color: rgba(0, 0, 0, 0.58);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .path-ribbon {
+        position: absolute;
+        bottom: clamp(26px, 4vw, 48px);
+        left: -15%;
+        width: 130%;
+        height: clamp(120px, 18vw, 210px);
+        background:
+          radial-gradient(ellipse at 30% 60%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 70%),
+          radial-gradient(ellipse at 65% 50%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 72%),
+          linear-gradient(90deg, rgba(224, 47, 40, 0.18) 0%, rgba(9, 9, 9, 0.08) 50%, rgba(224, 47, 40, 0.2) 100%);
+        filter: blur(1px);
+        pointer-events: none;
+        border-radius: 100% 100% 0 0 / 70% 70% 0 0;
+      }
+
+      .path-walker {
+        position: absolute;
+        bottom: clamp(40px, 5vw, 62px);
+        left: 50%;
+        width: 46px;
+        height: 120px;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .path-walker::before {
+        content: "";
+        width: 8px;
+        height: 48px;
+        border-radius: 50% 50% 12px 12px;
+        background: linear-gradient(180deg, rgba(18, 18, 18, 0.85) 0%, rgba(18, 18, 18, 0.6) 100%);
+      }
+
       .hero__intro {
         display: grid;
-        gap: 26px;
+        gap: 24px;
       }
 
       .hero__intro h1 {
         margin: 0;
         font-family: "Playfair Display", serif;
-        font-size: clamp(2.8rem, 6vw, 4.4rem);
-        letter-spacing: 0.28em;
+        font-size: clamp(2.6rem, 5.6vw, 3.8rem);
+        letter-spacing: 0.24em;
         text-transform: uppercase;
+        line-height: 1.3;
       }
 
       .hero__intro h1 span {
@@ -248,29 +346,14 @@
       .hero__details {
         display: grid;
         gap: 12px;
-        font-size: 0.92rem;
-        letter-spacing: 0.08em;
+        font-size: 0.88rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--muted);
       }
 
       .hero__details strong {
         color: var(--ink);
-      }
-
-      .hero__visual {
-        position: relative;
-        border-radius: 28px;
-        overflow: hidden;
-        border: 1px solid var(--stroke);
-        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18);
-      }
-
-      .hero__visual img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(100%) contrast(1.05);
       }
 
       .grid {
@@ -525,6 +608,24 @@
         .grid--cols-2 {
           grid-template-columns: 1fr;
         }
+
+        .path-scene {
+          flex-direction: column;
+          height: auto;
+        }
+
+        .path-column {
+          width: 100%;
+          height: clamp(220px, 38vw, 280px);
+        }
+
+        .path-ribbon {
+          display: none;
+        }
+
+        .path-walker {
+          bottom: clamp(20px, 6vw, 40px);
+        }
       }
     </style>
   </head>
@@ -551,13 +652,26 @@
       </header>
 
       <main>
-        <section class="hero" id="about" aria-labelledby="hero-title">
+        <section class="hero hero--path" id="about" aria-labelledby="hero-title">
+          <div class="path-scene">
+            <div class="path-column" data-label="Art">
+              <p>Raised on sketchbooks, installation art, and traditional illustration studies.</p>
+            </div>
+            <div class="path-column" data-label="Design">
+              <p>Crafting responsive journeys, motion systems, and accessible storytelling.</p>
+            </div>
+            <div class="path-column" data-label="Engineering">
+              <p>Engineering assistive robotics, front-ends, and scalable AI experiences.</p>
+            </div>
+            <div class="path-ribbon"></div>
+            <div class="path-walker" aria-hidden="true"></div>
+          </div>
           <div class="hero__intro">
             <span class="badge">Studio Practice &middot; Abu Dhabi</span>
             <h1 id="hero-title"><span>Noora Alhajeri</span>Architecting Human-Centered Futures</h1>
             <p>
-              I design digital and robotic experiences the way architects craft cities: minimal structure, purposeful flow, and emotive spaces.
-              Every narrative blends assistive technology, front-end craft, and a cinematic eye for detail.
+              I walk between art, design, and engineering—curving away from expected roads to build responsive worlds that feel crafted and
+              human. Each project becomes a scroll you can step inside: cinematic, functional, and deeply personal.
             </p>
             <div class="hero__details">
               <div><strong>Call</strong> <a href="tel:+971545566092">+971 54 556 6092</a></div>
