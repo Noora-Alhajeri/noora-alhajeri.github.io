@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Noora Alhajeri — ポートフォリオ | Japanese‑Style</title>
-  <meta name="description" content="Japanese‑style personal portfolio with light/dark mode, JP/EN language toggle, seigaiha background, tategaki hero, and refined micro‑interactions." />
+  <title>Noora Alhajeri — Portfolio | Japanese‑Style</title>
+  <meta name="description" content="Japanese‑style personal portfolio with light/dark mode, EN/JP language toggle, seigaiha background, tategaki hero, and refined micro‑interactions." />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;800&family=Noto+Serif+JP:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <style>
     /* THEME TOKENS */
@@ -65,6 +65,28 @@
     .torii{position:absolute;left:40px;bottom:22px;opacity:.18}
     .hero-left{padding:34px 34px 34px 44px;display:flex;gap:28px;align-items:flex-end}
     .hero-title{writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-weight:800;font-size:clamp(22px,5vw,36px);margin:0;line-height:1.3;letter-spacing:.12em}
+    .creative-text, .designer-text, .developer-text {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: clamp(22px, 5vw, 36px);
+      margin: 0;
+      line-height: 1.3;
+      letter-spacing: .12em;
+      position: absolute;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slide-up 10s infinite;
+    }
+
+    .creative-text { animation-delay: 0s; }
+    .designer-text { animation-delay: 3.33s; }
+    .developer-text { animation-delay: 6.66s; }
+
+    @keyframes slide-up {
+      0%, 100% { opacity: 0; transform: translateY(20px); }
+      10%, 30% { opacity: 1; transform: translateY(0); }
+      35%, 55% { opacity: 0; transform: translateY(-20px); }
+    }
     .hero-copy{max-width:560px}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .chip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);border-radius:999px;padding:6px 10px;background:var(--chip-bg);box-shadow:2px 2px 0 var(--ink);font-family:'Noto Sans JP',sans-serif}
@@ -140,12 +162,12 @@
   <div class="shell trans">
     <aside class="nav">
       <div class="nav-rail">
-        <div class="mon trans" style="filter:url(#wobble)"><span>の</span></div>
-        <a href="#about"   class="active trans"><span data-i18n="nav_about">略歴</span></a>
-        <a href="#projects" class="trans"><span data-i18n="nav_projects">作品</span></a>
-        <a href="#sketch"   class="trans"><span data-i18n="nav_sketch">スケッチ</span></a>
-        <a href="#photos"   class="trans"><span data-i18n="nav_photos">写真</span></a>
-        <a href="#contact"  class="trans"><span data-i18n="nav_contact">連絡</span></a>
+        <div class="mon trans" style="filter:url(#wobble)"><span>No</span></div>
+        <a href="#about"   class="active trans"><span data-i18n="nav_about">About</span></a>
+        <a href="#projects" class="trans"><span data-i18n="nav_projects">Projects</span></a>
+        <a href="#sketch"   class="trans"><span data-i18n="nav_sketch">Sketch</span></a>
+        <a href="#photos"   class="trans"><span data-i18n="nav_photos">Photos</span></a>
+        <a href="#contact"  class="trans"><span data-i18n="nav_contact">Contact</span></a>
         <div class="controls">
           <button class="icon-btn trans" id="themeToggle" aria-label="Toggle theme">
             <svg class="icon" width="18" height="18"><use href="#icon-moon" xlink:href="#icon-moon"/></svg>
@@ -178,12 +200,12 @@
           </g>
         </svg>
         <div class="hero-left">
-          <h1 class="hero-title" data-i18n="hero_title">ポートフォリオ｜ノーラ</h1>
+          <h1 class="hero-title" data-i18n="hero_title">Portfolio | Noora</h1>
           <div class="creative-text" data-i18n="hero_creative">Creative</div>
           <div class="designer-text" data-i18n="hero_designer">Designer</div>
           <div class="developer-text" data-i18n="hero_developer">Developer</div>
           <div class="hero-copy">
-            <p data-i18n="hero_blurb">Robotics × HRI × Biomedical 工学。ミニマルで端正な日本風の紙感と、朱（vermilion）のアクセント。Sketch／写真も展示。</p>
+            <p data-i18n="hero_blurb">Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.</p>
             <div class="chips">
               <span class="chip trans">Python</span><span class="chip trans">C++</span><span class="chip trans">ROS</span><span class="chip trans">OpenCV</span><span class="chip trans">PyTorch</span>
               <span class="chip trans">React</span><span class="chip trans">Next.js</span><span class="chip trans">MATLAB</span>
@@ -287,9 +309,9 @@
         contact_heading:'Contact', contact_blurb:'Reach out for collaborations or questions. Add a form (Formspree) or use the email link.', contact_send_mail:'Send Mail'
       }
     };
-    function setLang(lang){ const dict=i18n[lang]||i18n.ja; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.textContent=dict[k]; }); localStorage.setItem(langKey, lang); langBtn?.setAttribute('aria-label', lang==='ja'?'Switch language to English':'言語を日本語に切り替え'); }
-    const savedLang = localStorage.getItem(langKey) || 'ja'; setLang(savedLang);
-    langBtn?.addEventListener('click', ()=>{ const cur=localStorage.getItem(langKey)||'ja'; const next= cur==='ja'?'en':'ja'; setLang(next); });
+    function setLang(lang){ const dict=i18n[lang]||i18n.en; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.textContent=dict[k]; }); localStorage.setItem(langKey, lang); langBtn?.setAttribute('aria-label', 'Switch language to Japanese'); }
+    const savedLang = localStorage.getItem(langKey) || 'en'; setLang(savedLang);
+    langBtn?.addEventListener('click', ()=>{ const cur=localStorage.getItem(langKey)||'en'; const next= cur==='en'?'ja':'en'; setLang(next); });
 
     // Scroll-into-view reveals
     const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }) }, {threshold: 0.12});
@@ -338,7 +360,7 @@
     async function repos(){ return await j(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`); }
     async function cover(r){ for(const d of ['figures','images','media','assets','docs']){ try{ const items=await j(`https://api.github.com/repos/${GH_USER}/${r.name}/contents/${d}?ref=${r.default_branch}`); const f=(items||[]).find(x=>x.type==='file' && /\.(png|jpe?g|gif|webp)$/i.test(x.name)); if(f) return `https://raw.githubusercontent.com/${GH_USER}/${r.name}/${r.default_branch}/${d}/${encodeURIComponent(f.name)}`; }catch(e){} } return `https://opengraph.githubassets.com/1/${GH_USER}/${r.name}`; }
     async function live(){ STATUS.textContent=document.documentElement.getAttribute('data-lang')==='en'? 'Loading projects…': 'プロジェクトを読み込み中…'; showSkeleton(6); const rs=await repos(); await Promise.all(rs.map(async r=>{ try{ const t=await j(`https://api.github.com/repos/${GH_USER}/${r.name}/topics`); r.topics=t.names||[] }catch(e){ r.topics=[] }})); const order=FALLBACK.map(x=>x.name); rs.sort((a,b)=>{ const ia=order.indexOf(a.name), ib=order.indexOf(b.name); if(ia!==-1&&ib!==-1) return ia-ib; if(ia!==-1) return -1; if(ib!==-1) return 1; return new Date(b.pushed_at)-new Date(a.pushed_at) }); GRID.innerHTML=''; for(const r of rs){ GRID.insertAdjacentHTML('beforeend', card({ title:titleize(r.name), desc:r.description||'', tags:tags(r), href:r.html_url, cover: await cover(r)})); } STATUS.textContent=`Loaded ${rs.length} projects.`; addTilt(); }
-    function fallback(reason){ GRID.innerHTML=''; FALLBACK.forEach(r=>GRID.insertAdjacentHTML('beforeend', card({ title:titleize(r.name), desc:r.desc, tags:r.topics, href:`https://github.com/${GH_USER}/${r.name}`, cover:`https://opengraph.githubassets.com/1/${GH_USER}/${r.name}`}))); const lang=localStorage.getItem(langKey)||'ja'; STATUS.textContent=lang==='en'?`Showing curated set (API unavailable${reason?`: ${reason}`:''}).`:`キュレートしたセットを表示中（API 利用不可${reason?`：${reason}`:''}）。`; const b=document.createElement('button'); b.className='btn magnetic'; b.innerHTML='<span>Retry</span>'; b.onclick=()=>init(true); STATUS.append(' ', b); addTilt(); }
+    function fallback(reason){ GRID.innerHTML=''; FALLBACK.forEach(r=>GRID.insertAdjacentHTML('beforeend', card({ title:titleize(r.name), desc:r.desc, tags:r.topics, href:`https://github.com/${GH_USER}/${r.name}`, cover:`https://opengraph.githubassets.com/1/${GH_USER}/${r.name}`}))); const lang=localStorage.getItem(langKey)||'en'; STATUS.textContent=lang==='en'?`Showing curated set (API unavailable${reason?`: ${reason}`:''}).`:`キュレートしたセットを表示中（API 利用不可${reason?`：${reason}`:''}）。`; const b=document.createElement('button'); b.className='btn magnetic'; b.innerHTML='<span>Retry</span>'; b.onclick=()=>init(true); STATUS.append(' ', b); addTilt(); }
     async function init(force=false){ try{ if(!navigator.onLine) throw new Error('Offline'); await live(); } catch(e){ if(!force && location.protocol==='file:'){ fallback('file:// origin'); } else { fallback(e.message||'fetch failed'); } } }
     init();
 
