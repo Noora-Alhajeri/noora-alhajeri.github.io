@@ -14,21 +14,18 @@
     />
     <style>
       :root {
-        --canvas: #f7f3ea;
-        --canvas-alt: #f2ede1;
-        --ink: #1c1c1c;
-        --ink-soft: #303030;
-        --muted: #5a5852;
-        --accent: #ff6b4a;
-        --accent-soft: rgba(255, 107, 74, 0.18);
-        --accent-2: #4281ff;
-        --accent-3: #ffe152;
-        --paper-shadow: 0 28px 45px rgba(28, 28, 28, 0.16);
-        --card-shadow: 0 18px 36px rgba(28, 28, 28, 0.12);
-        --border: rgba(28, 28, 28, 0.16);
+        --bg: #05070d;
+        --bg-alt: #0d111f;
+        --bg-panel: rgba(9, 14, 26, 0.82);
+        --bg-card: rgba(13, 19, 34, 0.9);
+        --fg: #f4f6ff;
+        --fg-muted: #9ba4c6;
+        --accent: #5b7cfa;
+        --accent-alt: #ff4d92;
+        --border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 28px 80px rgba(3, 4, 10, 0.55);
         --max-width: 1180px;
         --transition: 180ms ease;
-        color-scheme: only light;
       }
 
       *,
@@ -41,22 +38,20 @@
       body {
         margin: 0;
         font-family: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: var(--ink);
-        background-color: var(--canvas);
+        color: var(--fg);
+        background: var(--bg);
         line-height: 1.65;
-      }
-
-      body {
-        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0 12px, transparent 12px),
-          linear-gradient(90deg, rgba(236, 229, 214, 0.28) 1px, transparent 1px);
-        background-size: 100% 24px, 24px 100%;
-        position: relative;
-        min-height: 100vh;
-        padding-bottom: 120px;
       }
 
       img {
         image-orientation: from-image;
+      }
+
+      body {
+        min-height: 100vh;
+        background-image: radial-gradient(circle at 12% 18%, rgba(91, 124, 250, 0.15), transparent 45%),
+          radial-gradient(circle at 88% 6%, rgba(255, 77, 146, 0.18), transparent 50%), linear-gradient(115deg, #05070d 0%, #060b18 52%, #0d111f 100%);
+        position: relative;
       }
 
       body::before {
@@ -64,12 +59,15 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        background: radial-gradient(circle at 12% 18%, rgba(255, 224, 120, 0.45), transparent 54%),
-          radial-gradient(circle at 88% 10%, rgba(66, 129, 255, 0.23), transparent 55%),
-          radial-gradient(circle at 12% 75%, rgba(255, 107, 74, 0.23), transparent 56%);
-        opacity: 0.75;
-        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg width='220' height='220' viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1.5'%3E%3Cpath d='M0 110c37-36 73-36 110 0s73 36 110 0'/%3E%3Cpath d='M0 0c37-36 73-36 110 0s73 36 110 0' opacity='.6'/%3E%3C/g%3E%3C/svg%3E");
+        mix-blend-mode: screen;
+        opacity: 0.65;
         z-index: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
       }
 
       .page {
@@ -78,235 +76,260 @@
       }
 
       header {
+        position: sticky;
+        top: 0;
+        z-index: 90;
+        backdrop-filter: blur(22px);
+        background: rgba(5, 7, 13, 0.85);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .header-inner {
         max-width: var(--max-width);
         margin: 0 auto;
-        padding: 40px 24px 0;
+        padding: 26px 24px;
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-items: flex-start;
-        gap: 32px;
+        gap: 28px;
       }
 
       .brand {
         display: grid;
-        gap: 6px;
+        gap: 4px;
       }
 
       .brand__name {
         font-family: "Kalam", cursive;
-        font-size: clamp(2rem, 3vw, 2.5rem);
-        letter-spacing: 0.05em;
+        font-size: clamp(1.8rem, 3vw, 2.2rem);
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
       }
 
       .brand__tagline {
-        font-size: 0.95rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.38em;
         text-transform: uppercase;
-        letter-spacing: 0.28em;
-        color: var(--muted);
+        color: var(--fg-muted);
       }
 
       nav {
         display: flex;
+        align-items: center;
         gap: 18px;
         flex-wrap: wrap;
-        font-size: 0.95rem;
-        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
       }
 
       nav a {
-        color: var(--ink);
-        padding: 6px 10px;
-        border-radius: 12px;
         position: relative;
-        transition: transform var(--transition);
+        padding-bottom: 4px;
+        color: var(--fg-muted);
+        transition: color var(--transition);
       }
 
       nav a::after {
         content: "";
         position: absolute;
-        inset: 0;
-        border-radius: 12px;
-        border: 1.5px dashed rgba(28, 28, 28, 0.35);
-        opacity: 0;
-        transform: rotate(-2deg);
-        transition: opacity var(--transition);
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-alt), var(--accent));
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform var(--transition);
       }
 
       nav a:hover,
       nav a:focus-visible {
-        transform: translateY(-3px);
+        color: var(--fg);
       }
 
       nav a:hover::after,
       nav a:focus-visible::after {
-        opacity: 1;
+        transform: scaleX(1);
+        transform-origin: left;
       }
 
       .contact-cta {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
-        padding: 14px 20px;
+        gap: 10px;
+        padding: 12px 20px;
         border-radius: 999px;
-        border: 1.5px solid var(--ink);
-        background: rgba(255, 255, 255, 0.78);
-        box-shadow: 10px 12px 0 rgba(28, 28, 28, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        color: #05070d;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        letter-spacing: 0.18em;
         font-weight: 700;
         transition: transform var(--transition), box-shadow var(--transition);
       }
 
       .contact-cta:hover,
       .contact-cta:focus-visible {
-        transform: translate(-3px, -3px);
-        box-shadow: 16px 16px 0 rgba(66, 129, 255, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 16px 30px rgba(91, 124, 250, 0.28);
+      }
+
+      .progress {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 3px;
+        width: 0;
+        background: linear-gradient(90deg, var(--accent-alt), var(--accent));
+        z-index: 95;
+        box-shadow: 0 0 12px rgba(91, 124, 250, 0.5);
       }
 
       main {
         max-width: var(--max-width);
         margin: 0 auto;
-        padding: 64px 24px 0;
+        padding: 120px 24px 120px;
         display: grid;
         gap: 120px;
       }
 
       section {
         position: relative;
+        display: grid;
+        gap: 42px;
       }
 
       .section__header {
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        gap: 24px;
-        margin-bottom: 42px;
+        gap: 26px;
       }
 
       .section__title {
+        margin: 0;
         font-family: "Kalam", cursive;
-        font-size: clamp(2.3rem, 5vw, 3.2rem);
-        letter-spacing: 0.04em;
-        position: relative;
-        display: inline-block;
-        padding-bottom: 8px;
+        font-size: clamp(2.3rem, 4.8vw, 3.6rem);
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
       }
 
       .section__title::after {
         content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 12px;
-        background-image: url("data:image/svg+xml,%3Csvg width='120' height='12' viewBox='0 0 120 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 10c18-6 36-6 56 0s38 6 56 0' stroke='%23ff6b4a' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
-        background-repeat: repeat-x;
-        background-size: 120px 12px;
-        opacity: 0.8;
+        display: inline-block;
+        width: 130px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-alt), var(--accent));
       }
 
       .section__lede {
         max-width: 420px;
-        color: var(--muted);
-        font-size: 0.98rem;
+        color: var(--fg-muted);
+        font-size: 1rem;
       }
 
       .hero {
-        display: grid;
-        gap: 48px;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 60px;
         align-items: center;
       }
 
       .hero__intro {
         display: grid;
-        gap: 24px;
+        gap: 26px;
       }
 
       .hero__intro h1 {
         margin: 0;
-        font-size: clamp(3rem, 6vw, 4rem);
-        font-family: "Kalam", cursive;
-        letter-spacing: 0.06em;
+        font-size: clamp(3.2rem, 6vw, 4.6rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
       }
 
       .hero__intro p {
         margin: 0;
-        color: var(--muted);
-        font-size: 1.05rem;
+        color: var(--fg-muted);
+        font-size: 1.06rem;
       }
 
       .hero__details {
         display: grid;
-        gap: 16px;
-        font-size: 0.95rem;
+        gap: 14px;
+        font-size: 0.92rem;
+        letter-spacing: 0.12em;
       }
 
       .hero__details strong {
         font-weight: 600;
-        color: var(--ink-soft);
-      }
-
-      .hero__card {
-        position: relative;
-        padding: 32px;
-        border-radius: 28px;
-        background: var(--canvas-alt);
-        border: 2px solid var(--ink);
-        box-shadow: var(--paper-shadow);
-        transform: rotate(-2.5deg);
-      }
-
-      .hero__card::after {
-        content: "";
-        position: absolute;
-        inset: 18px;
-        border: 1.5px dashed rgba(28, 28, 28, 0.25);
-        border-radius: 22px;
-        pointer-events: none;
-      }
-
-      .hero__card-title {
-        font-family: "Kalam", cursive;
-        font-size: 1.9rem;
-        margin: 0 0 18px;
-        letter-spacing: 0.08em;
-      }
-
-      .hero__grid {
-        display: grid;
-        gap: 18px;
-      }
-
-      .hero__scribble {
-        position: absolute;
-        width: 160px;
-        height: 160px;
-        top: -52px;
-        right: -32px;
-        background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234281ff' stroke-width='6' stroke-linecap='round'%3E%3Cpath d='M12 35c22-12 44-12 66 0s44 12 66 0' opacity='0.7'/%3E%3Cpath d='M12 75c22-12 44-12 66 0s44 12 66 0'/%3E%3Cpath d='M12 115c22-12 44-12 66 0s44 12 66 0' opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
-        pointer-events: none;
+        color: #fff;
       }
 
       .badge {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
+        gap: 10px;
+        padding: 8px 16px;
         border-radius: 999px;
-        border: 1px solid var(--ink);
-        background: rgba(255, 255, 255, 0.86);
-        font-size: 0.78rem;
-        letter-spacing: 0.12em;
+        background: rgba(91, 124, 250, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 0.74rem;
+        letter-spacing: 0.24em;
         text-transform: uppercase;
-        font-weight: 600;
+      }
+
+      .hero__card {
+        position: relative;
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 38px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero__card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 90% 0%, rgba(91, 124, 250, 0.32), transparent 58%);
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .hero__card-title {
+        margin: 0 0 22px;
+        font-family: "Kalam", cursive;
+        font-size: 1.9rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .hero__grid {
+        display: grid;
+        gap: 24px;
+      }
+
+      .hero__grid h4 {
+        margin: 0 0 8px;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        font-size: 0.76rem;
+        color: var(--fg-muted);
+      }
+
+      .hero__grid p {
+        margin: 0;
+        color: var(--fg);
+        font-size: 0.95rem;
       }
 
       .grid {
         display: grid;
-        gap: 24px;
+        gap: 28px;
       }
 
       .grid--cols-2 {
@@ -314,285 +337,228 @@
       }
 
       .grid--cols-3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      @media (max-width: 960px) {
-        .hero,
-        .grid--cols-2,
-        .grid--cols-3 {
-          grid-template-columns: 1fr;
-        }
-
-        .hero__card {
-          transform: rotate(0deg);
-        }
-
-        header {
-          flex-direction: column;
-        }
-
-        nav {
-          justify-content: center;
-        }
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
 
       .card {
         position: relative;
-        padding: 28px;
-        border-radius: 22px;
-        background: rgba(255, 255, 255, 0.92);
-        border: 1.6px solid rgba(28, 28, 28, 0.12);
-        box-shadow: var(--card-shadow);
-        transition: transform var(--transition), box-shadow var(--transition);
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 20px 50px rgba(3, 4, 10, 0.45);
+        transition: transform var(--transition), border-color var(--transition);
       }
 
-      .card::before {
+      .card::after {
         content: "";
         position: absolute;
-        inset: 16px;
-        border-radius: 18px;
-        border: 1.5px dashed rgba(28, 28, 28, 0.22);
+        inset: 0;
+        border-radius: inherit;
+        border: 1px solid rgba(255, 255, 255, 0.05);
         pointer-events: none;
-        opacity: 0.7;
       }
 
       .card:hover,
       .card:focus-within {
-        transform: translateY(-6px) rotate(-0.5deg);
-        box-shadow: 0 26px 48px rgba(28, 28, 28, 0.2);
+        transform: translateY(-6px);
+        border-color: rgba(91, 124, 250, 0.5);
       }
 
       .card h3 {
-        margin: 0 0 12px;
+        margin: 0 0 14px;
         font-family: "Kalam", cursive;
         font-size: 1.6rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
       }
 
       .card h4 {
-        margin: 0 0 10px;
-        font-size: 1rem;
-        letter-spacing: 0.06em;
+        margin: 0 0 12px;
+        font-size: 0.82rem;
+        letter-spacing: 0.26em;
         text-transform: uppercase;
-        color: var(--muted);
+        color: var(--fg-muted);
       }
 
       .card p {
         margin: 0;
-        color: var(--muted);
-        font-size: 0.96rem;
-      }
-
-      .card ul {
-        margin: 12px 0 0;
-        padding-left: 18px;
-        color: var(--muted);
+        color: var(--fg-muted);
         font-size: 0.95rem;
       }
 
-      .twocol {
-        display: grid;
-        gap: 32px;
-        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      }
-
-      @media (max-width: 900px) {
-        .twocol {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .timeline {
-        display: grid;
-        gap: 24px;
-      }
-
-      .timeline__item {
-        position: relative;
-        padding: 24px 24px 24px 40px;
-        border-left: 3px solid var(--accent);
-        background: rgba(255, 255, 255, 0.92);
-        border-radius: 18px;
-        box-shadow: var(--card-shadow);
-      }
-
-      .timeline__item::before {
-        content: "";
-        position: absolute;
-        left: -12px;
-        top: 28px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border: 2px solid var(--ink);
-        background: var(--accent-3);
-        box-shadow: 6px 6px 0 rgba(255, 107, 74, 0.25);
-      }
-
-      .timeline__meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--muted);
-        margin-bottom: 6px;
-      }
-
-      .timeline__role {
-        font-family: "Kalam", cursive;
-        font-size: 1.4rem;
-        margin: 0 0 8px;
+      .card ul {
+        margin: 18px 0 0;
+        padding-left: 20px;
+        color: var(--fg-muted);
+        font-size: 0.9rem;
       }
 
       .chips {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-top: 16px;
+        margin-top: 18px;
       }
 
       .chip {
-        display: inline-flex;
-        align-items: center;
         padding: 6px 14px;
         border-radius: 999px;
-        border: 1.5px dashed rgba(28, 28, 28, 0.32);
-        font-size: 0.82rem;
-        letter-spacing: 0.08em;
+        background: rgba(91, 124, 250, 0.12);
+        border: 1px solid rgba(91, 124, 250, 0.32);
+        font-size: 0.76rem;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        background: rgba(255, 255, 255, 0.85);
-      }
-
-      .project-card {
-        display: grid;
-        gap: 14px;
+        color: var(--fg);
       }
 
       .links {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        letter-spacing: 0.08em;
+        gap: 10px;
+        margin-top: 16px;
+        font-size: 0.74rem;
+        letter-spacing: 0.26em;
         text-transform: uppercase;
-        font-size: 0.84rem;
-        color: var(--ink);
+        color: var(--fg);
       }
 
       .links span {
-        display: inline-block;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 26px;
+      }
+
+      .timeline__item {
+        position: relative;
+        padding: 28px 28px 28px 54px;
+        border-radius: 24px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 48px rgba(3, 4, 10, 0.45);
+      }
+
+      .timeline__item::before {
+        content: "";
+        position: absolute;
+        left: 24px;
+        top: 32px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-alt), var(--accent));
+        box-shadow: 0 0 18px rgba(91, 124, 250, 0.6);
+      }
+
+      .timeline__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 0.76rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--fg-muted);
+        margin-bottom: 10px;
+      }
+
+      .timeline__role {
+        margin: 0 0 10px;
+        font-family: "Kalam", cursive;
+        font-size: 1.4rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
       }
 
       .gallery-grid {
         display: grid;
         gap: 18px;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        margin-top: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
 
       .wm {
         position: relative;
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
-        border: 2px solid var(--ink);
-        box-shadow: 6px 6px 0 rgba(28, 28, 28, 0.25);
-        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 18px 46px rgba(3, 4, 10, 0.5);
         transition: transform var(--transition), box-shadow var(--transition);
+        background: rgba(9, 14, 26, 0.88);
       }
 
       .wm:hover {
-        transform: translate(-4px, -4px) rotate(-1.5deg);
-        box-shadow: 12px 12px 0 rgba(66, 129, 255, 0.28);
+        transform: translateY(-4px);
+        box-shadow: 0 24px 60px rgba(91, 124, 250, 0.4);
       }
 
       .wm img {
         display: block;
         width: 100%;
-        height: 180px;
+        height: 200px;
         object-fit: cover;
-        filter: saturate(1.02);
       }
 
       .wm::after {
         content: "";
         position: absolute;
-        right: 12px;
-        bottom: 12px;
-        width: 64px;
-        height: 64px;
+        right: 16px;
+        bottom: 16px;
+        width: 96px;
+        height: 96px;
         background: url("assests/logo/nsh-stamp.svg") center/contain no-repeat;
-        filter: drop-shadow(2px 2px 0 rgba(28, 28, 28, 0.35));
+        opacity: 0.22;
         pointer-events: none;
+      }
+
+      @media (max-width: 520px) {
+        .wm::after {
+          width: 74px;
+          height: 74px;
+        }
       }
 
       code {
         font-family: "Work Sans", "Courier New", monospace;
-        font-size: 0.85rem;
-        background: rgba(255, 255, 255, 0.6);
+        font-size: 0.82rem;
+        background: rgba(255, 255, 255, 0.08);
         padding: 2px 6px;
         border-radius: 6px;
-        border: 1px dashed rgba(28, 28, 28, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.12);
       }
 
       footer {
         max-width: var(--max-width);
-        margin: 120px auto 0;
-        padding: 0 24px 64px;
+        margin: 0 auto;
+        padding: 0 24px 80px;
         display: grid;
         gap: 12px;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      footer .links {
-        color: var(--accent);
+        color: var(--fg-muted);
+        font-size: 0.86rem;
       }
 
       .floating-note {
-        position: absolute;
-        top: -46px;
-        right: 18%;
-        background: var(--accent-soft);
-        border: 2px solid var(--accent);
-        border-radius: 16px;
-        padding: 16px 20px;
-        font-family: "Kalam", cursive;
-        font-size: 1.1rem;
-        box-shadow: 12px 12px 0 rgba(255, 224, 120, 0.45);
-        transform: rotate(4deg);
-      }
-
-      @media (max-width: 720px) {
-        header {
-          align-items: center;
-          text-align: center;
-        }
-
-        .floating-note {
-          position: relative;
-          top: auto;
-          right: auto;
-          margin: 20px auto 0;
-          transform: rotate(0deg);
-        }
-
-        .section__header {
-          flex-direction: column;
-          align-items: flex-start;
-        }
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 22px;
+        border-radius: 999px;
+        background: rgba(91, 124, 250, 0.18);
+        border: 1px solid rgba(91, 124, 250, 0.32);
+        color: var(--fg);
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
       }
 
       .lightbox {
         position: fixed;
         inset: 0;
-        background: rgba(12, 12, 12, 0.75);
+        background: rgba(3, 4, 10, 0.82);
         display: grid;
         place-items: center;
         padding: 40px;
-        z-index: 999;
+        z-index: 120;
       }
 
       .lightbox[hidden] {
@@ -600,46 +566,94 @@
       }
 
       .lightbox img {
-        max-width: min(960px, 90vw);
-        max-height: 80vh;
-        border: 4px solid #fff;
+        max-width: min(960px, 92vw);
+        max-height: 82vh;
         border-radius: 18px;
-        box-shadow: 0 32px 70px rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 40px 80px rgba(3, 4, 10, 0.7);
       }
 
       .lightbox__close {
         position: absolute;
-        top: 24px;
-        right: 24px;
-        border: none;
-        background: rgba(255, 255, 255, 0.9);
+        top: 36px;
+        right: 36px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
-        width: 44px;
-        height: 44px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(5, 7, 13, 0.85);
+        color: var(--fg);
         font-size: 2rem;
         line-height: 1;
         cursor: pointer;
-        box-shadow: 6px 6px 0 rgba(28, 28, 28, 0.25);
+      }
+
+      @media (max-width: 960px) {
+        .header-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 18px;
+        }
+
+        nav {
+          justify-content: space-between;
+          width: 100%;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .grid--cols-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        nav {
+          gap: 12px;
+          letter-spacing: 0.18em;
+        }
+
+        .contact-cta {
+          width: 100%;
+          justify-content: center;
+        }
+
+        main {
+          padding-top: 100px;
+        }
+
+        .hero__intro h1 {
+          letter-spacing: 0.12em;
+        }
+
+        .links {
+          font-size: 0.7rem;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="progress" id="progress"></div>
     <div class="page">
       <header>
-        <div class="brand">
-          <div class="brand__name">Noora Saeed Alhajeri</div>
-          <div class="brand__tagline">Creative technologist &middot; Front-end developer &middot; Robotics researcher</div>
+        <div class="header-inner">
+          <div class="brand">
+            <div class="brand__name">Noora Saeed Alhajeri</div>
+            <div class="brand__tagline">Creative technologist &middot; Front-end developer &middot; Robotics researcher</div>
+          </div>
+          <nav aria-label="Primary">
+            <a href="#about">About</a>
+            <a href="#focus">Focus</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#art">Sketchbook</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <a class="contact-cta" href="mailto:n.s3eedalhajeri@gmail.com">Let's talk</a>
         </div>
-        <nav aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#focus">Focus</a>
-          <a href="#education">Education</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#art">Sketchbook</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a class="contact-cta" href="mailto:n.s3eedalhajeri@gmail.com">Let's talk</a>
       </header>
 
       <main>
@@ -662,7 +676,6 @@
             </div>
           </div>
           <div class="hero__card">
-            <div class="hero__scribble" aria-hidden="true"></div>
             <h2 class="hero__card-title">Creative Sketchbook</h2>
             <div class="hero__grid">
               <div>
@@ -682,7 +695,6 @@
             </div>
           </div>
         </section>
-
         <section id="focus" aria-labelledby="focus-title">
           <div class="section__header">
             <h2 class="section__title" id="focus-title">Focus Areas</h2>
@@ -768,7 +780,6 @@
             </article>
           </div>
         </section>
-
         <section id="experience" aria-labelledby="experience-title">
           <div class="section__header">
             <h2 class="section__title" id="experience-title">Selected Experience</h2>
@@ -829,11 +840,10 @@
           </div>
           <div class="grid grid--cols-3">
             <article class="card project-card">
-              <div class="badge">Robotics &middot; 2025</div>
+              <span class="badge">Robotics &middot; 2025</span>
               <h3>Bionic Upper-Limb Prosthesis</h3>
               <p>
-                Tendon-driven prosthetic arm with photonic tactile feedback, modular components, and sustainability-first manufacturing
-                pipeline.
+                Tendon-driven prosthetic arm with photonic tactile feedback, modular components, and sustainability-first manufacturing pipeline.
               </p>
               <div class="chips">
                 <span class="chip">CAD</span>
@@ -842,7 +852,7 @@
               </div>
             </article>
             <article class="card project-card">
-              <div class="badge">AI &middot; 2024</div>
+              <span class="badge">AI &middot; 2024</span>
               <h3>Bahar Chatbot</h3>
               <p>
                 JAIS-powered Arabic conversational agent with custom interface, responsive UX, and cloud deployment tuned for high availability.
@@ -853,12 +863,12 @@
                 <span class="chip">PyTorch</span>
                 <span class="chip">DevOps</span>
               </div>
-              <a class="links" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener"
-                >View highlights <span>&rarr;</span></a
-              >
+              <a class="links" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">
+                View highlights <span>&rarr;</span>
+              </a>
             </article>
             <article class="card project-card">
-              <div class="badge">Health Tech &middot; 2023</div>
+              <span class="badge">Health Tech &middot; 2023</span>
               <h3>TeleSound Stethoscope</h3>
               <p>
                 Telemedicine device using WebRTC streaming, pose detection, and robotic arm integration to power remote diagnostics with near-zero
@@ -871,7 +881,7 @@
               </div>
             </article>
             <article class="card project-card">
-              <div class="badge">Computer Vision &middot; 2022</div>
+              <span class="badge">Computer Vision &middot; 2022</span>
               <h3>Particle Attacks in BMDF</h3>
               <p>
                 Award-winning NYU biochip hackathon project improving detection accuracy through TensorFlow-powered analysis of microfluidic data.
@@ -883,7 +893,7 @@
               </div>
             </article>
             <article class="card project-card">
-              <div class="badge">Visualization &middot; 2024</div>
+              <span class="badge">Visualization &middot; 2024</span>
               <h3>MRI Volume Explorer</h3>
               <p>
                 MATLAB-based GUI for advanced visualization and volume rendering of medical imaging, published in the International Journal of
@@ -892,7 +902,6 @@
             </article>
           </div>
         </section>
-
         <section id="art" aria-labelledby="art-title">
           <div class="section__header">
             <h2 class="section__title" id="art-title">Art &amp; Photo Sketchbook</h2>
@@ -901,18 +910,16 @@
               storytelling.
             </p>
           </div>
-          <div class="twocol">
-            <div>
-              <article class="card">
-                <h3>Illustrations &amp; Sketches</h3>
-                <p>
-                  A rotating gallery of notebook scans, Procreate explorations, and stamped monoline experiments inspired by robotics forms,
-                  wearable design, and Tokyo street vignettes.
-                </p>
-                <div class="gallery-grid" id="sketch-gallery" aria-live="polite"></div>
-              </article>
-            </div>
-            <div>
+          <div class="grid grid--cols-2">
+            <article class="card">
+              <h3>Illustrations &amp; Sketches</h3>
+              <p>
+                A rotating gallery of notebook scans, Procreate explorations, and stamped monoline experiments inspired by robotics forms,
+                wearable design, and Tokyo street vignettes.
+              </p>
+              <div class="gallery-grid" id="sketch-gallery" aria-live="polite"></div>
+            </article>
+            <div class="grid">
               <article class="card">
                 <h3>Photography</h3>
                 <p>
@@ -925,13 +932,11 @@
                 <h3>Stamp &amp; File Prep Notes</h3>
                 <ul>
                   <li>Place photos in <code>assests/photos/</code> and sketches in <code>assests/art/</code>.</li>
-                  <li>Export JPGs between 1600&ndash;2000px on the long edge at roughly 80&#37; quality.</li>
+                  <li>Export JPGs between 1600&ndash;2000px on the long edge at roughly 80% quality.</li>
                   <li>Keep filenames lowercase with dashes: <code>studio-study-01.jpg</code>.</li>
                   <li>Strip GPS EXIF for privacy before publishing.</li>
                 </ul>
-                <p>
-                  Your stamp appears automatically thanks to the overlay watermark. Just update the file arrays below when you add new work.
-                </p>
+                <p>Your stamp appears automatically thanks to the overlay watermark. Just update the file arrays below when you add new work.</p>
               </article>
             </div>
           </div>
@@ -944,38 +949,33 @@
               Mentorship, teaching, and accolades that energize my practice and remind me why people stay at the center of every build.
             </p>
           </div>
-          <div class="twocol">
-            <div class="grid">
-              <article class="card">
-                <h3>Mentorship &amp; Volunteering</h3>
-                <ul>
-                  <li>Engineering mentor for sustainability and hackathon teams at Abu Dhabi University (2022 &mdash; 2023).</li>
-                  <li>Academic peer tutor supporting biology, chemistry, calculus, linear algebra, and introductory AI (2019 &mdash; 2022).</li>
-                </ul>
-              </article>
-              <article class="card">
-                <h3>Certificates &amp; Camps</h3>
-                <ul>
-                  <li>Code Foundation for ROS, The Construct (Aug 2024).</li>
-                  <li>ROS Summer Camp 2024: Mastering Robotics with ROS, Dubai Future Foundation (Jul 2024).</li>
-                  <li>Project Management Foundations, LinkedIn Learning (Feb 2024).</li>
-                </ul>
-              </article>
-            </div>
-            <div class="grid">
-              <article class="card">
-                <h3>Awards &amp; Honors</h3>
-                <ul>
-                  <li>Top 10 Finalist, Wyakom Initiative, Department of Community Development (Nov 2023).</li>
-                  <li>2nd and 3rd Place, 10th Annual Undergraduate Research Competition, Biomedical Category (May 2023).</li>
-                  <li>Excellence and Creative Engineering Award, Society of Engineers UAE (Jan 2024).</li>
-                  <li>Women in Research Forum, University of Sharjah (Sep 2023).</li>
-                </ul>
-              </article>
-            </div>
+          <div class="grid grid--cols-2">
+            <article class="card">
+              <h3>Mentorship &amp; Volunteering</h3>
+              <ul>
+                <li>Engineering mentor for sustainability and hackathon teams at Abu Dhabi University (2022 &mdash; 2023).</li>
+                <li>Academic peer tutor supporting biology, chemistry, calculus, linear algebra, and introductory AI (2019 &mdash; 2022).</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Certificates &amp; Camps</h3>
+              <ul>
+                <li>Code Foundation for ROS, The Construct (Aug 2024).</li>
+                <li>ROS Summer Camp 2024: Mastering Robotics with ROS, Dubai Future Foundation (Jul 2024).</li>
+                <li>Project Management Foundations, LinkedIn Learning (Feb 2024).</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Awards &amp; Honors</h3>
+              <ul>
+                <li>Top 10 Finalist, Wyakom Initiative, Department of Community Development (Nov 2023).</li>
+                <li>2nd and 3rd Place, 10th Annual Undergraduate Research Competition, Biomedical Category (May 2023).</li>
+                <li>Excellence and Creative Engineering Award, Society of Engineers UAE (Jan 2024).</li>
+                <li>Women in Research Forum, University of Sharjah (Sep 2023).</li>
+              </ul>
+            </article>
           </div>
         </section>
-
         <section id="contact" aria-labelledby="contact-title">
           <div class="section__header">
             <h2 class="section__title" id="contact-title">Let's Build Together</h2>
@@ -1014,10 +1014,12 @@
         </div>
       </footer>
     </div>
+
     <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" hidden>
       <button class="lightbox__close" type="button" aria-label="Close preview">&times;</button>
       <img alt="" id="lightbox-image" />
     </div>
+
     <script>
       const yearEl = document.getElementById("year");
       if (yearEl) {
@@ -1033,10 +1035,20 @@
         });
       });
 
-      // SKETCHES - add filenames from assests/art/ once uploaded.
-      const sketchImages = [];
+      const progressEl = document.getElementById("progress");
+      if (progressEl) {
+        const updateProgress = () => {
+          const doc = document.documentElement;
+          const scrollTop = doc.scrollTop || document.body.scrollTop;
+          const max = doc.scrollHeight - doc.clientHeight;
+          const percent = max > 0 ? (scrollTop / max) * 100 : 0;
+          progressEl.style.width = `${percent}%`;
+        };
+        window.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress();
+      }
 
-      // PHOTOS - pulling numbered files from assests/photos/1.jpg to 19.jpg.
+      const sketchImages = [];
       const photoImages = Array.from({ length: 19 }, (_, index) => `assests/photos/${index + 1}.jpg`);
 
       function renderGallery(id, sources) {
@@ -1078,14 +1090,10 @@
       const lightboxEl = document.getElementById("lightbox");
       if (lightboxEl) {
         lightboxEl.addEventListener("click", (event) => {
-          if (event.target === lightboxEl) {
-            closeLightbox();
-          }
+          if (event.target === lightboxEl) closeLightbox();
         });
         const closeButton = lightboxEl.querySelector(".lightbox__close");
-        if (closeButton) {
-          closeButton.addEventListener("click", closeLightbox);
-        }
+        if (closeButton) closeButton.addEventListener("click", closeLightbox);
       }
 
       renderGallery("sketch-gallery", sketchImages);

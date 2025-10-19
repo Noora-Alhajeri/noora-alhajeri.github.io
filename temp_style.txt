@@ -1,0 +1,432 @@
+    <style>
+
+      }
+        box-shadow: 0 32px 70px rgba(0, 0, 0, 0.35);
+        border-radius: 18px;
+        border: 4px solid #fff;
+        max-height: 80vh;
+        max-width: min(960px, 90vw);
+      .lightbox img {
+
+      }
+        display: none;
+      .lightbox[hidden] {
+
+      }
+        z-index: 999;
+        padding: 40px;
+        place-items: center;
+        display: grid;
+        background: rgba(12, 12, 12, 0.75);
+        inset: 0;
+        position: fixed;
+      .lightbox {
+
+      }
+        }
+          align-items: flex-start;
+          flex-direction: column;
+        .section__header {
+
+        }
+          transform: rotate(0deg);
+          margin: 20px auto 0;
+          right: auto;
+          top: auto;
+          position: relative;
+        .floating-note {
+
+        }
+          text-align: center;
+          align-items: center;
+        header {
+      @media (max-width: 720px) {
+
+      }
+        transform: rotate(4deg);
+        box-shadow: 12px 12px 0 rgba(255, 224, 120, 0.45);
+        font-size: 1.1rem;
+        font-family: "Kalam", cursive;
+        padding: 16px 20px;
+        border-radius: 16px;
+        border: 2px solid var(--accent);
+        background: var(--accent-soft);
+        right: 18%;
+        top: -46px;
+        position: absolute;
+      .floating-note {
+
+      }
+        color: var(--accent);
+      footer .links {
+
+      }
+        font-size: 0.9rem;
+        color: var(--muted);
+        gap: 12px;
+        display: grid;
+        padding: 0 24px 64px;
+        margin: 120px auto 0;
+        max-width: var(--max-width);
+      footer {
+
+      }
+        border: 1px dashed rgba(28, 28, 28, 0.25);
+        border-radius: 6px;
+        padding: 2px 6px;
+        background: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        font-family: "Work Sans", "Courier New", monospace;
+      code {
+
+      }
+        pointer-events: none;
+        filter: drop-shadow(2px 2px 0 rgba(28, 28, 28, 0.35));
+        background: url("assests/logo/nsh-stamp.svg") center/contain no-repeat;
+        height: 64px;
+        width: 64px;
+        bottom: 12px;
+        right: 12px;
+        position: absolute;
+        content: "";
+      .wm::after {
+
+      }
+        filter: saturate(1.02);
+        object-fit: cover;
+        height: 180px;
+        width: 100%;
+        display: block;
+      .wm img {
+
+      }
+        box-shadow: 12px 12px 0 rgba(66, 129, 255, 0.28);
+        transform: translate(-4px, -4px) rotate(-1.5deg);
+      .wm:hover {
+
+      }
+        transition: transform var(--transition), box-shadow var(--transition);
+        background: rgba(255, 255, 255, 0.6);
+        box-shadow: 6px 6px 0 rgba(28, 28, 28, 0.25);
+        border: 2px solid var(--ink);
+        overflow: hidden;
+        border-radius: 16px;
+        position: relative;
+      .wm {
+
+      }
+        margin-top: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+        display: grid;
+      .gallery-grid {
+
+      }
+        transform: translateY(-2px);
+        display: inline-block;
+      .links span {
+
+      }
+        color: var(--ink);
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+        gap: 8px;
+        align-items: center;
+        display: inline-flex;
+      .links {
+
+      }
+        gap: 14px;
+        display: grid;
+      .project-card {
+
+      }
+        background: rgba(255, 255, 255, 0.85);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.82rem;
+        border: 1.5px dashed rgba(28, 28, 28, 0.32);
+        border-radius: 999px;
+        padding: 6px 14px;
+        align-items: center;
+        display: inline-flex;
+      .chip {
+
+      }
+        margin-top: 16px;
+        gap: 10px;
+        flex-wrap: wrap;
+        display: flex;
+      .chips {
+
+      }
+        margin: 0 0 8px;
+        font-size: 1.4rem;
+        font-family: "Kalam", cursive;
+      .timeline__role {
+
+      }
+        margin-bottom: 6px;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        gap: 12px;
+        flex-wrap: wrap;
+        display: flex;
+      .timeline__meta {
+
+      }
+        box-shadow: 6px 6px 0 rgba(255, 107, 74, 0.25);
+        background: var(--accent-3);
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        top: 28px;
+        left: -12px;
+        position: absolute;
+        content: "";
+      .timeline__item::before {
+
+      }
+        box-shadow: var(--card-shadow);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.92);
+        border-left: 3px solid var(--accent);
+        padding: 24px 24px 24px 40px;
+        position: relative;
+      .timeline__item {
+
+      }
+        gap: 24px;
+        display: grid;
+      .timeline {
+
+      }
+        }
+          grid-template-columns: 1fr;
+        .twocol {
+      @media (max-width: 900px) {
+
+      }
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 32px;
+        display: grid;
+      .twocol {
+
+      }
+        font-size: 0.95rem;
+        color: var(--muted);
+        padding-left: 18px;
+        margin: 12px 0 0;
+      .card ul {
+
+      }
+        font-size: 0.96rem;
+        color: var(--muted);
+        margin: 0;
+      .card p {
+
+      }
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 1rem;
+        margin: 0 0 10px;
+      .card h4 {
+
+      }
+        font-size: 1.6rem;
+        font-family: "Kalam", cursive;
+        margin: 0 0 12px;
+      .card h3 {
+
+      }
+        box-shadow: 0 26px 48px rgba(28, 28, 28, 0.2);
+        transform: translateY(-6px) rotate(-0.5deg);
+      .card:focus-within {
+      .card:hover,
+
+      }
+        opacity: 0.7;
+        pointer-events: none;
+        border: 1.5px dashed rgba(28, 28, 28, 0.22);
+        border-radius: 18px;
+        inset: 16px;
+        position: absolute;
+        content: "";
+      .card::before {
+
+      }
+        transition: transform var(--transition), box-shadow var(--transition);
+        box-shadow: var(--card-shadow);
+        border: 1.6px solid rgba(28, 28, 28, 0.12);
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 22px;
+        padding: 28px;
+        position: relative;
+      .card {
+
+      }
+        }
+          justify-content: center;
+        nav {
+
+        }
+          flex-direction: column;
+        header {
+
+        }
+          transform: rotate(0deg);
+        .hero__card {
+
+        }
+          grid-template-columns: 1fr;
+        .grid--cols-3 {
+        .grid--cols-2,
+        .hero,
+      @media (max-width: 960px) {
+
+      }
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      .grid--cols-3 {
+
+      }
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .grid--cols-2 {
+
+      }
+        gap: 24px;
+        display: grid;
+      .grid {
+
+      }
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.78rem;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        padding: 6px 12px;
+        gap: 8px;
+        align-items: center;
+        display: inline-flex;
+      .badge {
+
+      }
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234281ff' stroke-width='6' stroke-linecap='round'%3E%3Cpath d='M12 35c22-12 44-12 66 0s44 12 66 0' opacity='0.7'/%3E%3Cpath d='M12 75c22-12 44-12 66 0s44 12 66 0'/%3E%3Cpath d='M12 115c22-12 44-12 66 0s44 12 66 0' opacity='0.7'/%3E%3C/g%3E%3C/svg%3E");
+        right: -32px;
+        top: -52px;
+        height: 160px;
+        width: 160px;
+        position: absolute;
+      .hero__scribble {
+
+      }
+        gap: 18px;
+        display: grid;
+      .hero__grid {
+
+      }
+        letter-spacing: 0.08em;
+        margin: 0 0 18px;
+        font-size: 1.9rem;
+        font-family: "Kalam", cursive;
+      .hero__card-title {
+
+      }
+        pointer-events: none;
+        border-radius: 22px;
+        border: 1.5px dashed rgba(28, 28, 28, 0.25);
+        inset: 18px;
+        position: absolute;
+        content: "";
+      .hero__card::after {
+
+      }
+        transform: rotate(-2.5deg);
+        box-shadow: var(--paper-shadow);
+        border: 2px solid var(--ink);
+        background: var(--canvas-alt);
+        border-radius: 28px;
+        padding: 32px;
+        position: relative;
+      .hero__card {
+
+      }
+        color: var(--ink-soft);
+        font-weight: 600;
+      .hero__details strong {
+
+      }
+        font-size: 0.95rem;
+        gap: 16px;
+        display: grid;
+      .hero__details {
+
+      }
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin: 0;
+      .hero__intro p {
+
+      }
+        letter-spacing: 0.06em;
+        font-family: "Kalam", cursive;
+        font-size: clamp(3rem, 6vw, 4rem);
+        margin: 0;
+      .hero__intro h1 {
+
+      }
+        gap: 24px;
+        display: grid;
+      .hero__intro {
+
+      }
+        align-items: center;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 48px;
+        display: grid;
+      .hero {
+
+      }
+        font-size: 0.98rem;
+        color: var(--muted);
+        max-width: 420px;
+      .section__lede {
+
+      }
+        opacity: 0.8;
+        background-size: 120px 12px;
+        background-repeat: repeat-x;
+        background-image: url("data:image/svg+xml,%3Csvg width='120' height='12' viewBox='0 0 120 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 10c18-6 36-6 56 0s38 6 56 0' stroke='%23ff6b4a' stroke-width='4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+        height: 12px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        position: absolute;
+        content: "";
+      .section__title::after {
+
+      }
+        padding-bottom: 8px;
+    />
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap"
+    <link
+    />
+      content="Portfolio of Noora Saeed Alhajeri &mdash; creative technologist, front-end developer, and robotics researcher crafting sketch-inspired digital experiences."
+      name="description"
+    <meta
+    <title>Noora Saeed Alhajeri &middot; Creative Technologist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+  <head>
+<html lang="en">
+<!doctype html>
+
