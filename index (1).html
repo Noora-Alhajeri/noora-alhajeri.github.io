@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noora Alhajeri — ポートフォリオ | Japanese‑Style</title>
+  <meta name="description" content="Japanese‑style personal portfolio with light/dark mode, JP/EN language toggle, seigaiha background, tategaki hero, and refined micro‑interactions." />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;800&family=Noto+Serif+JP:wght@500;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    /* THEME TOKENS */
+    :root{
+      --ink:#0f0f0f; --paper:#f8f5ee; --card:#ffffff; --muted:#6b7280;
+      --vermilion:#e60026; --indigo:#1d2a44; --gold:#c8a94a; --ring: rgba(230,0,38,.35);
+      --shadow-col: rgba(0,0,0,.08); --shadow: 0 18px 50px var(--shadow-col);
+      --chip-bg: #fff; --seigaiha-stroke: #9aa5b1; --btn-bg: #fff; --glow: 0 0 0 0 transparent;
+    }
+    :root[data-theme="dark"]{
+      --paper:#0c0f14; --ink:#f3f5f7; --card:#0f131a; --muted:#98a2b3;
+      --indigo:#a7b7d8; --shadow-col: rgba(0,0,0,.5); --chip-bg:#0f141b;
+      --seigaiha-stroke:#6b7785; --btn-bg:#0f141b; --ring: rgba(199,144,0,.4);
+      --glow: 0 0 40px rgba(230,0,38,.15);
+    }
+    @media (prefers-color-scheme:dark){
+      :root:not([data-theme]){
+        --paper:#0c0f14; --ink:#f3f5f7; --card:#0f131a; --muted:#98a2b3;
+        --indigo:#a7b7d8; --shadow-col: rgba(0,0,0,.5); --chip-bg:#0f141b;
+        --seigaiha-stroke:#6b7785; --btn-bg:#0f141b; --ring: rgba(199,144,0,.4);
+        --glow: 0 0 40px rgba(230,0,38,.15);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter, system-ui, Segoe UI, Roboto, Noto Sans JP, sans-serif;line-height:1.6}
+    .trans{transition:background-color .35s ease, color .35s ease, border-color .35s ease, box-shadow .35s ease, filter .35s ease, transform .25s ease}
+    :focus-visible{outline:2px solid var(--vermilion); outline-offset:3px}
+    .progress{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--vermilion),var(--gold));z-index:90;box-shadow:0 0 0 1px rgba(0,0,0,.06), var(--glow);transition:width .1s linear}
+
+    /* Seigaiha + grain */
+    body::before{content:"";position:fixed;inset:0;z-index:-2;opacity:.12;pointer-events:none;filter:url(#wobble);
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><defs><pattern id="sg" width="40" height="20" patternUnits="userSpaceOnUse"><path d="M0 20 Q 10 0 20 20 T 40 20" fill="none" stroke="%23aab" stroke-width="1.2"/></pattern></defs><rect width="100%" height="100%" fill="url(%23sg)"/></svg>');}
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.06;mix-blend-mode:overlay;
+      background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAV0lEQVQoz2NgoBvoZ2BgYGDg/9+5c+f/HyYGBgYmQKQwGDEQJwZQv2GQh0Cw3gQp7gYg0wBqQxg0wC8QqEw2Aqf+AQ1DgGQ0Q0kM0gBwbQdQfA0DQqQJQvQAA8W0Q0F4w9l8AAAAASUVORK5CYII=');}
+
+    /* Layout */
+    .shell{display:grid;grid-template-columns: 90px 1fr; gap: 22px; max-width:1200px;margin:0 auto;padding:16px}
+    @media (max-width:880px){ .shell{grid-template-columns:1fr} }
+
+    /* Vertical nav (tategaki) */
+    aside.nav{position:sticky; top:16px; height:calc(100vh - 32px); display:flex; align-items:flex-start; justify-content:center}
+    .nav-rail{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .mon{width:56px;height:56px;border-radius:999px;border:2px solid var(--ink);display:grid;place-items:center;margin:10px auto 8px;background:var(--card);box-shadow:var(--shadow)}
+    .mon span{font-family:'Noto Serif JP',serif;font-weight:700;color:var(--vermilion)}
+    .nav-rail a{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.08em;text-decoration:none;color:var(--ink);border:2px solid var(--ink);background:var(--card);padding:10px 8px;border-radius:12px;box-shadow:2px 2px 0 var(--ink);font-family:'Noto Serif JP',serif;font-weight:600}
+    .nav-rail a.active{border-color:var(--vermilion);box-shadow:2px 2px 0 var(--vermilion)}
+    .controls{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+    .icon-btn{width:42px;height:42px;border:2px solid var(--ink);border-radius:12px;background:var(--btn-bg);display:grid;place-items:center;box-shadow:2px 2px 0 var(--ink);cursor:pointer}
+    .icon-btn:hover{transform:translate(-1px,-1px)}
+
+    main{min-height:100vh}
+
+    /* HERO */
+    .hero{position:relative;height:min(88vh,860px);border-radius:18px;background:var(--card);border:2px solid var(--ink);box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns: 1fr 420px}
+    @media(max-width:960px){.hero{grid-template-columns:1fr}}
+    .sun{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 60% 40%, rgba(255,255,255,.2), transparent 35%), var(--vermilion);right:-60px;top:-60px;filter:contrast(1.1);opacity:.95}
+    .torii{position:absolute;left:40px;bottom:22px;opacity:.18}
+    .hero-left{padding:34px 34px 34px 44px;display:flex;gap:28px;align-items:flex-end}
+    .hero-title{writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-weight:800;font-size:clamp(22px,5vw,36px);margin:0;line-height:1.3;letter-spacing:.12em}
+    .hero-copy{max-width:560px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);border-radius:999px;padding:6px 10px;background:var(--chip-bg);box-shadow:2px 2px 0 var(--ink);font-family:'Noto Sans JP',sans-serif}
+    .cta{display:flex;gap:10px;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid var(--ink);border-radius:14px;background:var(--btn-bg);box-shadow:3px 3px 0 var(--ink);cursor:pointer;text-decoration:none;color:inherit;font-weight:600;position:relative;overflow:hidden}
+    .btn.primary{border-color:var(--vermilion);box-shadow:3px 3px 0 var(--vermilion)}
+    .btn .icon{width:18px;height:18px}
+    .btn.magnetic span{display:inline-block;transition:transform .15s ease}
+
+    /* Section cards */
+    section.card{margin:26px 0;border:2px solid var(--ink);background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:24px}
+    section.card h2{margin:0 0 6px;font-family:'Noto Serif JP',serif;font-weight:700;letter-spacing:.06em}
+    .muted{color:var(--muted)}
+
+    /* Projects grid */
+    .grid{display:grid;gap:16px}
+    .grid.projects{grid-template-columns:repeat(auto-fit, minmax(260px,1fr))}
+    .project{position:relative;border:2px solid var(--ink);border-radius:16px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,.7));box-shadow:3px 3px 0 var(--ink);padding:12px;overflow:hidden;transform-style:preserve-3d}
+    .project::after{content:"";position:absolute;inset:-2px;border-radius:16px;border:2px solid transparent;background:linear-gradient(120deg,transparent,rgba(230,0,38,.2),transparent) border-box; -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:0; transition:opacity .25s}
+    .project:hover::after{opacity:1}
+    .project img{width:100%;height:140px;object-fit:cover;border-radius:12px;border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);background:#e5e7eb}
+    .project h3{margin:8px 0 6px;font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px}
+    .tag{border:2px solid var(--ink);border-radius:999px;padding:2px 8px;font-size:12px;background:var(--chip-bg)}
+    .project .ext{position:absolute;right:10px;top:10px;opacity:.6}
+    .shine{position:absolute;inset:0;background:radial-gradient(600px 200px at var(--mx,50%) var(--my,0%), rgba(255,255,255,.14), transparent 40%);pointer-events:none;opacity:0;transition:opacity .2s ease}
+    .project:hover .shine{opacity:1}
+
+    /* Skeletons */
+    .skeleton{animation:pulse 1.1s ease-in-out infinite; background:linear-gradient(90deg, rgba(0,0,0,.08), rgba(0,0,0,.02), rgba(0,0,0,.08)); background-size:200% 100%}
+    @keyframes pulse{to{background-position:-200% 0}}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit, minmax(160px,1fr));gap:10px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:12px;border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);cursor:zoom-in;background:#e5e7eb}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:60}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:min(92vw,1100px);max-height:86vh;border-radius:16px;border:2px solid var(--ink);box-shadow:10px 10px 0 var(--indigo)}
+
+    /* Floating Contact CTA */
+    .fab{position:fixed;right:18px;bottom:18px;z-index:40}
+    .fab .icon-btn{border-color:var(--vermilion);box-shadow:2px 2px 0 var(--vermilion)}
+
+    /* Page transition wipe */
+    .wipe{position:fixed;inset:0;background:var(--vermilion);transform:translateY(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);z-index:80;pointer-events:none}
+    .wipe.active{transform:translateY(0)}
+
+    /* Appear on scroll */
+    .reveal{opacity:0;transform:translateY(8px);transition:opacity .5s ease, transform .5s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    @media (prefers-reduced-motion:reduce){ .trans, .reveal{transition:none} .project::after{transition:none} .shine{transition:none} }
+  </style>
+</head>
+<body class="trans">
+  <!-- ICON SPRITE + wobble filter -->
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><g stroke="currentColor" stroke-width="2" fill="none"><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></g></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></symbol>
+    <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 000 12a11.5 11.5 0 008 10.93c.6.1.82-.26.82-.58v-2.1c-3.26.72-3.95-1.4-3.95-1.4-.55-1.4-1.34-1.78-1.34-1.78-1.1-.76.08-.75.08-.75 1.22.08 1.86 1.26 1.86 1.26 1.08 1.85 2.83 1.32 3.52 1 .1-.8.42-1.33.76-1.64-2.6-.29-5.33-1.3-5.33-5.78 0-1.28.46-2.33 1.22-3.15-.12-.3-.53-1.5.12-3.1 0 0 1-.32 3.3 1.2a11.6 11.6 0 016 0c2.28-1.52 3.28-1.2 3.28-1.2.66 1.6.24 2.8.12 3.1.76.82 1.22 1.87 1.22 3.15 0 4.5-2.74 5.48-5.35 5.77.44.38.82 1.1.82 2.24v3.32c0 .32.22.7.84.58A11.5 11.5 0 0024 12 11.5 11.5 0 0012 .5z"/></symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12H3v-12zm7 0h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.31h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.96v5.7h-4v-12z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2zm8 6l10-6H2l10 6z"/></symbol>
+    <symbol id="icon-ext" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.3 9.3-1.41-1.41 9.3-9.3H14V3zM5 5h5V3H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5h-2v5H5V5z"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 018 8h-3c-.2-2.9-1.4-5.5-3.1-7.3A8 8 0 0112 4zm-2.9.9C7.4 6.7 6.2 9.3 6 12H3a8 8 0 016.1-7.1zM6 12c.2 2.7 1.4 5.3 3.1 7.1A8 8 0 014 12h2zm10 0a10.7 10.7 0 01-3.1 7.1A8 8 0 0020 12h-4z"/></symbol>
+    <filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="1" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </svg>
+
+  <div class="progress" id="progress"></div>
+  <div class="wipe" id="wipe"></div>
+
+  <div class="shell trans">
+    <aside class="nav">
+      <div class="nav-rail">
+        <div class="mon trans" style="filter:url(#wobble)"><span>の</span></div>
+        <a href="#about"   class="active trans"><span data-i18n="nav_about">略歴</span></a>
+        <a href="#projects" class="trans"><span data-i18n="nav_projects">作品</span></a>
+        <a href="#sketch"   class="trans"><span data-i18n="nav_sketch">スケッチ</span></a>
+        <a href="#photos"   class="trans"><span data-i18n="nav_photos">写真</span></a>
+        <a href="#contact"  class="trans"><span data-i18n="nav_contact">連絡</span></a>
+        <div class="controls">
+          <button class="icon-btn trans" id="themeToggle" aria-label="Toggle theme">
+            <svg class="icon" width="18" height="18"><use href="#icon-moon" xlink:href="#icon-moon"/></svg>
+          </button>
+          <button class="icon-btn trans" id="langToggle" aria-label="Toggle language (EN/日本)">
+            <svg class="icon" width="18" height="18"><use href="#icon-globe"/></svg>
+          </button>
+          <a class="icon-btn trans" aria-label="GitHub" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noopener">
+            <svg class="icon" width="18" height="18"><use href="#icon-github"/></svg>
+          </a>
+          <a class="icon-btn trans" aria-label="LinkedIn" href="https://linkedin.com/in/nsh019" target="_blank" rel="noopener">
+            <svg class="icon" width="18" height="18"><use href="#icon-linkedin"/></svg>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <!-- HERO -->
+      <header class="hero trans" id="home" style="filter:url(#wobble)">
+        <div class="sun trans"></div>
+        <svg class="torii" width="120" height="80" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="var(--ink)" stroke-width="3">
+            <line x1="10" y1="60" x2="30" y2="60"/>
+            <line x1="90" y1="60" x2="110" y2="60"/>
+            <rect x="20" y="20" width="80" height="6" fill="var(--ink)"/>
+            <rect x="12" y="28" width="96" height="6" fill="var(--ink)"/>
+            <line x1="30" y1="34" x2="30" y2="60"/>
+            <line x1="90" y1="34" x2="90" y2="60"/>
+          </g>
+        </svg>
+        <div class="hero-left">
+          <h1 class="hero-title" data-i18n="hero_title">ポートフォリオ｜ノーラ</h1>
+          <div class="hero-copy">
+            <p data-i18n="hero_blurb">Robotics × HRI × Biomedical 工学。ミニマルで端正な日本風の紙感と、朱（vermilion）のアクセント。Sketch／写真も展示。</p>
+            <div class="chips">
+              <span class="chip trans">Python</span><span class="chip trans">C++</span><span class="chip trans">ROS</span><span class="chip trans">OpenCV</span><span class="chip trans">PyTorch</span>
+              <span class="chip trans">React</span><span class="chip trans">Next.js</span><span class="chip trans">MATLAB</span>
+            </div>
+            <div class="cta">
+              <a class="btn primary magnetic trans" href="#projects"><span data-i18n="cta_view_projects">作品を見る</span> <svg class="icon" width="18" height="18"><use href="#icon-ext"/></svg></a>
+              <a class="btn magnetic trans" href="assets/Noora_Alhajeri_CV.pdf" target="_blank" rel="noopener"><span data-i18n="cta_cv">CV</span></a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ABOUT -->
+      <section class="card reveal trans" id="about">
+        <h2 data-i18n="about_heading">略歴 / About</h2>
+        <p data-i18n="about_copy">Robotics MSc (MBZUAI)。Khalifa University にて Visiting Student Researcher。関心: ヒューマノイド、HRI、義手、モーション制御、人体モデリング。低コスト腱駆動バイオニックハンド（フォトニック触覚、モジュール制御）に従事。</p>
+        <p class="muted"><span data-i18n="about_tools_label">Tools:</span> Python • C++ • MATLAB • ROS • PyTorch • OpenCV • Arduino • Raspberry Pi • React • Next.js • Flask • Figma</p>
+        <div class="cta">
+          <a class="btn magnetic trans" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noopener"><span>GitHub</span></a>
+          <a class="btn magnetic trans" href="https://linkedin.com/in/nsh019" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+          <a class="btn magnetic trans" href="mailto:n.s3eedalhajeri@gmail.com"><span>Email</span></a>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="card reveal trans" id="projects">
+        <h2 data-i18n="projects_heading">作品 / Projects</h2>
+        <p class="muted" id="projects-status" data-i18n="projects_loading">Loading projects…</p>
+        <div class="grid projects" id="projects-grid"></div>
+      </section>
+
+      <!-- SKETCHBOOK -->
+      <section class="card reveal trans" id="sketch">
+        <h2 data-i18n="sketch_heading">スケッチ / Sketchbook</h2>
+        <p class="muted" data-i18n="sketch_blurb">Click to zoom. Put images inside <code>assets/art/</code> and list them in <code>artImages</code> below.</p>
+        <div class="gallery" id="art-gallery"></div>
+      </section>
+
+      <!-- PHOTOS -->
+      <section class="card reveal trans" id="photos">
+        <h2 data-i18n="photos_heading">写真 / Photos</h2>
+        <p class="muted" data-i18n="photos_blurb">Street, texture, and accidental geometry.</p>
+        <div class="gallery" id="photo-gallery"></div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="card reveal trans" id="contact">
+        <h2 data-i18n="contact_heading">連絡 / Contact</h2>
+        <p data-i18n="contact_blurb">コラボ・質問などお気軽に。フォーム（Formspree など）やメールリンクを設置できます。</p>
+        <div class="cta">
+          <a class="btn primary magnetic trans" href="mailto:n.s3eedalhajeri@gmail.com"><span data-i18n="contact_send_mail">メールを送る</span></a>
+          <a class="btn magnetic trans" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noopener"><span>GitHub</span></a>
+        </div>
+      </section>
+
+      <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Image viewer">
+        <img id="lightbox-img" alt="Expanded media" />
+      </div>
+
+      <footer class="reveal trans" style="text-align:center;color:var(--muted);padding:18px 0 42px">
+        <small>© <span id="year"></span> Noora Alhajeri — Japanese‑style portfolio.</small>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Floating Contact -->
+  <div class="fab"><a class="icon-btn" href="#contact" aria-label="Contact"><svg width="18" height="18" class="icon"><use href="#icon-mail"/></svg></a></div>
+
+  <script>
+    // THEME (explicit): 'light' or 'dark'
+    const root = document.documentElement; const themeKey='noora-theme'; const themeBtn=document.getElementById('themeToggle');
+    function applyTheme(t){ const use = themeBtn?.querySelector('use'); if(t==='dark'){ root.setAttribute('data-theme','dark'); if(use){use.setAttribute('href','#icon-sun'); use.setAttribute('xlink:href','#icon-sun');} themeBtn?.setAttribute('aria-label','Switch to light mode'); }
+      else if(t==='light'){ root.setAttribute('data-theme','light'); if(use){use.setAttribute('href','#icon-moon'); use.setAttribute('xlink:href','#icon-moon');} themeBtn?.setAttribute('aria-label','Switch to dark mode'); }
+      else { const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches; applyTheme(prefersDark?'dark':'light'); return; } }
+    const savedTheme = localStorage.getItem(themeKey); if(savedTheme==='dark'||savedTheme==='light'){ applyTheme(savedTheme); } else { applyTheme(null); }
+    themeBtn?.addEventListener('click', ()=>{ const cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); const next = cur==='dark'?'light':'dark'; localStorage.setItem(themeKey,next); applyTheme(next); const wipe=document.getElementById('wipe'); if(!matchMedia('(prefers-reduced-motion: reduce)').matches){ wipe.classList.add('active'); setTimeout(()=>wipe.classList.remove('active'), 450); }});
+
+    // I18N (JP/EN) — inspired by i18next usage in Shin-Portfolio
+    const langKey='noora-lang'; const langBtn=document.getElementById('langToggle');
+    const i18n = {
+      ja: {
+        nav_about:'略歴', nav_projects:'作品', nav_sketch:'スケッチ', nav_photos:'写真', nav_contact:'連絡',
+        hero_title:'ポートフォリオ｜ノーラ', hero_blurb:'Robotics × HRI × Biomedical 工学。ミニマルで端正な日本風の紙感と、朱（vermilion）のアクセント。Sketch／写真も展示。',
+        cta_view_projects:'作品を見る', cta_cv:'CV',
+        about_heading:'略歴 / About', about_copy:'Robotics MSc (MBZUAI)。Khalifa University にて Visiting Student Researcher。関心: ヒューマノイド、HRI、義手、モーション制御、人体モデリング。低コスト腱駆動バイオニックハンド（フォトニック触覚、モジュール制御）に従事。', about_tools_label:'Tools:',
+        projects_heading:'作品 / Projects', projects_loading:'プロジェクトを読み込み中…',
+        sketch_heading:'スケッチ / Sketchbook', sketch_blurb:'クリックで拡大。画像は assets/art/ に追加し、下の artImages 配列に列挙してください。',
+        photos_heading:'写真 / Photos', photos_blurb:'ストリート、テクスチャ、ジオメトリ。',
+        contact_heading:'連絡 / Contact', contact_blurb:'コラボ・質問などお気軽に。フォーム（Formspree など）やメールリンクを設置できます。', contact_send_mail:'メールを送る'
+      },
+      en: {
+        nav_about:'About', nav_projects:'Projects', nav_sketch:'Sketch', nav_photos:'Photos', nav_contact:'Contact',
+        hero_title:'Portfolio | Noora', hero_blurb:'Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.',
+        cta_view_projects:'View Projects', cta_cv:'CV',
+        about_heading:'About', about_copy:'Robotics MSc (MBZUAI). Visiting Student Researcher at Khalifa University. Interests: Humanoids, HRI, prosthetics, motion control, human body modeling. Worked on low-cost tendon-driven bionic hand (photonic tactile, modular control).', about_tools_label:'Tools:',
+        projects_heading:'Projects', projects_loading:'Loading projects…',
+        sketch_heading:'Sketchbook', sketch_blurb:'Click to zoom. Add images to assets/art/ and list them in the artImages array below.',
+        photos_heading:'Photos', photos_blurb:'Street, textures, and geometry.',
+        contact_heading:'Contact', contact_blurb:'Reach out for collaborations or questions. Add a form (Formspree) or use the email link.', contact_send_mail:'Send Mail'
+      }
+    };
+    function setLang(lang){ const dict=i18n[lang]||i18n.ja; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.textContent=dict[k]; }); localStorage.setItem(langKey, lang); langBtn?.setAttribute('aria-label', lang==='ja'?'Switch language to English':'言語を日本語に切り替え'); }
+    const savedLang = localStorage.getItem(langKey) || 'ja'; setLang(savedLang);
+    langBtn?.addEventListener('click', ()=>{ const cur=localStorage.getItem(langKey)||'ja'; const next= cur==='ja'?'en':'ja'; setLang(next); });
+
+    // Scroll-into-view reveals
+    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); }) }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Nav active state on scroll
+    const sections = ['about','projects','sketch','photos','contact'];
+    const links = Array.from(document.querySelectorAll('.nav-rail a[href^="#"]'));
+    function setActive(id){ links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+id)); }
+    const obs = new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting) setActive(ent.target.id); }) }, {rootMargin: '-40% 0px -55% 0px'});
+    sections.forEach(id=>{ const el=document.getElementById(id); if(el) obs.observe(el); });
+
+    // Lightbox
+    function openLightbox(src){ const lb=document.getElementById('lightbox'); const im=document.getElementById('lightbox-img'); im.src=src; lb.classList.add('active'); lb.onclick=()=>lb.classList.remove('active'); }
+
+    // Galleries
+    const artImages = [ ]; const photoImages = [ ];
+    function renderGallery(id, arr){ const wrap=document.getElementById(id); wrap.innerHTML=''; arr.forEach(src=>{ const im=new Image(); im.loading='lazy'; im.src=src; im.alt='gallery item'; im.onclick=()=>openLightbox(src); wrap.appendChild(im); }); }
+    renderGallery('art-gallery', artImages); renderGallery('photo-gallery', photoImages);
+
+    // GitHub Projects (robust fetch + skeleton + fallback)
+    const GH_USER='Noora-Alhajeri'; const STATUS=document.getElementById('projects-status'); const GRID=document.getElementById('projects-grid');
+    const FALLBACK=[
+      { name:'BSc-Thesis-Telemedicine-Stethoscope',desc:'TeleSound — WebRTC stethoscope + pose + Dobot arm.', topics:['WebRTC','TensorFlow','Robotics'] },
+      { name:'sport-motion-retargeting',desc:'Motion retargeting experiments.', topics:['CV','Pose'] },
+      { name:'My-Mobile-Robot',desc:'Mobile robot platform & control.', topics:['Robotics','Embedded'] },
+      { name:'GUI-for-the-Visualization-and-Volume-Rendering-of-MRI-Data',desc:'MRI visualization GUI.', topics:['MATLAB','Med Imaging'] },
+      { name:'ECG-Simulator-Device',desc:'ECG simulator HW+SW.', topics:['Biomedical','Embedded'] },
+      { name:'Smart-Camera',desc:'Detection/streaming pipeline.', topics:['OpenCV','Edge'] },
+      { name:'Wearable-IoT-Based-Device-for-Critical-Care-Alzheimer-s-Patients',desc:'Wearable monitoring.', topics:['IoT','Healthcare'] },
+      { name:'IoT-Syringe-Pump',desc:'Networked syringe pump.', topics:['IoT','Control'] },
+      { name:'bahar',desc:'Arabic LLM Chatbot (JAIS‑13).', topics:['NLP','PyTorch','Next.js'] }
+    ];
+    function titleize(n){return n.replace(/[-_]/g,' ').replace(/\b([a-z])/g,m=>m.toUpperCase());}
+    function tags(r){const t=[]; if(r.language) t.push(r.language); if(r.topics) t.push(...r.topics.slice(0,3)); return t;}
+    function card({title,desc,tags,href,cover}){ return `<article class="project trans tilt">
+        <a class="ext" href="${href}" target="_blank" rel="noopener" aria-label="Open repository"><svg width="18" height="18"><use href="#icon-ext"/></svg></a>
+        <div class="shine"></div>
+        <img alt="${title} preview" src="${cover}"/>
+        <h3>${title}</h3>
+        <p>${desc||'—'}</p>
+        <div class="tags">${(tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </article>`; }
+    function showSkeleton(n=6){ GRID.innerHTML=''; for(let i=0;i<n;i++){ const s=document.createElement('div'); s.className='project'; s.innerHTML=`<div class="skeleton" style="height:140px;border-radius:12px;margin-bottom:10px"></div><div class="skeleton" style="height:16px;width:60%;margin:8px 0;border-radius:6px"></div><div class="skeleton" style="height:12px;width:90%;border-radius:6px"></div>`; GRID.appendChild(s);} }
+    async function j(url,h={}){ const c=new AbortController(); const id=setTimeout(()=>c.abort(),8000); try{ const r=await fetch(url,{headers:{'Accept':'application/vnd.github+json',...h},mode:'cors',cache:'no-store',signal:c.signal}); if(!r.ok) throw new Error('GitHub '+r.status); return await r.json(); } finally{ clearTimeout(id) } }
+    async function repos(){ return await j(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`); }
+    async function cover(r){ for(const d of ['figures','images','media','assets','docs']){ try{ const items=await j(`https://api.github.com/repos/${GH_USER}/${r.name}/contents/${d}?ref=${r.default_branch}`); const f=(items||[]).find(x=>x.type==='file' && /\.(png|jpe?g|gif|webp)$/i.test(x.name)); if(f) return `https://raw.githubusercontent.com/${GH_USER}/${r.name}/${r.default_branch}/${d}/${encodeURIComponent(f.name)}`; }catch(e){} } return `https://opengraph.githubassets.com/1/${GH_USER}/${r.name}`; }
+    async function live(){ STATUS.textContent=document.documentElement.getAttribute('data-lang')==='en'? 'Loading projects…': 'プロジェクトを読み込み中…'; showSkeleton(6); const rs=await repos(); await Promise.all(rs.map(async r=>{ try{ const t=await j(`https://api.github.com/repos/${GH_USER}/${r.name}/topics`); r.topics=t.names||[] }catch(e){ r.topics=[] }})); const order=FALLBACK.map(x=>x.name); rs.sort((a,b)=>{ const ia=order.indexOf(a.name), ib=order.indexOf(b.name); if(ia!==-1&&ib!==-1) return ia-ib; if(ia!==-1) return -1; if(ib!==-1) return 1; return new Date(b.pushed_at)-new Date(a.pushed_at) }); GRID.innerHTML=''; for(const r of rs){ GRID.insertAdjacentHTML('beforeend', card({ title:titleize(r.name), desc:r.description||'', tags:tags(r), href:r.html_url, cover: await cover(r)})); } STATUS.textContent=`Loaded ${rs.length} projects.`; addTilt(); }
+    function fallback(reason){ GRID.innerHTML=''; FALLBACK.forEach(r=>GRID.insertAdjacentHTML('beforeend', card({ title:titleize(r.name), desc:r.desc, tags:r.topics, href:`https://github.com/${GH_USER}/${r.name}`, cover:`https://opengraph.githubassets.com/1/${GH_USER}/${r.name}`}))); const lang=localStorage.getItem(langKey)||'ja'; STATUS.textContent=lang==='en'?`Showing curated set (API unavailable${reason?`: ${reason}`:''}).`:`キュレートしたセットを表示中（API 利用不可${reason?`：${reason}`:''}）。`; const b=document.createElement('button'); b.className='btn magnetic'; b.innerHTML='<span>Retry</span>'; b.onclick=()=>init(true); STATUS.append(' ', b); addTilt(); }
+    async function init(force=false){ try{ if(!navigator.onLine) throw new Error('Offline'); await live(); } catch(e){ if(!force && location.protocol==='file:'){ fallback('file:// origin'); } else { fallback(e.message||'fetch failed'); } } }
+    init();
+
+    // Scroll progress bar
+    const progress=document.getElementById('progress');
+    function onScroll(){ const h=document.documentElement; const p=(h.scrollTop)/(h.scrollHeight - h.clientHeight); progress.style.width=(p*100).toFixed(2)+'%'; }
+    document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+    // Magnetic buttons
+    function addMagnetics(){ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; document.querySelectorAll('.btn.magnetic').forEach(btn=>{ const span = btn.querySelector('span'); btn.addEventListener('mousemove', e=>{ const r=btn.getBoundingClientRect(); const x=e.clientX - r.left - r.width/2; const y=e.clientY - r.top - r.height/2; span.style.transform = `translate(${x*0.08}px, ${y*0.08}px)`; }); btn.addEventListener('mouseleave', ()=>{ span.style.transform='translate(0,0)'; }); }); }
+    addMagnetics();
+
+    // Tilt cards
+    function addTilt(){ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; document.querySelectorAll('.tilt').forEach(card=>{ const max=8; const persp=700; card.style.perspective = persp+'px'; card.addEventListener('mousemove', e=>{ const r=card.getBoundingClientRect(); const px=(e.clientX - r.left)/r.width; const py=(e.clientY - r.top)/r.height; const rx=(.5 - py)*max*2; const ry=(px - .5)*max*2; card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`; card.style.boxShadow=`12px 18px 40px var(--shadow-col)`; card.style.zIndex=2; card.style.setProperty('--mx', (px*100)+'%'); card.style.setProperty('--my', (py*100)+'%'); }); card.addEventListener('mouseleave', ()=>{ card.style.transform='rotateX(0) rotateY(0)'; card.style.boxShadow='3px 3px 0 var(--ink)'; card.style.zIndex=1; }); }); }
+
+    // Smooth internal nav with wipe
+    document.querySelectorAll('.nav-rail a[href^="#"]').forEach(a=>{ a.addEventListener('click', (e)=>{ e.preventDefault(); const href=a.getAttribute('href'); const target=document.querySelector(href); if(!target) return; const wipe=document.getElementById('wipe'); if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){ wipe.classList.add('active'); setTimeout(()=>{ target.scrollIntoView({behavior:'smooth'}); setTimeout(()=>wipe.classList.remove('active'), 450); }, 120); } else { target.scrollIntoView({behavior:'smooth'}); } }); });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
