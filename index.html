@@ -36,8 +36,10 @@
     .progress{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--vermilion),var(--gold));z-index:90;box-shadow:0 0 0 1px rgba(0,0,0,.06), var(--glow);transition:width .1s linear}
 
     /* Seigaiha + grain */
-    body::before{content:"";position:fixed;inset:0;z-index:-2;opacity:.12;pointer-events:none;}
-    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.06;mix-blend-mode:overlay;}
+    body::before{content:"";position:fixed;inset:0;z-index:-2;opacity:.12;pointer-events:none;filter:url(#wobble);
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 120 60"><defs><pattern id="sg" width="40" height="20" patternUnits="userSpaceOnUse"><path d="M0 20 Q 10 0 20 20 T 40 20" fill="none" stroke="%23aab" stroke-width="1.2"/></pattern></defs><rect width="100%" height="100%" fill="url(%23sg)"/></svg>');}
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.06;mix-blend-mode:overlay;
+      background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAV0lEQVQoz2NgoBvoZ2BgYGDg/9+5c+f/HyYGBgYmQKQwGDEQJwZQv2GQh0Cw3gQp7gYg0wBqQxg0wC8QqEw2Aqf+AQ1DgGQ0Q0kM0gBwbQdQfA0DQqQJQvQAA8W0Q0F4w9l8AAAAASUVORK5CYII=');}
 
     /* Layout */
     .shell{display:grid;grid-template-columns: 90px 1fr; gap: 22px; max-width:1200px;margin:0 auto;padding:16px}
@@ -57,13 +59,45 @@
     main{}
 
     /* HERO */
-    .hero{position:relative;height:min(88vh,860px);border-radius:18px;background:var(--card);border:2px solid var(--ink);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px;background-image:url('assets/hero-background.jpg');background-size:cover;background-position:center;}
+    .hero{position:relative;height:min(88vh,860px);border-radius:18px;background:var(--card);border:2px solid var(--ink);box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns: 1fr 420px}
     @media(max-width:960px){.hero{grid-template-columns:1fr}}
     .sun{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 60% 40%, rgba(255,255,255,.2), transparent 35%), var(--vermilion);right:-60px;top:-60px;filter:contrast(1.1);opacity:.95}
     .torii{position:absolute;left:40px;bottom:22px;opacity:.18}
-    .hero-left{padding:34px 34px 34px 44px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;position:relative;}
-    .hero-title{writing-mode:unset;text-orientation:unset;font-family:Inter, system-ui, Segoe UI, Roboto, Noto Sans JP, sans-serif;font-weight:800;font-size:clamp(32px, 8vw, 64px);margin:0;line-height:1.1;letter-spacing:unset}
-    .hero-image{width:100%; max-width: 400px; height: auto; border-radius: 8px; margin-top: 20px;}
+    .hero-left{padding:34px 34px 34px 44px;display:flex;gap:28px;align-items:flex-end;position:relative;}
+    .hero-title{writing-mode:vertical-rl;text-orientation:mixed;font-family:'Noto Serif JP',serif;font-weight:800;font-size:clamp(22px,5vw,36px);margin:0;line-height:1.3;letter-spacing:.12em}
+    .hero-title .emoji { font-size: 0.8em; vertical-align: middle; margin-left: 5px; }
+    .hero-title .pronunciation { font-size: 0.6em; vertical-align: middle; opacity: 0.7; }
+    .hero-title-wrapper {
+      position: absolute;
+      left: 34px; /* Adjust as needed */
+      bottom: 100px; /* Adjust as needed to position above buttons */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+    .creative-text, .designer-text, .developer-text {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 700;
+      font-size: clamp(22px, 5vw, 36px);
+      margin: 0;
+      line-height: 1.3;
+      letter-spacing: .12em;
+      position: absolute;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slide-up 10s infinite;
+    }
+
+    .creative-text { animation-delay: 0s; }
+    .designer-text { animation-delay: 3.33s; }
+    .developer-text { animation-delay: 6.66s; }
+
+    @keyframes slide-up {
+      0%, 100% { opacity: 0; transform: translateY(20px); }
+      10%, 30% { opacity: 1; transform: translateY(0); }
+      35%, 55% { opacity: 0; transform: translateY(-20px); }
+    }
     .hero-copy{max-width:560px}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .chip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);border-radius:999px;padding:6px 10px;background:var(--chip-bg);box-shadow:2px 2px 0 var(--ink);font-family:'Noto Sans JP',sans-serif}
@@ -176,6 +210,7 @@
     <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2zm8 6l10-6H2l10 6z"/></symbol>
     <symbol id="icon-ext" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.3 9.3-1.41-1.41 9.3-9.3H14V3zM5 5h5V3H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5h-2v5H5V5z"/></symbol>
     <symbol id="icon-globe" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 018 8h-3c-.2-2.9-1.4-5.5-3.1-7.3A8 8 0 0112 4zm-2.9.9C7.4 6.7 6.2 9.3 6 12H3a8 8 0 016.1-7.1zM6 12c.2 2.7 1.4 5.3 3.1 7.1A8 8 0 014 12h2zm10 0a10.7 10.7 0 01-3.1 7.1A8 8 0 0020 12h-4z"/></symbol>
+    <filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="1" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter>
   </svg>
 
   <div class="progress" id="progress"></div>
@@ -184,12 +219,9 @@
   <div class="shell trans">
     <aside class="nav">
       <div class="nav-rail">
-        <div class="mon trans" style="filter:url(#wobble)"><span>No</span></div>
+        <div class="mon trans"><span>No</span></div>
         <a href="#about"   class="active trans"><span data-i18n="nav_about">About</span></a>
-        <a href="#projects" class="trans"><span data-i18n="nav_projects">Projects</span></a>
-        <a href="#publications" class="trans"><span data-i18n="nav_publications">Publications</span></a>
-        <a href="#sketch"   class="trans"><span data-i18n="nav_sketch">Sketch</span></a>
-        <a href="#photos"   class="trans"><span data-i18n="nav_photos">Photos</span></a>
+        <a href="#projects" class="trans"><span data-i18n="nav_projects">Works</span></a>
         <a href="#contact"  class="trans"><span data-i18n="nav_contact">Contact</span></a>
         <div class="controls">
           <button class="icon-btn trans" id="themeToggle" aria-label="Toggle theme">
@@ -211,8 +243,36 @@
     <main>
       <!-- HERO -->
       <header class="hero trans" id="home">
-          <h1 class="hero-title" data-i18n="hero_title">Noora Alhajeri</h1>
-          <img src="assets/hero-image.jpg" alt="Hero Image" class="hero-image"/>
+        <div class="sun trans"></div>
+        <svg class="torii" width="120" height="80" viewBox="0 0 120 80" aria-hidden="true">
+          <g fill="none" stroke="var(--ink)" stroke-width="3">
+            <line x1="10" y1="60" x2="30" y2="60"/>
+            <line x1="90" y1="60" x2="110" y2="60"/>
+            <rect x="20" y="20" width="80" height="6" fill="var(--ink)"/>
+            <rect x="12" y="28" width="96" height="6" fill="var(--ink)"/>
+            <line x1="30" y1="34" x2="30" y2="60"/>
+            <line x1="90" y1="34" x2="90" y2="60"/>
+          </g>
+        </svg>
+        <div class="hero-left">
+          <h1 class="hero-title" data-i18n="hero_title">Portfolio | Noora</h1>
+          <div class="hero-title-wrapper">
+            <div class="creative-text" data-i18n="hero_creative">Creative</div>
+            <div class="designer-text" data-i18n="hero_designer">Designer</div>
+            <div class="developer-text" data-i18n="hero_developer">Developer</div>
+          </div>
+          <div class="hero-copy">
+            <p data-i18n="hero_blurb">Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.</p>
+            <div class="chips">
+              <span class="chip trans">Python</span><span class="chip trans">C++</span><span class="chip trans">ROS</span><span class="chip trans">OpenCV</span><span class="chip trans">PyTorch</span>
+              <span class="chip trans">React</span><span class="chip trans">Next.js</span><span class="chip trans">MATLAB</span>
+            </div>
+            <div class="cta">
+              <a class="btn primary magnetic trans" href="#projects"><span data-i18n="cta_view_projects">View Projects</span> <svg class="icon" width="18" height="18"><use href="#icon-ext"/></svg></a>
+              <a class="btn magnetic trans" href="assets/Noor-Alhajeri_CV.pdf" target="_blank" rel="noopener"><span data-i18n="cta_cv">CV</span></a>
+            </div>
+          </div>
+        </div>
       </header>
 
       <!-- ABOUT -->
@@ -251,57 +311,9 @@
         <div class="grid projects" id="projects-grid"></div>
       </section>
 
-      <!-- PUBLICATIONS -->
-      <section class="card reveal trans" id="publications">
-        <h2 data-i18n="publications_heading">Publications</h2>
-        <p class="muted" data-i18n="publications_blurb">Selected Perception + Manipulation Planning + Control + Localization + Mapping + Others</p>
-        <div class="publications-list">
-          <div class="publication-item">
-            <h3>Multimodal Reasoning-Aware Generalist Robotic Policies via Teacher-Guided Fine-Tuning</h3>
-            <p class="muted"><em>arXiv (25/05/2025)</em></p>
-            <p>Tuan Van Vo, Quang-Tan Nguyen, Noora Alhajeri, Nhat Xuan Tran, Duy H. M. Nguyen, An Thai Le, Ngo Anh Vien, Minh Nhat Vu.</p>
-            <div class="cta">
-              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>PDF</span></a>
-            </div>
-          </div>
-          <div class="publication-item">
-            <h3>DeGuV: Depth-Guided Visual Reinforcement Learning for Generalization and Interpretability in Manipulation</h3>
-            <p class="muted"><em>arXiv (05/09/2025)</em></p>
-            <p>Tien Pham, Xinyun Chi, Noora Alhajeri, Manfred Huber, Angelo Cangelosi.</p>
-            <div class="cta">
-              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>PDF</span></a>
-            </div>
-          </div>
-          <div class="publication-item">
-            <h3>ExtPerFC: An Efficient 2D & 3D Perception Software-Hardware Framework for Mobile Cobot</h3>
-            <p class="muted"><em>arXiv (08/06/2023)</em></p>
-            <p>Tuan Dang, Noora Alhajeri, Manfred Huber.</p>
-            <div class="cta">
-              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>PDF</span></a>
-              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>CODE</span></a>
-              <a class="btn magnetic trans" href="#" target="_blank" rel="noopener"><span>DEMO</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SKETCHBOOK -->
-      <section class="card reveal trans" id="sketch">
-        <h2 data-i18n="sketch_heading">スケッチ / Sketchbook</h2>
-        <p class="muted" data-i18n="sketch_blurb">Click to zoom. Put images inside <code>assets/art/</code> and list them in <code>artImages</code> below.</p>
-        <div class="gallery" id="art-gallery"></div>
-      </section>
-
-      <!-- PHOTOS -->
-      <section class="card reveal trans" id="photos">
-        <h2 data-i18n="photos_heading">写真 / Photos</h2>
-        <p class="muted" data-i18n="photos_blurb">Street, texture, and accidental geometry.</p>
-        <div class="gallery" id="photo-gallery"></div>
-      </section>
-
       <!-- CONTACT -->
       <section class="card reveal trans" id="contact">
-        <h2 data-i18n="contact_heading">連絡 / Contact</h2>
+        <h2 data-i18n="contact_heading">Contact</h2>
         <p data-i18n="contact_blurb">コラボ・質問などお気軽に。フォーム（Formspree など）やメールリンクを設置できます。</p>
         <div class="cta">
           <a class="btn primary magnetic trans" href="mailto:n.s3eedalhajeri@gmail.com"><span data-i18n="contact_send_mail">メールを送る</span></a>
@@ -335,25 +347,21 @@
     const langKey='noora-lang'; const langBtn=document.getElementById('langToggle');
     const i18n = {
       ja: {
-        nav_about:'About', nav_projects:'Projects', nav_sketch:'Sketch', nav_photos:'Photos', nav_contact:'Contact',
-        nav_publications:'Publications',
-        hero_title:'Noora Alhajeri',
+        nav_about:'About', nav_projects:'Works', nav_contact:'Contact',
+        hero_title:'Portfolio | Noora', hero_blurb:'Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.',
+        hero_creative:'Creative', hero_designer:'Designer', hero_developer:'Developer',
+        cta_view_projects:'View Projects', cta_cv:'CV',
         about_heading:'About', about_copy:'Robotics MSc (MBZUAI). Visiting Student Researcher at Khalifa University. Interests: Humanoids, HRI, prosthetics, motion control, human body modeling. Worked on low-cost tendon-driven bionic hand (photonic tactile, modular control).', about_tools_label:'Tools:',
-        projects_heading:'Projects', projects_loading:'Loading projects…',
-        publications_heading:'Publications', publications_blurb:'Selected Perception + Manipulation Planning + Control + Localization + Mapping + Others',
-        sketch_heading:'Sketchbook', sketch_blurb:'Click to zoom. Add images to assets/art/ and list them in the artImages array below.',
-        photos_heading:'Photos', photos_blurb:'Street, textures, and accidental geometry.',
+        projects_heading:'Works', projects_loading:'Loading works…',
         contact_heading:'Contact', contact_blurb:'Reach out for collaborations or questions. Add a form (Formspree) or use the email link.', contact_send_mail:'Send Mail'
       },
       en: {
-        nav_about:'About', nav_projects:'Projects', nav_sketch:'Sketch', nav_photos:'Photos', nav_contact:'Contact',
-        nav_publications:'Publications',
-        hero_title:'Noora Alhajeri',
+        nav_about:'About', nav_projects:'Works', nav_contact:'Contact',
+        hero_title:'Portfolio | Noora', hero_blurb:'Robotics × HRI × Biomedical engineering. Minimal, Japanese-paper feel with vermilion accents. Sketches & photos included.',
+        hero_creative:'Creative', hero_designer:'Designer', hero_developer:'Developer',
+        cta_view_projects:'View Projects', cta_cv:'CV',
         about_heading:'About', about_copy:'Robotics MSc (MBZUAI). Visiting Student Researcher at Khalifa University. Interests: Humanoids, HRI, prosthetics, motion control, human body modeling. Worked on low-cost tendon-driven bionic hand (photonic tactile, modular control).', about_tools_label:'Tools:',
-        projects_heading:'Projects', projects_loading:'Loading projects…',
-        publications_heading:'Publications', publications_blurb:'Selected Perception + Manipulation Planning + Control + Localization + Mapping + Others',
-        sketch_heading:'Sketchbook', sketch_blurb:'Click to zoom. Add images to assets/art/ and list them in the artImages array below.',
-        photos_heading:'Photos', photos_blurb:'Street, textures, and accidental geometry.',
+        projects_heading:'Works', projects_loading:'Loading works…',
         contact_heading:'Contact', contact_blurb:'Reach out for collaborations or questions. Add a form (Formspree) or use the email link.', contact_send_mail:'Send Mail'
       }
     };
@@ -366,7 +374,7 @@
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
     // Nav active state on scroll
-    const sections = ['about','projects','publications','sketch','photos','contact'];
+    const sections = ['about','projects','contact'];
     const links = Array.from(document.querySelectorAll('.nav-rail a[href^="#"]'));
     function setActive(id){ links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+id)); }
     const obs = new IntersectionObserver((ents)=>{ ents.forEach(ent=>{ if(ent.isIntersecting) setActive(ent.target.id); }) }, {rootMargin: '-40% 0px -55% 0px'});
