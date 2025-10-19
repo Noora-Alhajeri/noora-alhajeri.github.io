@@ -3,30 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Noora Saeed Alhajeri &middot; Creative Technologist</title>
+    <title>Noora Alhajeri · Interdisciplinary Narrative</title>
     <meta
       name="description"
-      content="Portfolio of Noora Saeed Alhajeri &mdash; creative technologist, front-end developer, and robotics researcher crafting sketch-inspired digital experiences."
+      content="Portfolio of Noora Alhajeri — weaving art, design, and engineering into poetic, human-centered experiences."
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Kalam:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Work+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --canvas: #f1eee9;
-        --canvas-dark: #171717;
-        --panel: #f4f1ec;
-        --stroke: rgba(0, 0, 0, 0.12);
+        --canvas: #f4f0e7;
         --ink: #181818;
-        --muted: #67686f;
-        --accent: #e02f28;
-        --max-width: 1100px;
-        --transition: 180ms ease;
+        --muted: #6b6963;
+        --accent: #c9211e;
+        --accent-soft: rgba(201, 33, 30, 0.16);
+        --grid-max: 1160px;
+        --transition: 200ms ease;
       }
 
       *,
@@ -38,80 +32,82 @@
       html,
       body {
         margin: 0;
-        font-family: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.6;
-        background: linear-gradient(180deg, #1a1a1a 0%, #2c2c2c 34%, #3b3b3b 80%, #1a1a1a 100%);
+        background: linear-gradient(180deg, #111 0%, #1f1f1f 38%, #151515 60%, #111 100%);
         color: var(--ink);
+        font-family: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.7;
+        letter-spacing: 0.02em;
       }
 
       img {
-        max-width: 100%;
         display: block;
+        max-width: 100%;
         image-orientation: from-image;
       }
 
-      .page {
-        max-width: 1240px;
-        margin: 60px auto 120px;
+      .frame {
+        max-width: 1280px;
+        margin: 50px auto 120px;
+        padding: 28px;
+        background: var(--canvas);
         border-radius: 44px;
-        background: var(--panel);
-        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.28);
-        overflow: hidden;
+        box-shadow: 0 120px 160px rgba(0, 0, 0, 0.28);
+        position: relative;
+      }
+
+      .frame::before {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border-radius: 36px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        pointer-events: none;
       }
 
       header {
-        position: sticky;
-        top: 20px;
-        z-index: 50;
-      }
-
-      .header-inner {
+        padding: 48px clamp(32px, 5vw, 64px) 32px;
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px;
         align-items: center;
-        gap: 24px;
-        padding: 28px 44px;
-        background: rgba(241, 238, 233, 0.92);
-        border-radius: 36px;
-        margin: 20px auto;
-        max-width: calc(var(--max-width) + 80px);
-        border: 1px solid var(--stroke);
-        backdrop-filter: blur(10px);
       }
 
-      .brand {
+      .masthead {
         display: grid;
-        gap: 4px;
-        letter-spacing: 0.18em;
+        gap: 8px;
+      }
+
+      .masthead__title {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.8rem, 5vw, 4.4rem);
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        font-size: 0.68rem;
       }
 
-      .brand__name {
-        font-family: "Playfair Display", "Times New Roman", serif;
-        font-size: clamp(1.4rem, 2.4vw, 2rem);
-        letter-spacing: 0.28em;
-      }
-
-      .brand__tagline {
+      .masthead__subtitle {
+        margin: 0;
+        font-size: 0.92rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
         color: var(--muted);
       }
 
       nav {
-        display: flex;
-        justify-content: center;
-        gap: 22px;
-        flex-wrap: wrap;
-        letter-spacing: 0.22em;
+        justify-self: end;
+        display: grid;
+        gap: 16px;
+        text-align: right;
+        letter-spacing: 0.24em;
         text-transform: uppercase;
-        font-size: 0.72rem;
-        color: var(--muted);
+        font-size: 0.8rem;
       }
 
       nav a {
+        color: inherit;
+        text-decoration: none;
         position: relative;
-        padding-bottom: 3px;
-        transition: color var(--transition);
+        padding-bottom: 4px;
       }
 
       nav a::after {
@@ -127,889 +123,419 @@
         transition: transform var(--transition);
       }
 
-      nav a:hover,
-      nav a:focus-visible {
-        color: var(--ink);
-      }
-
       nav a:hover::after,
       nav a:focus-visible::after {
         transform: scaleX(1);
         transform-origin: left;
       }
 
-      .contact-cta {
-        display: inline-flex;
-        align-items: center;
-        padding: 10px 20px;
-        border-radius: 999px;
-        border: 1px solid var(--accent);
-        color: var(--accent);
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        font-size: 0.7rem;
-        transition: background var(--transition), color var(--transition);
-      }
-
-      .contact-cta:hover,
-      .contact-cta:focus-visible {
-        background: var(--accent);
-        color: var(--panel);
-      }
-
-      .progress {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 3px;
-        width: 0;
-        z-index: 90;
-        background: linear-gradient(90deg, var(--accent), #1f1f1f);
-      }
-
-      main {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 80px 60px 120px;
+      .intro {
+        padding: 32px clamp(32px, 5vw, 64px) 70px;
         display: grid;
-        gap: 120px;
+        gap: clamp(48px, 6vw, 80px);
       }
 
-      section {
+      .hero-essay {
         display: grid;
-        gap: 42px;
+        gap: clamp(32px, 4vw, 58px);
       }
 
-      .section__header {
-        display: flex;
-        justify-content: space-between;
-        gap: 28px;
-        align-items: flex-end;
-      }
-
-      .section__title {
-        margin: 0;
+      .hero-essay__lede {
         font-family: "Playfair Display", serif;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+        font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+        letter-spacing: 0.1em;
+        max-width: 820px;
       }
 
-      .section__lede {
-        max-width: 420px;
+      .hero-essay__copy {
+        max-width: 760px;
         color: var(--muted);
-        font-size: 0.98rem;
       }
 
-      .hero {
-        display: grid;
-        gap: 48px;
-      }
-
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 6px 16px;
-        border-radius: 999px;
-        border: 1px solid var(--stroke);
-        letter-spacing: 0.26em;
-        text-transform: uppercase;
-        font-size: 0.68rem;
-        color: var(--muted);
-        background: rgba(0, 0, 0, 0.04);
-      }
-
-      .path-scene {
+      .scroll-panels {
         position: relative;
-        height: clamp(420px, 60vw, 520px);
-        padding: clamp(28px, 4vw, 60px);
-        border: 1px solid var(--stroke);
-        border-radius: 32px;
-        overflow: hidden;
-        box-shadow: 0 60px 120px rgba(0, 0, 0, 0.16);
-        display: flex;
-        gap: clamp(16px, 3vw, 36px);
-        align-items: flex-end;
-        background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.92) 0%, rgba(244, 241, 236, 0.94) 40%, rgba(224, 218, 210, 0.78) 100%);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(20px, 3vw, 40px);
+        padding-bottom: clamp(30px, 4vw, 50px);
       }
 
-      .path-column {
-        flex: 1;
-        min-width: 180px;
-        height: 100%;
-        border-radius: clamp(22px, 3vw, 30px);
+      .scroll-panels::after {
+        content: "";
+        position: absolute;
+        bottom: 12px;
+        left: 6%;
+        width: 88%;
+        height: clamp(100px, 18vw, 140px);
+        background: radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+        transform: translateY(50%);
+        pointer-events: none;
+      }
+
+      .scroll-panel {
+        position: relative;
+        border-radius: clamp(24px, 3vw, 32px);
+        padding: clamp(24px, 3vw, 34px);
         border: 1px solid rgba(0, 0, 0, 0.08);
         background:
-          radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%),
-          linear-gradient(180deg, rgba(240, 236, 229, 0.96) 0%, rgba(223, 217, 206, 0.88) 50%, rgba(210, 202, 192, 0.8) 100%);
-        box-shadow: inset 0 40px 60px rgba(255, 255, 255, 0.65), inset 0 -40px 60px rgba(0, 0, 0, 0.08);
-        position: relative;
-        padding: clamp(28px, 3vw, 40px);
+          radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55) 52%, rgba(214, 206, 194, 0.75) 100%),
+          url("assests/photos/12.jpg") center/cover;
         display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: clamp(280px, 38vw, 360px);
       }
 
-      .path-column::before {
+      .scroll-panel:nth-child(2) {
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.58) 54%, rgba(214, 206, 194, 0.72) 100%),
+          url("assests/photos/3.jpg") center/cover;
+      }
+
+      .scroll-panel:nth-child(3) {
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.55) 52%, rgba(214, 206, 194, 0.75) 100%),
+          url("assests/photos/8.jpg") center/cover;
+      }
+
+      .scroll-panel::before {
         content: attr(data-label);
         position: absolute;
-        top: clamp(26px, 4vw, 38px);
+        top: clamp(24px, 4vw, 32px);
         left: 50%;
         transform: translateX(-50%);
         font-family: "Playfair Display", serif;
-        font-size: clamp(1.2rem, 2vw, 1.4rem);
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: rgba(0, 0, 0, 0.58);
-      }
-
-      .path-column::after {
-        content: "";
-        position: absolute;
-        inset: 12%;
-        border-radius: clamp(18px, 2.4vw, 26px);
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        pointer-events: none;
-      }
-
-      .path-column p {
-        margin: 0;
-        font-size: 0.82rem;
-        color: rgba(0, 0, 0, 0.58);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .path-ribbon {
-        position: absolute;
-        bottom: clamp(26px, 4vw, 48px);
-        left: -15%;
-        width: 130%;
-        height: clamp(120px, 18vw, 210px);
-        background:
-          radial-gradient(ellipse at 30% 60%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 70%),
-          radial-gradient(ellipse at 65% 50%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 72%),
-          linear-gradient(90deg, rgba(224, 47, 40, 0.18) 0%, rgba(9, 9, 9, 0.08) 50%, rgba(224, 47, 40, 0.2) 100%);
-        filter: blur(1px);
-        pointer-events: none;
-        border-radius: 100% 100% 0 0 / 70% 70% 0 0;
-      }
-
-      .path-walker {
-        position: absolute;
-        bottom: clamp(40px, 5vw, 62px);
-        left: 50%;
-        width: 46px;
-        height: 120px;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-      }
-
-      .path-walker::before {
-        content: "";
-        width: 8px;
-        height: 48px;
-        border-radius: 50% 50% 12px 12px;
-        background: linear-gradient(180deg, rgba(18, 18, 18, 0.85) 0%, rgba(18, 18, 18, 0.6) 100%);
-      }
-
-      .hero__intro {
-        display: grid;
-        gap: 24px;
-      }
-
-      .hero__intro h1 {
-        margin: 0;
-        font-family: "Playfair Display", serif;
-        font-size: clamp(2.6rem, 5.6vw, 3.8rem);
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        line-height: 1.3;
-      }
-
-      .hero__intro h1 span {
-        display: block;
-        color: var(--accent);
-      }
-
-      .hero__intro p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 1.02rem;
-      }
-
-      .hero__details {
-        display: grid;
-        gap: 12px;
-        font-size: 0.88rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .hero__details strong {
-        color: var(--ink);
-      }
-
-      .grid {
-        display: grid;
-        gap: 36px;
-      }
-
-      .grid--cols-2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .grid--cols-3 {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      }
-
-      .card {
-        background: rgba(255, 255, 255, 0.72);
-        border-radius: 28px;
-        border: 1px solid var(--stroke);
-        padding: 34px;
-        box-shadow: 0 32px 60px rgba(0, 0, 0, 0.08);
-        transition: transform var(--transition), box-shadow var(--transition);
-      }
-
-      .card:hover,
-      .card:focus-within {
-        transform: translateY(-6px);
-        box-shadow: 0 42px 70px rgba(0, 0, 0, 0.12);
-      }
-
-      .card h3 {
-        margin: 0 0 12px;
-        font-family: "Playfair Display", serif;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      .card h4 {
-        margin: 0 0 10px;
-        font-size: 0.75rem;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .card p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .card ul {
-        margin: 18px 0 0;
-        padding-left: 20px;
-        color: var(--muted);
-      }
-
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      .chip {
-        padding: 6px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(0, 0, 0, 0.16);
-        letter-spacing: 0.18em;
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .links {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 18px;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        font-size: 0.74rem;
-        color: var(--accent);
-      }
-
-      .timeline {
-        display: grid;
-        gap: 24px;
-      }
-
-      .timeline__item {
-        position: relative;
-        padding: 28px 26px 28px 60px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.82);
-        border: 1px solid var(--stroke);
-        box-shadow: 0 32px 48px rgba(0, 0, 0, 0.08);
-      }
-
-      .timeline__item::before {
-        content: "";
-        position: absolute;
-        left: 26px;
-        top: 32px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 0 6px rgba(224, 47, 40, 0.18);
-      }
-
-      .timeline__meta {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        font-size: 0.72rem;
+        font-size: clamp(1.3rem, 2.4vw, 1.6rem);
         letter-spacing: 0.26em;
         text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 6px;
+        color: rgba(0, 0, 0, 0.66);
       }
 
-      .timeline__role {
-        margin: 0 0 8px;
-        font-family: "Playfair Display", serif;
+      .scroll-panel__note {
+        margin: 0;
+        font-size: 0.88rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.68);
+        background: rgba(244, 240, 231, 0.76);
+        padding: 10px 14px;
+        border-radius: 999px;
+        align-self: center;
+      }
+
+      .grid-section {
+        display: grid;
+        gap: clamp(48px, 5vw, 72px);
+      }
+
+      .section-heading {
+        display: grid;
+        gap: 10px;
+      }
+
+      .section-heading span {
+        font-size: 0.8rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .diptych {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: clamp(32px, 4vw, 56px);
+        align-items: end;
+      }
+
+      .diptych figure {
+        margin: 0;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 50px 80px rgba(0, 0, 0, 0.12);
+      }
+
+      .diptych figcaption {
+        margin: 16px 0 0;
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        color: var(--muted);
+      }
+
+      .essay-block {
+        color: var(--muted);
+      }
+
+      .essay-block strong {
+        display: block;
+        font-family: "Playfair Display", serif;
+        color: var(--ink);
+        font-size: 1.02rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
       }
 
       .gallery-grid {
         display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(26px, 3vw, 40px);
       }
 
-      .wm {
+      .gallery-item {
         position: relative;
-        border: 1px solid var(--stroke);
-        border-radius: 20px;
+      }
+
+      .gallery-item figure {
+        margin: 0;
+        border-radius: 26px;
         overflow: hidden;
-        background: rgba(255, 255, 255, 0.76);
-        box-shadow: 0 28px 44px rgba(0, 0, 0, 0.12);
-        transition: transform var(--transition), box-shadow var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: 0 40px 70px rgba(0, 0, 0, 0.12);
       }
 
-      .wm img {
-        height: 200px;
-        object-fit: cover;
-        filter: grayscale(100%);
+      .gallery-item figcaption {
+        margin-top: 14px;
+        font-size: 0.8rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
-      .wm:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 36px 60px rgba(0, 0, 0, 0.16);
+      .monogram {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(5rem, 10vw, 8rem);
+        letter-spacing: 0.28em;
+        color: rgba(0, 0, 0, 0.08);
+        text-transform: uppercase;
+        text-align: center;
       }
 
-      .wm::after {
-        content: "";
-        position: absolute;
-        right: 14px;
-        bottom: 14px;
-        width: 82px;
-        height: 82px;
-        background: url("assests/logo/nsh-stamp.svg") center/contain no-repeat;
-        opacity: 0.2;
+      .contact-strip {
+        display: grid;
+        gap: 14px;
+        text-align: center;
+        padding: 40px 0 70px;
+      }
+
+      .contact-strip strong {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .contact-strip a {
+        color: var(--accent);
+        text-decoration: none;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 0.88rem;
       }
 
       footer {
-        padding: 0 60px 60px;
-        color: var(--muted);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        font-size: 0.76rem;
-      }
-
-      .floating-note {
-        display: inline-flex;
-        gap: 12px;
-        padding: 12px 18px;
-        border: 1px solid var(--stroke);
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.04);
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        font-size: 0.72rem;
-      }
-
-      code {
-        font-family: "Work Sans", "Courier New", monospace;
-        background: rgba(0, 0, 0, 0.08);
-        padding: 2px 6px;
-        border-radius: 4px;
-      }
-
-      .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(15, 15, 15, 0.78);
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        padding: 32px clamp(32px, 5vw, 64px) 48px;
         display: grid;
-        place-items: center;
-        padding: 40px;
-        z-index: 120;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
       }
 
-      .lightbox[hidden] {
-        display: none;
-      }
-
-      .lightbox img {
-        max-width: min(960px, 92vw);
-        max-height: 82vh;
-        border-radius: 18px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-      }
-
-      .lightbox__close {
-        position: absolute;
-        top: 32px;
-        right: 32px;
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        border: none;
-        background: rgba(255, 255, 255, 0.86);
-        font-size: 2rem;
-        cursor: pointer;
-      }
-
-      @media (max-width: 1080px) {
-        .header-inner {
+      @media (max-width: 980px) {
+        header {
           grid-template-columns: 1fr;
-          justify-items: center;
           text-align: center;
         }
 
         nav {
-          order: 3;
+          justify-self: center;
+          text-align: center;
         }
 
-        .contact-cta {
-          order: 2;
+        .scroll-panels {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        main {
-          padding: 70px 30px 100px;
-        }
-
-        .hero {
+        .diptych {
           grid-template-columns: 1fr;
         }
 
-        .grid--cols-2 {
+        .gallery-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .frame {
+          margin: 24px auto 60px;
+          padding: 18px;
+          border-radius: 28px;
+        }
+
+        .frame::before {
+          inset: 12px;
+          border-radius: 22px;
+        }
+
+        .scroll-panels {
           grid-template-columns: 1fr;
         }
 
-        .path-scene {
-          flex-direction: column;
-          height: auto;
-        }
-
-        .path-column {
-          width: 100%;
-          height: clamp(220px, 38vw, 280px);
-        }
-
-        .path-ribbon {
-          display: none;
-        }
-
-        .path-walker {
-          bottom: clamp(20px, 6vw, 40px);
+        .gallery-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
   <body>
-    <div class="progress" id="progress"></div>
-    <div class="page">
+    <div class="frame">
       <header>
-        <div class="header-inner">
-          <div class="brand">
-            <div class="brand__name">Noora Saeed Alhajeri</div>
-            <div class="brand__tagline">Creative technologist &middot; Front-end developer &middot; Robotics researcher</div>
-          </div>
-          <nav aria-label="Primary">
-            <a href="#about">About</a>
-            <a href="#focus">Focus</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#art">Sketchbook</a>
-            <a href="#contact">Contact</a>
-          </nav>
-          <a class="contact-cta" href="mailto:n.s3eedalhajeri@gmail.com">Let's talk</a>
+        <div class="masthead">
+          <p class="masthead__subtitle">Interdisciplinary practice</p>
+          <h1 class="masthead__title">Noora Alhajeri</h1>
         </div>
+        <nav aria-label="Primary">
+          <a href="#portfolio">Portfolio</a>
+          <a href="#experience">Experience</a>
+          <a href="#research">Research</a>
+          <a href="#contact">Contact</a>
+        </nav>
       </header>
 
-      <main>
-        <section class="hero hero--path" id="about" aria-labelledby="hero-title">
-          <div class="path-scene">
-            <div class="path-column" data-label="Art">
-              <p>Raised on sketchbooks, installation art, and traditional illustration studies.</p>
-            </div>
-            <div class="path-column" data-label="Design">
-              <p>Crafting responsive journeys, motion systems, and accessible storytelling.</p>
-            </div>
-            <div class="path-column" data-label="Engineering">
-              <p>Engineering assistive robotics, front-ends, and scalable AI experiences.</p>
-            </div>
-            <div class="path-ribbon"></div>
-            <div class="path-walker" aria-hidden="true"></div>
+      <div class="intro">
+        <article class="hero-essay">
+          <p class="hero-essay__lede">
+            From the precision of robotics to the chiaroscuro of motion design, I build experiences steeped in narrative, light, and human warmth.
+          </p>
+          <p class="hero-essay__copy">
+            My practice threads together biomedical engineering, AI research, and visual storytelling. Each project is treated as an atelier study:
+            highly collaborative, quietly radical, designed to bring empathy into emerging technologies.
+          </p>
+        </article>
+
+        <div class="scroll-panels" aria-label="Interdisciplinary paths">
+          <div class="scroll-panel" data-label="Art">
+            <p class="scroll-panel__note">hand-drawn narratives · illustration residencies</p>
           </div>
-          <div class="hero__intro">
-            <span class="badge">Studio Practice &middot; Abu Dhabi</span>
-            <h1 id="hero-title"><span>Noora Alhajeri</span>Architecting Human-Centered Futures</h1>
+          <div class="scroll-panel" data-label="Design">
+            <p class="scroll-panel__note">responsive journeys · ambient interactions</p>
+          </div>
+          <div class="scroll-panel" data-label="Engineering">
+            <p class="scroll-panel__note">assistive robotics · human-robot research</p>
+          </div>
+        </div>
+      </div>
+
+      <section id="portfolio" class="grid-section">
+        <div class="section-heading">
+          <span>Selected work</span>
+          <h2>Baroque Futures</h2>
+        </div>
+
+        <div class="diptych">
+          <figure>
+            <img src="assests/photos/10.jpg" alt="Bionic upper limb prototype in progress" />
+            <figcaption>Tendon-driven prosthesis · Khalifa University Lab · 2025</figcaption>
+          </figure>
+          <article class="essay-block">
+            <strong>Reimagining touch</strong>
             <p>
-              I walk between art, design, and engineering—curving away from expected roads to build responsive worlds that feel crafted and
-              human. Each project becomes a scroll you can step inside: cinematic, functional, and deeply personal.
+              A modular, tactile bionic arm built with photonic sensors and sustainable PLA casting. I lead research, motion modeling, and user
+              testing to ensure every interaction feels expressive and humane.
             </p>
-            <div class="hero__details">
-              <div><strong>Call</strong> <a href="tel:+971545566092">+971 54 556 6092</a></div>
-              <div><strong>Email</strong> <a href="mailto:n.s3eedalhajeri@gmail.com">n.s3eedalhajeri@gmail.com</a></div>
-              <div>
-                <strong>Connect</strong>
-                <a href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">LinkedIn</a> /
-                <a href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">GitHub</a>
-              </div>
-            </div>
-          </div>
-          <div class="hero__visual">
-            <img src="assests/photos/1.jpg" alt="Atmospheric portfolio hero" />
-          </div>
-        </section>
-        <section id="focus" aria-labelledby="focus-title">
-          <div class="section__header">
-            <h2 class="section__title" id="focus-title">Focus Areas</h2>
-            <p class="section__lede">
-              Multi-disciplinary practice focused on robotics research, tactile interfaces, and the craft of expressive, accessible web products.
+            <p>
+              Roles include biomechanical CAD, sensor calibration, and interface prototyping that bridges hardware with inclusive UI systems for
+              future myoelectric control.
             </p>
-          </div>
-          <div class="grid grid--cols-3">
-            <article class="card">
-              <h3>Robotics &amp; HRI</h3>
-              <p>
-                Humanoid locomotion, prosthetic design, motion control, and sensory feedback systems to augment human capability while staying
-                empathetic to real-world contexts.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Creative Front-Ends</h3>
-              <p>
-                Responsive storytelling with HTML, CSS, JavaScript, React, and Angular &mdash; weaving motion, accessibility, and localization into
-                every build.
-              </p>
-            </article>
-            <article class="card">
-              <h3>UX Research &amp; Design</h3>
-              <p>
-                UX research, rapid prototyping, and design systems that bridge complex AI workflows with intuitive human experiences across
-                devices.
-              </p>
-            </article>
-          </div>
-          <div class="floating-note" aria-hidden="true">Always prototyping &middot; forever learning</div>
-        </section>
+          </article>
+        </div>
 
-        <section id="education" aria-labelledby="education-title">
-          <div class="section__header">
-            <h2 class="section__title" id="education-title">Education Journey</h2>
-            <p class="section__lede">
-              A path that stretches from biomedical engineering to advanced robotics, grounded in teaching, accessibility, and experimentation.
-            </p>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <figure>
+              <img src="assests/photos/5.jpg" alt="Bahar chatbot interface" />
+            </figure>
+            <figcaption>Bahar · JAIS-13 conversational interface · 2024</figcaption>
           </div>
-          <div class="timeline">
-            <article class="timeline__item">
-              <div class="timeline__meta">
-                <span>Aug 2024 &mdash; Present</span>
-                <span>Abu Dhabi</span>
-              </div>
-              <div class="timeline__role">MSc Robotics, Mohamed bin Zayed University of Artificial Intelligence</div>
-              <p>
-                Studying foundations of AI, machine learning, robotic vision, localization, and human-robot interaction under Prof. Yoshihiko
-                Nakamura while researching assistive and humanoid systems.
-              </p>
-            </article>
-            <article class="timeline__item">
-              <div class="timeline__meta">
-                <span>Feb 2024 &mdash; Present</span>
-                <span>Abu Dhabi</span>
-              </div>
-              <div class="timeline__role">Postgraduate Diploma in Teaching (Hons), Abu Dhabi University</div>
-              <p>
-                Exploring STEM pedagogy, educational tech, and inclusive learning while mentoring students in engineering-focused programs.
-              </p>
-            </article>
-            <article class="timeline__item">
-              <div class="timeline__meta">
-                <span>Dec 2023 &mdash; Apr 2024</span>
-                <span>Online</span>
-              </div>
-              <div class="timeline__role">Nanodegree: UX Design, Udacity</div>
-              <p>
-                Learned UX research, low to high-fidelity prototyping, and crafting narrative-driven case studies that bring products to life.
-              </p>
-            </article>
-            <article class="timeline__item">
-              <div class="timeline__meta">
-                <span>Aug 2019 &mdash; Jul 2023</span>
-                <span>Abu Dhabi</span>
-              </div>
-              <div class="timeline__role">BSc Biomedical Engineering (Hons), Abu Dhabi University</div>
-              <p>
-                Integrated medical instrumentation, computer vision, and control systems to develop human-centered health technologies under
-                Prof. Mohammad Ghazal.
-              </p>
-            </article>
+          <div class="gallery-item">
+            <figure>
+              <img src="assests/photos/14.jpg" alt="TeleSound Stethoscope project" />
+            </figure>
+            <figcaption>TeleSound · Robotics & WebRTC telemedicine · 2023</figcaption>
           </div>
-        </section>
-        <section id="experience" aria-labelledby="experience-title">
-          <div class="section__header">
-            <h2 class="section__title" id="experience-title">Selected Experience</h2>
-            <p class="section__lede">
-              Building assistive prototypes, delivering medical technology, and scaling AI-led products alongside interdisciplinary teams.
-            </p>
+          <div class="gallery-item">
+            <figure>
+              <img src="assests/photos/7.jpg" alt="MRI volume explorer" />
+            </figure>
+            <figcaption>MRI Volume Explorer · Published interface study · 2024</figcaption>
           </div>
-          <div class="grid grid--cols-2">
-            <article class="card">
-              <h3>Khalifa University, Biomechanics &amp; Biodesign Lab</h3>
-              <h4>Visiting Student Researcher &middot; Jun 2025 &mdash; Present</h4>
-              <p>
-                Designing a low-cost bionic upper-limb prosthesis from anatomical modeling to additive manufacturing, integrating tendon-driven
-                actuation and photonic tactile sensors for modular, human-friendly use.
-              </p>
-              <ul>
-                <li>Shaping universal fit prototypes with sustainable PLA materials.</li>
-                <li>Coordinating cross-disciplinary research on sensor fusion and future myoelectric control.</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>Philips Middle East</h3>
-              <h4>Biomedical Electronic Engineer &middot; Nov 2023 &mdash; Jul 2024</h4>
-              <p>
-                Supported maintenance of MRI, X-ray, and ultrasound systems while leading technical training for clinicians on safe, efficient
-                operations within high-stakes clinical environments.
-              </p>
-            </article>
-            <article class="card">
-              <h3>MBZUAI</h3>
-              <h4>AI Trainee &middot; Jan 2024 &mdash; Feb 2024</h4>
-              <p>
-                Co-built "Bahar", an Arabic-language chatbot powered by JAIS-13, aligning large-language-model research with responsive web
-                interfaces and production-ready deployment.
-              </p>
-              <ul>
-                <li>Developed Next.js interfaces and Flask APIs to bridge users with the model.</li>
-                <li>Automated deployment via Docker and GitHub Actions for scalable performance.</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>Sheikh Shakhbout Medical City</h3>
-              <h4>Biomedical Engineer Intern &middot; Jan 2023 &mdash; Mar 2023</h4>
-              <p>
-                Managed corrective and preventive maintenance workflows while supporting patient care requests within the home-care robotics
-                workshop.
-              </p>
-            </article>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="projects" aria-labelledby="projects-title">
-          <div class="section__header">
-            <h2 class="section__title" id="projects-title">Projects &amp; Experiments</h2>
-            <p class="section__lede">
-              Interfaces and prototypes that merge robotics, AI, and human stories &mdash; each documented like a sketchbook page.
-            </p>
-          </div>
-          <div class="grid grid--cols-3">
-            <article class="card project-card">
-              <span class="badge">Robotics &middot; 2025</span>
-              <h3>Bionic Upper-Limb Prosthesis</h3>
-              <p>
-                Tendon-driven prosthetic arm with photonic tactile feedback, modular components, and sustainability-first manufacturing pipeline.
-              </p>
-              <div class="chips">
-                <span class="chip">CAD</span>
-                <span class="chip">Additive Manufacturing</span>
-                <span class="chip">Sensor Fusion</span>
-              </div>
-            </article>
-            <article class="card project-card">
-              <span class="badge">AI &middot; 2024</span>
-              <h3>Bahar Chatbot</h3>
-              <p>
-                JAIS-powered Arabic conversational agent with custom interface, responsive UX, and cloud deployment tuned for high availability.
-              </p>
-              <div class="chips">
-                <span class="chip">Next.js</span>
-                <span class="chip">Flask</span>
-                <span class="chip">PyTorch</span>
-                <span class="chip">DevOps</span>
-              </div>
-              <a class="links" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">
-                View highlights <span>&rarr;</span>
-              </a>
-            </article>
-            <article class="card project-card">
-              <span class="badge">Health Tech &middot; 2023</span>
-              <h3>TeleSound Stethoscope</h3>
-              <p>
-                Telemedicine device using WebRTC streaming, pose detection, and robotic arm integration to power remote diagnostics with near-zero
-                latency.
-              </p>
-              <div class="chips">
-                <span class="chip">React</span>
-                <span class="chip">TensorFlow</span>
-                <span class="chip">Robotics</span>
-              </div>
-            </article>
-            <article class="card project-card">
-              <span class="badge">Computer Vision &middot; 2022</span>
-              <h3>Particle Attacks in BMDF</h3>
-              <p>
-                Award-winning NYU biochip hackathon project improving detection accuracy through TensorFlow-powered analysis of microfluidic data.
-              </p>
-              <div class="chips">
-                <span class="chip">OpenCV</span>
-                <span class="chip">TensorFlow</span>
-                <span class="chip">Reverse Engineering</span>
-              </div>
-            </article>
-            <article class="card project-card">
-              <span class="badge">Visualization &middot; 2024</span>
-              <h3>MRI Volume Explorer</h3>
-              <p>
-                MATLAB-based GUI for advanced visualization and volume rendering of medical imaging, published in the International Journal of
-                Applied Technology in Medical Sciences.
-              </p>
-            </article>
-          </div>
-        </section>
-        <section id="art" aria-labelledby="art-title">
-          <div class="section__header">
-            <h2 class="section__title" id="art-title">Art &amp; Photo Sketchbook</h2>
-            <p class="section__lede">
-              Ink sketches, concept studies, and photography experiments that influence my visual language across interfaces and robotics
-              storytelling.
-            </p>
-          </div>
-          <div class="grid grid--cols-2">
-            <article class="card">
-              <h3>Illustrations &amp; Sketches</h3>
-              <p>
-                A rotating gallery of notebook scans, Procreate explorations, and stamped monoline experiments inspired by robotics forms,
-                wearable design, and Tokyo street vignettes.
-              </p>
-              <div class="gallery-grid" id="sketch-gallery" aria-live="polite"></div>
-            </article>
-            <div class="grid">
-              <article class="card">
-                <h3>Photography</h3>
-                <p>
-                  Glimpses captured between research sessions and travel &mdash; kinetic architecture, desert light, quiet studio moments. Each
-                  print carries my NSH stamp for authenticity.
-                </p>
-                <div class="gallery-grid" id="photo-gallery" aria-live="polite"></div>
-              </article>
-              <article class="card">
-                <h3>Stamp &amp; File Prep Notes</h3>
-                <ul>
-                  <li>Place photos in <code>assests/photos/</code> and sketches in <code>assests/art/</code>.</li>
-                  <li>Export JPGs between 1600&ndash;2000px on the long edge at roughly 80% quality.</li>
-                  <li>Keep filenames lowercase with dashes: <code>studio-study-01.jpg</code>.</li>
-                  <li>Strip GPS EXIF for privacy before publishing.</li>
-                </ul>
-                <p>Your stamp appears automatically thanks to the overlay watermark. Just update the file arrays below when you add new work.</p>
-              </article>
-            </div>
-          </div>
-        </section>
+      <section id="experience" class="grid-section">
+        <div class="section-heading">
+          <span>Timeline</span>
+          <h2>Chiaroscuro Practice</h2>
+        </div>
 
-        <section id="extras" aria-labelledby="extras-title">
-          <div class="section__header">
-            <h2 class="section__title" id="extras-title">Community &amp; Recognition</h2>
-            <p class="section__lede">
-              Mentorship, teaching, and accolades that energize my practice and remind me why people stay at the center of every build.
-            </p>
-          </div>
-          <div class="grid grid--cols-2">
-            <article class="card">
-              <h3>Mentorship &amp; Volunteering</h3>
-              <ul>
-                <li>Engineering mentor for sustainability and hackathon teams at Abu Dhabi University (2022 &mdash; 2023).</li>
-                <li>Academic peer tutor supporting biology, chemistry, calculus, linear algebra, and introductory AI (2019 &mdash; 2022).</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>Certificates &amp; Camps</h3>
-              <ul>
-                <li>Code Foundation for ROS, The Construct (Aug 2024).</li>
-                <li>ROS Summer Camp 2024: Mastering Robotics with ROS, Dubai Future Foundation (Jul 2024).</li>
-                <li>Project Management Foundations, LinkedIn Learning (Feb 2024).</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>Awards &amp; Honors</h3>
-              <ul>
-                <li>Top 10 Finalist, Wyakom Initiative, Department of Community Development (Nov 2023).</li>
-                <li>2nd and 3rd Place, 10th Annual Undergraduate Research Competition, Biomedical Category (May 2023).</li>
-                <li>Excellence and Creative Engineering Award, Society of Engineers UAE (Jan 2024).</li>
-                <li>Women in Research Forum, University of Sharjah (Sep 2023).</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-        <section id="contact" aria-labelledby="contact-title">
-          <div class="section__header">
-            <h2 class="section__title" id="contact-title">Let's Build Together</h2>
-            <p class="section__lede">
-              From assistive robotics to sketch-inspired digital experiences, I am always excited to collaborate, prototype, and teach.
-            </p>
-          </div>
-          <div class="grid grid--cols-2">
-            <article class="card">
-              <h3>Reach Out</h3>
-              <p>
-                Drop a note about projects, residencies, or research collaborations. I am especially interested in inclusive technology,
-                human-robot interaction, and design-led development.
-              </p>
-              <div class="chips">
-                <a class="links" href="mailto:n.s3eedalhajeri@gmail.com">Email <span>&rarr;</span></a>
-                <a class="links" href="tel:+971545566092">Call <span>&rarr;</span></a>
-              </div>
-            </article>
-            <article class="card">
-              <h3>Follow the Work</h3>
-              <p>Stay close to ongoing explorations, sketches, and prototypes.</p>
-              <div class="chips">
-                <a class="links" href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">LinkedIn <span>&rarr;</span></a>
-                <a class="links" href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">GitHub <span>&rarr;</span></a>
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
+        <article class="essay-block">
+          <strong>Visiting Researcher · Khalifa University · 2025</strong>
+          <p>
+            Designing accessible prosthetics within the Biomechanics &amp; Biodesign Lab. My focus: tendon-driven actuation, photonic tactile
+            mapping, and adaptive interfaces that speak both to clinicians and the people using the device.
+          </p>
+        </article>
+        <article class="essay-block">
+          <strong>Biomedical Electronic Engineer · Philips Middle East · 2023–24</strong>
+          <p>
+            Maintained MRI, X-ray, and ultrasound systems; introduced training rituals that centered empathy and confidence in high-stakes
+            environments.
+          </p>
+        </article>
+        <article class="essay-block">
+          <strong>AI Trainee · MBZUAI · 2024</strong>
+          <p>
+            Co-created Bahar, an Arabic LLM interface built with Next.js, Flask, and orchestrated deployments via Docker and GitHub Actions.
+          </p>
+        </article>
+      </section>
+
+      <section id="research" class="grid-section">
+        <div class="section-heading">
+          <span>Inquiry</span>
+          <h2>Light Studies</h2>
+        </div>
+        <article class="hero-essay__copy">
+          Humanoid robotics, motion control, HRI ethics, and cultural storytelling remain my compass. I explore how tactile feedback, motion
+          shaders, and ambient typography can make technology feel ceremonious rather than sterile.
+        </article>
+      </section>
+
+      <div class="monogram" aria-hidden="true">Noora</div>
+
+      <section id="contact" class="contact-strip">
+        <strong>Let’s sketch the next scene</strong>
+        <a href="mailto:n.s3eedalhajeri@gmail.com">n.s3eedalhajeri@gmail.com</a>
+        <a href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">linkedin · nsh019</a>
+        <a href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">github · noora-alhajeri</a>
+      </section>
 
       <footer>
-        <div>&copy; <span id="year"></span> Noora Saeed Alhajeri. Hand-crafted with curiosity in Abu Dhabi.</div>
-        <div>
-          Built with HTML, CSS, and a love for sketchbook storytelling. Inspired by contemporary Japanese digital art and tactile documentation.
-        </div>
+        <span>© <span id="year"></span> Noora Saeed Alhajeri · Abu Dhabi</span>
+        <span>Portfolio crafted with Playfair Display &amp; Work Sans · Inspired by baroque light</span>
       </footer>
-    </div>
-
-    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" hidden>
-      <button class="lightbox__close" type="button" aria-label="Close preview">&times;</button>
-      <img alt="" id="lightbox-image" />
     </div>
 
     <script>
@@ -1018,78 +544,20 @@
         yearEl.textContent = String(new Date().getFullYear());
       }
 
-      document.querySelectorAll('a[href^="#"]').forEach((link) => {
-        link.addEventListener("click", (event) => {
-          const target = document.querySelector(link.getAttribute("href"));
-          if (!target) return;
-          event.preventDefault();
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      });
+      const progress = document.createElement("div");
+      progress.className = "progress";
+      document.body.appendChild(progress);
 
-      const progressEl = document.getElementById("progress");
-      if (progressEl) {
-        const updateProgress = () => {
-          const doc = document.documentElement;
-          const scrollTop = doc.scrollTop || document.body.scrollTop;
-          const max = doc.scrollHeight - doc.clientHeight;
-          const percent = max > 0 ? (scrollTop / max) * 100 : 0;
-          progressEl.style.width = `${percent}%`;
-        };
-        window.addEventListener("scroll", updateProgress, { passive: true });
-        updateProgress();
-      }
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const total = doc.scrollHeight - doc.clientHeight;
+        const scrolled = doc.scrollTop || document.body.scrollTop;
+        const percent = total > 0 ? (scrolled / total) * 100 : 0;
+        progress.style.width = `${percent}%`;
+      };
 
-      const sketchImages = [];
-      const photoImages = Array.from({ length: 19 }, (_, index) => `assests/photos/${index + 1}.jpg`);
-
-      function renderGallery(id, sources) {
-        const wrap = document.getElementById(id);
-        if (!wrap) return;
-        wrap.innerHTML = "";
-        sources.forEach((src) => {
-          const box = document.createElement("div");
-          box.className = "wm";
-          const img = document.createElement("img");
-          img.loading = "lazy";
-          img.decoding = "async";
-          img.src = src;
-          img.alt = "";
-          img.addEventListener("click", () => openLightbox(src));
-          box.appendChild(img);
-          wrap.appendChild(box);
-        });
-      }
-
-      function openLightbox(src) {
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImg = document.getElementById("lightbox-image");
-        if (!lightbox || !lightboxImg) return;
-        lightboxImg.src = src;
-        lightbox.hidden = false;
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeLightbox() {
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImg = document.getElementById("lightbox-image");
-        if (!lightbox || !lightboxImg) return;
-        lightbox.hidden = true;
-        lightboxImg.src = "";
-        document.body.style.overflow = "";
-      }
-
-      const lightboxEl = document.getElementById("lightbox");
-      if (lightboxEl) {
-        lightboxEl.addEventListener("click", (event) => {
-          if (event.target === lightboxEl) closeLightbox();
-        });
-        const closeButton = lightboxEl.querySelector(".lightbox__close");
-        if (closeButton) closeButton.addEventListener("click", closeLightbox);
-      }
-
-      renderGallery("sketch-gallery", sketchImages);
-      renderGallery("photo-gallery", photoImages);
+      document.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
     </script>
   </body>
 </html>
