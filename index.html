@@ -928,8 +928,8 @@
               <article class="card">
                 <h3>Stamp &amp; File Prep Notes</h3>
                 <ul>
-                  <li>Place photos in <code>assets/photos/</code> and sketches in <code>assets/sketches/</code>.</li>
-                  <li>Export JPGs between 1600&ndash;2000px on the long edge at roughly 80% quality.</li>
+                  <li>Place photos in <code>assests/photos/</code> and sketches in <code>assests/art/</code>.</li>
+                  <li>Export JPGs between 1600&ndash;2000px on the long edge at roughly 80&#37; quality.</li>
                   <li>Keep filenames lowercase with dashes: <code>studio-study-01.jpg</code>.</li>
                   <li>Strip GPS EXIF for privacy before publishing.</li>
                 </ul>
@@ -1037,21 +1037,11 @@
         });
       });
 
-      const sketchImages = [
-        "assets/sketches/robotic-form-study-01.jpg",
-        "assets/sketches/gesture-series-02.jpg",
-        "assets/sketches/motion-panels-03.jpg",
-        "assets/sketches/kinetic-lines-04.jpg"
-      ];
+      // SKETCHES - add filenames from assests/art/ once uploaded.
+      const sketchImages = [];
 
-      const photoImages = [
-        "assets/photos/photo01.jpg",
-        "assets/photos/photo02.jpg",
-        "assets/photos/photo03.jpg",
-        "assets/photos/photo04.jpg",
-        "assets/photos/photo05.jpg",
-        "assets/photos/photo06.jpg"
-      ];
+      // PHOTOS - pulling numbered files from assests/photos/1.jpg to 19.jpg.
+      const photoImages = Array.from({ length: 19 }, (_, index) => `assests/photos/${index + 1}.jpg`);
 
       function renderGallery(id, sources) {
         const wrap = document.getElementById(id);
