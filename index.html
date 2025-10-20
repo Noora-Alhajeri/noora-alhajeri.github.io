@@ -155,7 +155,7 @@
       }
 
       .top-bar__brand::before {
-        content: "";
+        content: "o";
         width: 12px;
         height: 12px;
         background: var(--accent);
@@ -181,7 +181,7 @@
       }
 
       .top-bar nav a::after {
-        content: "";
+        content: "o";
         position: absolute;
         left: 0;
         bottom: 0;
@@ -215,7 +215,7 @@
       }
 
       .theme-toggle::before {
-        content: "";
+        content: "o";
         width: 10px;
         height: 10px;
         border-radius: 999px;
@@ -250,7 +250,7 @@
 
       .hero::before,
       .hero::after {
-        content: "";
+        content: "o";
         position: absolute;
         inset: 0;
         pointer-events: none;
@@ -278,7 +278,7 @@
       }
 
       .hero__media::before {
-        content: "tactile robotics";
+        content: "o";
         position: absolute;
         top: 24px;
         left: 24px;
@@ -474,7 +474,7 @@
       }
 
       .tab-button::before {
-        content: "â—‹";
+        content: "o";
         font-size: 0.7rem;
         opacity: 0.6;
       }
@@ -507,7 +507,7 @@
       }
 
       .tab-panel::before {
-        content: "";
+        content: "o";
         position: absolute;
         inset: 8%;
         border: 1px dashed var(--outline);
@@ -596,7 +596,7 @@
       .panel-list__item::before,
       .timeline__item::before,
       .project-card__points li::before {
-        content: "";
+        content: "o";
         position: absolute;
         left: 0;
         top: 0.7em;
@@ -698,7 +698,7 @@
 
       .project-card::before,
       .project-card::after {
-        content: "";
+        content: "o";
         position: absolute;
         inset: 18px;
         border-radius: clamp(16px, 3vw, 28px);
@@ -721,6 +721,55 @@
       .project-card > * {
         position: relative;
         z-index: 2;
+      }
+
+      .project-card__canvas {
+        position: relative;
+        display: grid;
+        gap: 8px;
+        padding: clamp(16px, 3vw, 24px);
+        border: 1px solid var(--outline);
+        border-radius: clamp(16px, 3vw, 28px);
+        aspect-ratio: 16 / 10;
+        background:
+          linear-gradient(140deg, rgba(255, 255, 255, 0.08), transparent 65%),
+          linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+          var(--frame-bg);
+        background-size: 180px 180px, 44px 44px, 44px 44px, auto;
+        overflow: hidden;
+      }
+
+      .project-card__canvas::before {
+        content: attr(data-symbol);
+        position: absolute;
+        bottom: -8%;
+        right: clamp(-14px, -2vw, -24px);
+        font-family: "Playfair Display", serif;
+        font-size: clamp(4rem, 12vw, 9.5rem);
+        color: var(--glyph-color);
+        pointer-events: none;
+      }
+
+      .project-card__label {
+        font-size: 0.64rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .project-card__canvas-note {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        max-width: 28ch;
+        color: var(--ink-secondary);
+      }
+
+      .project-card__canvas strong {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.2rem, 2.4vw, 2.1rem);
+        line-height: 1.1;
       }
 
       .project-card__header {
@@ -879,56 +928,6 @@
           align-items: flex-start;
         }
       }
-    </style>
-      :root {
-        --page-bg: #050505;
-        --frame-bg: #0e0e0e;
-        --ink: #f5f5f5;
-        --muted: #a9a9a9;
-        --accent: #2a64ff;
-        --accent-soft: rgba(42, 100, 255, 0.15);
-        --grid-line: rgba(255, 255, 255, 0.08);
-        --surface-sheen: rgba(255, 255, 255, 0.03);
-        --outline: rgba(255, 255, 255, 0.1);
-        --outline-strong: rgba(255, 255, 255, 0.35);
-        --outline-heavy: rgba(255, 255, 255, 0.45);
-        --outline-alt: rgba(255, 255, 255, 0.24);
-        --overlay: rgba(0, 0, 0, 0.55);
-        --overlay-soft: rgba(0, 0, 0, 0.1);
-        --overlay-strong: rgba(0, 0, 0, 0.65);
-        --glyph-color: rgba(255, 255, 255, 0.07);
-        --ink-soft: rgba(245, 245, 245, 0.84);
-        --ink-secondary: rgba(245, 245, 245, 0.82);
-        --contact-link: rgba(245, 245, 245, 0.9);
-        --caption-bg: rgba(0, 0, 0, 0.65);
-        --cta-hover-ink: #050505;
-        --max-width: 1380px;
-        --grid-size: clamp(72px, 12vw, 140px);
-        --transition: 220ms ease;
-        color-scheme: dark;
-      }
-
-      html[data-theme="light"] {
-        --page-bg: #f6f6f3;
-        --frame-bg: #ffffff;
-        --ink: #0a0a0a;
-        --muted: #4a4a4a;
-        --accent: #2740ff;
-        --accent-soft: rgba(39, 64, 255, 0.12);
-        --grid-line: rgba(0, 0, 0, 0.07);
-        --surface-sheen: rgba(0, 0, 0, 0.05);
-        --outline: rgba(0, 0, 0, 0.08);
-        --outline-strong: rgba(0, 0, 0, 0.28);
-        --outline-heavy: rgba(0, 0, 0, 0.42);
-        --outline-alt: rgba(0, 0, 0, 0.18);
-        --overlay: rgba(255, 255, 255, 0.82);
-        --overlay-soft: rgba(255, 255, 255, 0.55);
-        --overlay-strong: rgba(255, 255, 255, 0.9);
-        --glyph-color: rgba(0, 0, 0, 0.06);
-        --ink-soft: rgba(32, 32, 32, 0.78);
-        --ink-secondary: rgba(38, 38, 38, 0.72);
-        --contact-link: rgba(32, 32, 32, 0.82);
-        --caption-bg: rgba(255, 255, 255, 0.86);
         --cta-hover-ink: #f6f6f3;
         color-scheme: light;
       }
@@ -1004,7 +1003,7 @@
       }
 
       .top-bar__brand::before {
-        content: "";
+        content: "o";
         width: 12px;
         height: 12px;
         background: var(--accent);
@@ -1028,7 +1027,7 @@
       }
 
       .top-bar nav a::after {
-        content: "";
+        content: "o";
         position: absolute;
         left: 0;
         bottom: 0;
@@ -1062,7 +1061,7 @@
       }
 
       .theme-toggle::before {
-        content: "";
+        content: "o";
         width: 10px;
         height: 10px;
         border-radius: 999px;
@@ -1097,7 +1096,7 @@
 
       .hero::before,
       .hero::after {
-        content: "";
+        content: "o";
         position: absolute;
         inset: 0;
         pointer-events: none;
@@ -1125,7 +1124,7 @@
       }
 
       .hero__media::before {
-        content: "tactile robotics";
+        content: "o";
         position: absolute;
         top: 24px;
         left: 24px;
@@ -1796,14 +1795,18 @@
           </div>
           <div class="project-gallery">
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="AV">
+                <span class="project-card__label">System overview</span>
+                <strong>Ambu ventilation loop</strong>
+                <p class="project-card__canvas-note">Servo cradle compresses the AMBU bag while a watchdog rail guards airflow and failure states.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
-                <span>2025</span>
+                <span>2024</span>
               </div>
               <h3 class="project-card__title">Arduino Ventilator System</h3>
               <p class="project-card__summary">
-                A portable ventilator concept using an AMBU bag, servo choreography, and Arduino Uno control to simulate life-saving airflow when
-                critical care equipment is scarce.
+                Low-cost ventilator concept simulating mechanical ventilation through Arduino UNO control, AMBU actuation, and fail-safe alarms.
               </p>
               <ul class="project-card__points">
                 <li>Servo-driven compression with adjustable cadence and tidal volume presets.</li>
@@ -1814,24 +1817,22 @@
                 <span class="badge">Arduino</span>
                 <span class="badge">Medical device</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/Arduino-Ventilator-System"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/Arduino-Ventilator-System" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
 
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="TS">
+                <span class="project-card__label">System overview</span>
+                <strong>Tele-auscultation pod</strong>
+                <p class="project-card__canvas-note">Robotic stethoscope placement guided by computer vision and latency-aware WebRTC channels.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
                 <span>2025</span>
               </div>
               <h3 class="project-card__title">Telemedicine Stethoscope</h3>
               <p class="project-card__summary">
-                Bachelor thesis reimagining auscultation through WebRTC streaming, pose-guided robotics, and clinical-grade feedback loops for
-                remote physicians.
+                Bachelor thesis connecting Dobot robotics, WebRTC streaming, and pose detection to let clinicians perform remote auscultation.
               </p>
               <ul class="project-card__points">
                 <li>React interface with latency-sensitive audio and video for Dobot arms.</li>
@@ -1842,24 +1843,22 @@
                 <span class="badge">WebRTC</span>
                 <span class="badge">TensorFlow</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/BSc-Thesis-Telemedicine-Stethoscope"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/BSc-Thesis-Telemedicine-Stethoscope" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
 
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="BA">
+                <span class="project-card__label">System overview</span>
+                <strong>Bilingual dialogue webapp</strong>
+                <p class="project-card__canvas-note">Interface and service layer for JAIS-powered storytelling in Arabic and English.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
                 <span>2024</span>
               </div>
               <h3 class="project-card__title">Bahar Conversational Atlas</h3>
               <p class="project-card__summary">
-                A bilingual chatbot experience powered by JAIS, designed during the Emirati AI Boot Camp to make large language models legible and
-                culturally grounded.
+                JAIS-powered chatbot crafted during the Emirati AI Boot Camp, pairing bilingual UX flows with resilient inference orchestration.
               </p>
               <ul class="project-card__points">
                 <li>Next.js front end with story-driven conversation flows and session replay.</li>
@@ -1870,23 +1869,22 @@
                 <span class="badge">Next.js</span>
                 <span class="badge">PyTorch</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/bahar"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/bahar" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
 
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="SP">
+                <span class="project-card__label">System overview</span>
+                <strong>Syringe control rail</strong>
+                <p class="project-card__canvas-note">Stepper-driven pump with remote dosage console and emergency stop lattice.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
                 <span>2025</span>
               </div>
               <h3 class="project-card__title">IoT Syringe Pump</h3>
               <p class="project-card__summary">
-                Remote dosage control through Raspberry Pi, stepper motors, and a web console, enabling precise infusion management for caregivers.
+                Remote dosage controller using Raspberry Pi, stepper motors, and a caregiver dashboard to orchestrate precise infusions.
               </p>
               <ul class="project-card__points">
                 <li>Python control suite with calibration scripts and live dosage telemetry.</li>
@@ -1897,24 +1895,22 @@
                 <span class="badge">IoT</span>
                 <span class="badge">Healthcare</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/IoT-Syringe-Pump"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/IoT-Syringe-Pump" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
 
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="MRI">
+                <span class="project-card__label">System overview</span>
+                <strong>Volumetric render suite</strong>
+                <p class="project-card__canvas-note">App Designer interface for multi-mode MRI exploration with cinematic exports.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
                 <span>2025</span>
               </div>
               <h3 class="project-card__title">MRI Volume Explorer</h3>
               <p class="project-card__summary">
-                MATLAB App Designer interface for interactive visualization and renderings of volumetric MRI data, published in Applied Technology
-                in Medical Sciences.
+                MATLAB-based GUI delivering interactive volume rendering, published in Applied Technology in Medical Sciences.
               </p>
               <ul class="project-card__points">
                 <li>MIP, MinIP, isosurface rendering, and slice planes for rapid diagnostics.</li>
@@ -1925,23 +1921,22 @@
                 <span class="badge">Medical imaging</span>
                 <span class="badge">App Designer</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/GUI-for-the-Visualization-and-Volume-Rendering-of-MRI-Data"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/GUI-for-the-Visualization-and-Volume-Rendering-of-MRI-Data" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
 
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="MR">
+                <span class="project-card__label">System overview</span>
+                <strong>ROS 2 mobility stack</strong>
+                <p class="project-card__canvas-note">Teleop, SLAM, Nav2, and perception pipelines orchestrated inside Gazebo sandboxes.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
                 <span>2025</span>
               </div>
               <h3 class="project-card__title">My Mobile Robot</h3>
               <p class="project-card__summary">
-                ROS 2 simulation suite fusing teleoperation, SLAM mapping, Nav2 autonomy, and OpenCV perception into a single learning environment.
+                ROS 2 simulation suite unifying autonomous navigation, mapping, and computer vision to prototype mobile robots.
               </p>
               <ul class="project-card__points">
                 <li>Gazebo worlds with configurable missions and autonomy scenarios.</li>
@@ -1952,24 +1947,22 @@
                 <span class="badge">ROS 2</span>
                 <span class="badge">Robotics</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/My-Mobile-Robot"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/My-Mobile-Robot" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
 
             <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="WA">
+                <span class="project-card__label">System overview</span>
+                <strong>Caregiver wearable mesh</strong>
+                <p class="project-card__canvas-note">IoT bracelet blueprint combining GPS, fall detection, and caregiver alerts.</p>
+              </figure>
               <div class="project-card__header">
                 <span>System sketch</span>
                 <span>2024</span>
               </div>
               <h3 class="project-card__title">Wearable IoT for Alzheimer Care</h3>
               <p class="project-card__summary">
-                Smart hand-band concept blending GPS, fall detection, emergency alerts, and biomarker logging for caregivers supporting
-                Alzheimer patients.
+                Smart hand-band concept blending real-time location tracking, fall detection, and biomarker logging for Alzheimer support.
               </p>
               <ul class="project-card__points">
                 <li>Firebase-backed telemetry and caregiver notifications.</li>
@@ -1980,17 +1973,192 @@
                 <span class="badge">IoT</span>
                 <span class="badge">Assistive tech</span>
               </div>
-              <a
-                class="project-card__cta"
-                href="https://github.com/Noora-Alhajeri/Wearable-IoT-Based-Device-for-Critical-Care-Alzheimer-s-Patients"
-                target="_blank"
-                rel="noreferrer noopener"
-                >Open repository</a
-              >
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/Wearable-IoT-Based-Device-for-Critical-Care-Alzheimer-s-Patients" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="FG">
+                <span class="project-card__label">System overview</span>
+                <strong>Food diffusion lab</strong>
+                <p class="project-card__canvas-note">Graduate notebooks exploring generative cuisine imagery and evaluation pipelines.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">CV703 FoodGen</h3>
+              <p class="project-card__summary">
+                CV703 coursework documenting experiments in food image generation, dataset preparation, and qualitative evaluations.
+              </p>
+              <ul class="project-card__points">
+                <li>Jupyter workflow capturing training runs, prompts, and ablation studies.</li>
+                <li>Evaluation notebooks comparing diffusion outputs with culinary references.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">Python</span>
+                <span class="badge">Jupyter</span>
+                <span class="badge">Generative AI</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/CV703-FoodGen" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="ECG">
+                <span class="project-card__label">System overview</span>
+                <strong>Analog waveform synth</strong>
+                <p class="project-card__canvas-note">Instrumentation amplifier and Johnson counter orchestrating ECG traces.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">ECG Simulator Device</h3>
+              <p class="project-card__summary">
+                Multisim-driven simulator producing ECG waveforms for testing biomedical amplifiers and training clinicians.
+              </p>
+              <ul class="project-card__points">
+                <li>Instrumentation amplifier front-end paired with programmable waveform logic.</li>
+                <li>Simulation deck documenting signal integrity and integration guidance.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">Multisim</span>
+                <span class="badge">Analog</span>
+                <span class="badge">Biomedical</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/ECG-Simulator-Device" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="MV">
+                <span class="project-card__label">System overview</span>
+                <strong>Histone cinematics</strong>
+                <p class="project-card__canvas-note">PyMOL session files choreographing the 6KIX histone protein with annotations.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">Molecular Visualization - PyMOL</h3>
+              <p class="project-card__summary">
+                Visualization set showcasing 6KIX histone structures with annotated camera paths and storytelling overlays.
+              </p>
+              <ul class="project-card__points">
+                <li>PyMOL scenes with labelled residues and curated camera motions.</li>
+                <li>Export-ready scripts for narrated sequences and teaching decks.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">PyMOL</span>
+                <span class="badge">Visualization</span>
+                <span class="badge">Biology</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/Molecular-Visualization-PyMOL" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="SC">
+                <span class="project-card__label">System overview</span>
+                <strong>Adaptive smart camera</strong>
+                <p class="project-card__canvas-note">Particle-filter tracking fused with Arduino pan-tilt choreography.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">Smart Camera</h3>
+              <p class="project-card__summary">
+                Real-time camera tracking platform pairing MATLAB vision algorithms with Arduino-controlled servo mechanics.
+              </p>
+              <ul class="project-card__points">
+                <li>Motion-based multi-object tracking tuned with particle filtering.</li>
+                <li>Pan-tilt servo controller for responsive physical camera moves.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">MATLAB</span>
+                <span class="badge">Computer vision</span>
+                <span class="badge">Arduino</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/Smart-Camera" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="SM">
+                <span class="project-card__label">System overview</span>
+                <strong>Sports motion retargeting</strong>
+                <p class="project-card__canvas-note">Notebooks exploring skeletal alignment for athletic motion reuse.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">sport-motion-retargeting</h3>
+              <p class="project-card__summary">
+                Research sandbox investigating how athlete motion capture can be mapped onto new rigs for analysis and training.
+              </p>
+              <ul class="project-card__points">
+                <li>Python utilities for preprocessing joint trajectories and normalization.</li>
+                <li>Experiments comparing retargeting quality across sports drills.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">Python</span>
+                <span class="badge">Motion</span>
+                <span class="badge">Research</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/sport-motion-retargeting" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="NA">
+                <span class="project-card__label">System overview</span>
+                <strong>GitHub profile README</strong>
+                <p class="project-card__canvas-note">Living markdown dossier summarizing current research, contact, and rituals.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">Noora-Alhajeri</h3>
+              <p class="project-card__summary">
+                Personal README highlighting current research focus, quick facts, and ways to collaborate across robotics and design.
+              </p>
+              <ul class="project-card__points">
+                <li>Curated sections for active residencies, publications, and community work.</li>
+                <li>Direct links to contact channels, portfolio, and featured case studies.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">Markdown</span>
+                <span class="badge">Profile</span>
+                <span class="badge">Storytelling</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">Open repository</a>
+            </article>
+
+            <article class="project-card">
+              <figure class="project-card__canvas" data-symbol="WWW">
+                <span class="project-card__label">System overview</span>
+                <strong>Portfolio source</strong>
+                <p class="project-card__canvas-note">This very site: tabbed CV, blueprint gallery, light/dark ritual.</p>
+              </figure>
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">noora-alhajeri.github.io</h3>
+              <p class="project-card__summary">
+                Static portfolio site blending monochrome grids, theme toggles, and narrative-led storytelling in pure HTML/CSS/JS.
+              </p>
+              <ul class="project-card__points">
+                <li>Includes tabbed CV notebook, blueprint-inspired gallery, and scroll rituals.</li>
+                <li>Light/dark theming with persisted preferences and keyboard-friendly tabs.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">HTML</span>
+                <span class="badge">CSS</span>
+                <span class="badge">Portfolio</span>
+              </div>
+              <a class="project-card__cta" href="https://github.com/Noora-Alhajeri/noora-alhajeri.github.io" target="_blank" rel="noreferrer noopener">Open repository</a>
             </article>
           </div>
         </section>
-
         <section class="cities">
           <div class="section-heading">
             <strong>Residencies &amp; research</strong>
@@ -2197,6 +2365,12 @@
     </script>
   </body>
 </html>
+
+
+
+
+
+
 
 
 
