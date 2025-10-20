@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Noora Alhajeri — Chiaroscuro Studio</title>
+    <title>Noora Alhajeri &mdash; Chiaroscuro Studio</title>
     <meta
       name="description"
       content="Monochrome portfolio for Noora Alhajeri, blending tactile robotics, cultural storytelling, and sketch-driven design."
@@ -29,6 +29,857 @@
       })();
     </script>
     <style>
+      :root {
+        --page-bg: #050505;
+        --frame-bg: #0e0e0e;
+        --ink: #f5f5f5;
+        --muted: #9a9a9a;
+        --accent: #2a64ff;
+        --accent-soft: rgba(42, 100, 255, 0.16);
+        --grid-line: rgba(255, 255, 255, 0.08);
+        --surface-sheen: rgba(255, 255, 255, 0.04);
+        --outline: rgba(255, 255, 255, 0.1);
+        --outline-strong: rgba(255, 255, 255, 0.32);
+        --outline-heavy: rgba(255, 255, 255, 0.48);
+        --outline-dashed: rgba(255, 255, 255, 0.35);
+        --overlay: rgba(0, 0, 0, 0.55);
+        --overlay-soft: rgba(0, 0, 0, 0.12);
+        --overlay-strong: rgba(0, 0, 0, 0.72);
+        --glyph-color: rgba(255, 255, 255, 0.08);
+        --ink-soft: rgba(245, 245, 245, 0.84);
+        --ink-secondary: rgba(245, 245, 245, 0.75);
+        --contact-link: rgba(245, 245, 245, 0.9);
+        --caption-bg: rgba(0, 0, 0, 0.65);
+        --cta-hover-ink: #050505;
+        --badge-bg: rgba(42, 100, 255, 0.16);
+        --max-width: 1380px;
+        --grid-size: clamp(72px, 12vw, 140px);
+        --transition: 220ms ease;
+        color-scheme: dark;
+      }
+
+      html[data-theme="light"] {
+        --page-bg: #f6f6f3;
+        --frame-bg: #ffffff;
+        --ink: #0a0a0a;
+        --muted: #4a4a4a;
+        --accent: #2740ff;
+        --accent-soft: rgba(39, 64, 255, 0.12);
+        --grid-line: rgba(0, 0, 0, 0.06);
+        --surface-sheen: rgba(0, 0, 0, 0.05);
+        --outline: rgba(0, 0, 0, 0.08);
+        --outline-strong: rgba(0, 0, 0, 0.26);
+        --outline-heavy: rgba(0, 0, 0, 0.42);
+        --outline-dashed: rgba(0, 0, 0, 0.32);
+        --overlay: rgba(255, 255, 255, 0.86);
+        --overlay-soft: rgba(255, 255, 255, 0.45);
+        --overlay-strong: rgba(255, 255, 255, 0.82);
+        --glyph-color: rgba(0, 0, 0, 0.06);
+        --ink-soft: rgba(32, 32, 32, 0.78);
+        --ink-secondary: rgba(38, 38, 38, 0.72);
+        --contact-link: rgba(32, 32, 32, 0.82);
+        --caption-bg: rgba(255, 255, 255, 0.9);
+        --cta-hover-ink: #f6f6f3;
+        --badge-bg: rgba(39, 64, 255, 0.1);
+        color-scheme: light;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+      }
+
+      body {
+        background: var(--page-bg);
+        color: var(--ink);
+        font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0.02em;
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .grain {
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23noise)' opacity='0.12'/%3E%3C/svg%3E");
+        background-size: 320px 320px;
+        opacity: 0.35;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        z-index: 10;
+      }
+
+      html[data-theme="light"] .grain {
+        mix-blend-mode: multiply;
+        opacity: 0.28;
+      }
+
+      .page {
+        position: relative;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: clamp(32px, 5vw, 56px);
+      }
+
+      .top-bar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: center;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        padding-block: 12px;
+      }
+
+      .top-bar__brand {
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .top-bar__brand::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        background: var(--accent);
+      }
+
+      .top-bar__actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(16px, 3vw, 32px);
+      }
+
+      .top-bar nav {
+        display: flex;
+        gap: clamp(16px, 4vw, 36px);
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .top-bar nav a {
+        position: relative;
+        padding-bottom: 4px;
+      }
+
+      .top-bar nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--accent);
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform var(--transition);
+      }
+
+      .top-bar nav a:hover::after,
+      .top-bar nav a:focus-visible::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .theme-toggle {
+        border: 1px solid var(--outline-strong);
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        padding: 10px 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: background var(--transition), color var(--transition), border-color var(--transition);
+      }
+
+      .theme-toggle::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: currentColor;
+        transition: transform var(--transition);
+      }
+
+      html[data-theme="light"] .theme-toggle::before {
+        transform: translateX(6px);
+      }
+
+      .theme-toggle:hover,
+      .theme-toggle:focus-visible {
+        background: var(--accent);
+        color: var(--cta-hover-ink);
+        border-color: transparent;
+      }
+
+      .hero {
+        position: relative;
+        display: grid;
+        gap: clamp(32px, 6vw, 80px);
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+        padding: clamp(48px, 8vw, 96px) clamp(24px, 5vw, 80px);
+        margin-top: clamp(48px, 7vw, 120px);
+        background: var(--frame-bg);
+        overflow: hidden;
+        border-radius: clamp(32px, 6vw, 72px);
+        transition: background var(--transition);
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: var(--grid-size) var(--grid-size);
+        mix-blend-mode: soft-light;
+      }
+
+      .hero::after {
+        background: linear-gradient(120deg, var(--overlay-strong) 0%, var(--overlay-soft) 70%);
+        z-index: 1;
+      }
+
+      .hero__media {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+        border-radius: clamp(28px, 5vw, 56px);
+        outline: 1px solid var(--outline-strong);
+        transition: outline-color var(--transition);
+      }
+
+      .hero__media::before {
+        content: "tactile robotics";
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        padding: 6px 12px;
+        border: 1px solid var(--outline-strong);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.26em;
+        background: var(--overlay);
+      }
+
+      .hero__media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) contrast(105%);
+        transform: scale(1.02);
+        transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      .hero__media:hover img {
+        transform: scale(1.08);
+      }
+
+      .hero__glyph {
+        position: absolute;
+        inset: auto 6% 12% auto;
+        z-index: 0;
+        font-size: clamp(7rem, 22vw, 18rem);
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        text-transform: lowercase;
+        color: var(--glyph-color);
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        transition: color var(--transition);
+      }
+
+      .hero__content {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        gap: clamp(16px, 3vw, 28px);
+        max-width: 520px;
+      }
+
+      .hero__label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.32em;
+        color: var(--muted);
+      }
+
+      .hero__title {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        line-height: 1.05;
+        font-weight: 600;
+      }
+
+      .hero__title span {
+        color: var(--accent);
+      }
+
+      .hero__meta {
+        display: grid;
+        gap: 10px;
+        font-size: 1rem;
+        color: var(--ink-soft);
+      }
+
+      .hero__meta strong {
+        font-size: 0.9rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .hero__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        padding: 14px 24px;
+        border: 1px solid var(--outline-strong);
+        transition: background var(--transition), color var(--transition), border-color var(--transition);
+      }
+
+      .hero__cta:hover,
+      .hero__cta:focus-visible {
+        background: var(--accent);
+        color: var(--cta-hover-ink);
+        border-color: transparent;
+      }
+
+      main {
+        display: grid;
+        gap: clamp(96px, 12vw, 140px);
+        margin-block: clamp(80px, 12vw, 160px);
+      }
+
+      section {
+        position: relative;
+        display: grid;
+        gap: clamp(32px, 5vw, 60px);
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        font-size: 0.78rem;
+        color: var(--muted);
+      }
+
+      .section-heading strong {
+        color: var(--ink);
+      }
+
+      .story {
+        background: linear-gradient(135deg, var(--surface-sheen) 0%, transparent 70%);
+        border-radius: clamp(28px, 5vw, 48px);
+        padding: clamp(32px, 6vw, 80px);
+        border: 1px solid var(--outline);
+      }
+
+      .story__grid {
+        display: grid;
+        gap: clamp(24px, 4vw, 52px);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .story__lead {
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        line-height: 1.3;
+        margin: 0;
+        max-width: 560px;
+      }
+
+      .story__paragraphs {
+        display: grid;
+        gap: 18px;
+        font-size: 1rem;
+        color: var(--ink-secondary);
+      }
+
+      .story__aside {
+        display: grid;
+        gap: 12px;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: var(--muted);
+      }
+
+      .story__aside span {
+        display: inline-block;
+        padding: 8px 12px;
+        border: 1px solid var(--outline);
+        background: var(--overlay);
+      }
+
+      .tabs {
+        display: grid;
+        gap: clamp(24px, 4vw, 48px);
+      }
+
+      .tab-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .tab-button {
+        border: 1px dashed var(--outline-dashed);
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        padding: 10px 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        position: relative;
+        transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+      }
+
+      .tab-button::before {
+        content: "○";
+        font-size: 0.7rem;
+        opacity: 0.6;
+      }
+
+      .tab-button[aria-selected="true"] {
+        background: var(--accent-soft);
+        border-style: solid;
+        border-color: transparent;
+        color: var(--ink);
+        transform: translateY(-2px);
+      }
+
+      .tab-button:hover,
+      .tab-button:focus-visible {
+        border-color: var(--accent);
+      }
+
+      .tab-panels {
+        display: grid;
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .tab-panel {
+        border: 1px solid var(--outline);
+        border-radius: clamp(24px, 4vw, 36px);
+        padding: clamp(28px, 5vw, 52px);
+        background: var(--frame-bg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tab-panel::before {
+        content: "";
+        position: absolute;
+        inset: 8%;
+        border: 1px dashed var(--outline);
+        border-radius: clamp(20px, 4vw, 32px);
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .tab-panel > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .tab-panel[hidden] {
+        display: none;
+      }
+
+      .panel-header {
+        display: grid;
+        gap: 12px;
+        max-width: 720px;
+      }
+
+      .panel-header h3 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-family: "Playfair Display", serif;
+        letter-spacing: 0.04em;
+      }
+
+      .panel-header p {
+        margin: 0;
+        color: var(--ink-secondary);
+        line-height: 1.6;
+      }
+
+      .panel-grid {
+        display: grid;
+        gap: clamp(18px, 3vw, 36px);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin-top: clamp(18px, 3vw, 32px);
+      }
+
+      .panel-block {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--surface-sheen), transparent);
+        border: 1px solid var(--outline);
+      }
+
+      .panel-block h4 {
+        margin: 0;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.26em;
+        color: var(--muted);
+      }
+
+      .panel-block p {
+        margin: 0;
+        color: var(--ink-secondary);
+        line-height: 1.6;
+      }
+
+      .panel-list,
+      .timeline,
+      .project-card__points {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      .panel-list__item,
+      .timeline__item,
+      .project-card__points li {
+        position: relative;
+        padding-left: 22px;
+        color: var(--ink-secondary);
+        line-height: 1.6;
+      }
+
+      .panel-list__item::before,
+      .timeline__item::before,
+      .project-card__points li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.7em;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+      }
+
+      .timeline {
+        margin-top: clamp(24px, 4vw, 40px);
+      }
+
+      .timeline__item {
+        border-left: 1px solid var(--outline);
+        padding-left: 28px;
+      }
+
+      .timeline__item::before {
+        left: -6px;
+        top: 0.75em;
+        background: var(--page-bg);
+      }
+
+      .timeline__meta {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        color: var(--muted);
+      }
+
+      .timeline__title {
+        margin: 4px 0 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .skill-grid {
+        display: grid;
+        gap: clamp(16px, 3vw, 28px);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin-top: clamp(18px, 3vw, 32px);
+      }
+
+      .skill-block {
+        padding: 18px 20px;
+        border: 1px dashed var(--outline-dashed);
+        border-radius: 18px;
+        display: grid;
+        gap: 10px;
+        background: linear-gradient(145deg, var(--surface-sheen), transparent);
+      }
+
+      .skill-block h4 {
+        margin: 0;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.26em;
+        color: var(--muted);
+      }
+
+      .skill-block p {
+        margin: 0;
+        color: var(--ink-secondary);
+        line-height: 1.6;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        background: var(--badge-bg);
+        color: var(--ink);
+      }
+
+      .project-gallery {
+        display: grid;
+        gap: clamp(24px, 4vw, 40px);
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .project-card {
+        position: relative;
+        border: 1px dashed var(--outline-dashed);
+        border-radius: clamp(20px, 4vw, 32px);
+        padding: clamp(24px, 4vw, 40px);
+        display: grid;
+        gap: clamp(16px, 3vw, 24px);
+        background:
+          linear-gradient(125deg, var(--surface-sheen) 0%, transparent 60%),
+          var(--frame-bg);
+        overflow: hidden;
+      }
+
+      .project-card::before,
+      .project-card::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border-radius: clamp(16px, 3vw, 28px);
+        pointer-events: none;
+      }
+
+      .project-card::before {
+        border: 1px solid var(--outline);
+        opacity: 0.35;
+      }
+
+      .project-card::after {
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 56px 56px;
+        opacity: 0.18;
+        mix-blend-mode: soft-light;
+      }
+
+      .project-card > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .project-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        color: var(--muted);
+      }
+
+      .project-card__title {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+        letter-spacing: 0.04em;
+      }
+
+      .project-card__summary {
+        margin: 0;
+        color: var(--ink-secondary);
+        line-height: 1.6;
+      }
+
+      .project-card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .project-card__cta {
+        align-self: flex-start;
+        padding: 10px 18px;
+        border: 1px solid var(--outline-strong);
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        font-size: 0.72rem;
+        transition: background var(--transition), color var(--transition), border-color var(--transition);
+      }
+
+      .project-card__cta:hover,
+      .project-card__cta:focus-visible {
+        background: var(--accent);
+        color: var(--cta-hover-ink);
+        border-color: transparent;
+      }
+
+      .field-notes__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: clamp(16px, 3vw, 40px);
+      }
+
+      .field-note {
+        position: relative;
+        border-radius: 22px;
+        overflow: hidden;
+        outline: 1px solid var(--outline);
+        transition: outline-color var(--transition);
+      }
+
+      .field-note img {
+        width: 100%;
+        height: clamp(220px, 32vw, 320px);
+        object-fit: cover;
+        filter: grayscale(100%) contrast(110%);
+        transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      .field-note:hover img {
+        transform: scale(1.06);
+      }
+
+      .field-note__caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        padding: 6px 12px;
+        background: var(--caption-bg);
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .contact {
+        display: grid;
+        gap: 20px;
+        padding: clamp(40px, 6vw, 72px);
+        border-radius: clamp(28px, 5vw, 48px);
+        background: linear-gradient(128deg, var(--accent-soft), rgba(255, 255, 255, 0));
+        border: 1px solid var(--outline-strong);
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+      }
+
+      .contact strong {
+        font-size: clamp(1.4rem, 3vw, 2.4rem);
+        letter-spacing: 0.18em;
+      }
+
+      .contact a {
+        font-size: 0.86rem;
+        color: var(--contact-link);
+      }
+
+      footer {
+        margin-block: clamp(72px, 10vw, 120px);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: space-between;
+        font-size: 0.72rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        background: var(--accent);
+        z-index: 100;
+        transition: background var(--transition);
+      }
+
+      @media (max-width: 720px) {
+        .top-bar {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .top-bar__actions {
+          justify-content: flex-start;
+          gap: 14px;
+        }
+
+        .hero {
+          padding-inline: clamp(16px, 5vw, 36px);
+        }
+
+        .tab-panel::before {
+          inset: 12%;
+        }
+
+        .project-gallery {
+          grid-template-columns: 1fr;
+        }
+
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
       :root {
         --page-bg: #050505;
         --frame-bg: #0e0e0e;
@@ -613,7 +1464,9 @@
         <div class="top-bar__actions">
           <nav>
             <a href="#practice">Practice</a>
-            <a href="#story">Story</a>
+            <a href="#story">Chronicle</a>
+            <a href="#synopsis">Narrative</a>
+            <a href="#projects">Systems</a>
             <a href="#field-notes">Field Notes</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -659,12 +1512,482 @@
                 Recent residencies span MBZUAI, Philips Middle East, and collaborative workshops across the GCC. My work centers inclusive design,
                 tactile feedback, and the storytelling rituals that make emerging tech feel intimate and human.
               </p>
+              <p>
+                Outside the lab, I mentor hackathon teams, teach STEM rituals with care, and keep sprawling sketchbooks of imagined interfaces.
+                The work is equal parts poem and protocol.
+              </p>
             </div>
             <div class="story__aside">
               <span>87 prototypes</span>
               <span>24 collaborators</span>
               <span>16 cities</span>
             </div>
+          </div>
+        </section>
+
+        <section class="tabs" id="synopsis">
+          <div class="section-heading">
+            <strong>Living notebook</strong>
+            <span>Tabs of practice, milestones, and craft</span>
+          </div>
+          <div class="tab-controls" role="tablist" aria-label="Noora studio notebook">
+            <button
+              type="button"
+              class="tab-button"
+              id="tab-profile"
+              role="tab"
+              aria-controls="panel-profile"
+              aria-selected="true"
+              data-tab="profile"
+            >
+              Profile
+            </button>
+            <button
+              type="button"
+              class="tab-button"
+              id="tab-experience"
+              role="tab"
+              aria-controls="panel-experience"
+              aria-selected="false"
+              data-tab="experience"
+            >
+              Experience
+            </button>
+            <button
+              type="button"
+              class="tab-button"
+              id="tab-education"
+              role="tab"
+              aria-controls="panel-education"
+              aria-selected="false"
+              data-tab="education"
+            >
+              Education
+            </button>
+            <button
+              type="button"
+              class="tab-button"
+              id="tab-skills"
+              role="tab"
+              aria-controls="panel-skills"
+              aria-selected="false"
+              data-tab="skills"
+            >
+              Toolkit
+            </button>
+            <button
+              type="button"
+              class="tab-button"
+              id="tab-awards"
+              role="tab"
+              aria-controls="panel-awards"
+              aria-selected="false"
+              data-tab="awards"
+            >
+              Accolades
+            </button>
+          </div>
+          <div class="tab-panels">
+            <article class="tab-panel" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile">
+              <div class="panel-header">
+                <h3>Practice overview</h3>
+                <p>
+                  I am a biomedical engineer and roboticist weaving Arabic storytelling with human-centered tech. My studio toggles between
+                  speculative sketches and deployed systems that dignify care.
+                </p>
+              </div>
+              <div class="panel-grid">
+                <div class="panel-block">
+                  <h4>Currently</h4>
+                  <p>
+                    M.S. Robotics scholar at MBZUAI and research assistant at Khalifa University Biomechanics Lab, prototyping tendon-driven
+                    prosthetics with photonic sensing.
+                  </p>
+                </div>
+                <div class="panel-block">
+                  <h4>North star</h4>
+                  <p>
+                    Designing assistive technologies that feel like couture instruments: precise, compassionate, and co-created with the communities
+                    they serve.
+                  </p>
+                </div>
+                <div class="panel-block">
+                  <h4>Practice threads</h4>
+                  <p>
+                    Humanoid motion studies, inclusive interface choreography, haptic storytelling, and empathy rituals drawn from teaching and
+                    mentoring.
+                  </p>
+                </div>
+              </div>
+              <ul class="panel-list">
+                <li class="panel-list__item">
+                  Keywords: chiaroscuro robotics, embodied AI, inclusive health tech, Arabic narrative design.
+                </li>
+                <li class="panel-list__item">
+                  Formats: living lab residencies, remote collaboration kits, tactile publications, sketch archives, speculative films.
+                </li>
+              </ul>
+            </article>
+
+            <article class="tab-panel" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience" hidden>
+              <div class="panel-header">
+                <h3>Experience loop</h3>
+                <p>
+                  From hospital wards to robotics research, every placement amplified the dialogue between precision engineering and human ritual.
+                </p>
+              </div>
+              <ul class="timeline">
+                <li class="timeline__item">
+                  <span class="timeline__meta">2025 · Abu Dhabi</span>
+                  <h4 class="timeline__title">Khalifa University — Part-time Research Assistant</h4>
+                  <p>
+                    Continuing post-internship research on accessible bionic limbs under Dr. Kinda Khalaf. Building modular tendons, tactile
+                    sensing, and adaptive control tuned for real-world users.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2025 · Abu Dhabi</span>
+                  <h4 class="timeline__title">Khalifa University — Visiting Student Researcher</h4>
+                  <p>
+                    Led the end-to-end design of a low-cost prosthetic hand: anatomical CAD, additive manufacturing in PLA, tendon actuation, and
+                    photonic-based tactile mapping ready for future myoelectric cues.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2023-2024 · Abu Dhabi</span>
+                  <h4 class="timeline__title">Philips — Biomedical Electronic Engineer</h4>
+                  <p>
+                    Maintained MRI, X-ray, and ultrasound ecosystems while delivering empathy-led training rituals for clinicians and technicians.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2024 · MBZUAI</span>
+                  <h4 class="timeline__title">MBZUAI — AI Trainee</h4>
+                  <p>
+                    Prototyped the Bahar chatbot atop JAIS, unifying Next.js surfaces, Flask orchestration, and PyTorch fine-tuning for bilingual
+                    interactions.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2023 · SSMC</span>
+                  <h4 class="timeline__title">Sheikh Shakhbout Medical City — Biomedical Intern</h4>
+                  <p>
+                    Delivered home-care device support, meticulous CM and PPM logs, and responsive patient interventions inside high-trust
+                    environments.
+                  </p>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tab-panel" id="panel-education" role="tabpanel" aria-labelledby="tab-education" hidden>
+              <div class="panel-header">
+                <h3>Education milestones</h3>
+                <p>
+                  A choreography of robotics, pedagogy, and design research. Each program seeded specific rituals that now live inside my studio.
+                </p>
+              </div>
+              <ul class="timeline">
+                <li class="timeline__item">
+                  <span class="timeline__meta">2024-present · MBZUAI</span>
+                  <h4 class="timeline__title">M.S. Robotics</h4>
+                  <p>
+                    Courses in robotic vision, localization, reinforcement learning, and ROS. Research supervised by Prof. Yoshihiko Nakamura on
+                    humanoid interaction and assistive actuation.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2024-2025 · Abu Dhabi University</span>
+                  <h4 class="timeline__title">Postgraduate Diploma in Teaching (Hons)</h4>
+                  <p>
+                    Built inclusive classroom frameworks across special education, educational technology, and STEM pedagogy to keep technical work
+                    human-faced.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2023-2024 · Udacity</span>
+                  <h4 class="timeline__title">UX Nanodegree</h4>
+                  <p>
+                    Advanced research synthesis, low-to-high fidelity prototyping, and living case studies that now feed into interface sketches.
+                  </p>
+                </li>
+                <li class="timeline__item">
+                  <span class="timeline__meta">2019-2023 · Abu Dhabi University</span>
+                  <h4 class="timeline__title">B.S. Biomedical Engineering (Hons)</h4>
+                  <p>
+                    Grounding in control systems, biosignal processing, medical imaging, and device design under Prof. Mohammad Ghazal.
+                  </p>
+                </li>
+              </ul>
+            </article>
+
+            <article class="tab-panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
+              <div class="panel-header">
+                <h3>Toolkit atlas</h3>
+                <p>
+                  A blend of engineering stacks, creative software, and research instruments tuned for rapid prototyping and storytelling.
+                </p>
+              </div>
+              <div class="skill-grid">
+                <div class="skill-block">
+                  <h4>Programming</h4>
+                  <p>Python, C++, MATLAB, Bash, ROS, Arduino, Raspberry Pi</p>
+                </div>
+                <div class="skill-block">
+                  <h4>Web &amp; interface</h4>
+                  <p>HTML, CSS, JavaScript, React, Next.js, Angular, Flask</p>
+                </div>
+                <div class="skill-block">
+                  <h4>Simulation</h4>
+                  <p>Gazebo, RViz, MuJoCo, OpenAI Gym, PyTorch, OpenCV</p>
+                </div>
+                <div class="skill-block">
+                  <h4>Design systems</h4>
+                  <p>Figma, Miro, App Designer, UML tools, speculative storyboard kits</p>
+                </div>
+                <div class="skill-block">
+                  <h4>Ops &amp; tooling</h4>
+                  <p>Docker, GitHub Actions, Git, Linux, Jira, LaTeX</p>
+                </div>
+                <div class="skill-block">
+                  <h4>Research rituals</h4>
+                  <p>Human-robot studies, motion capture, usability labs, participatory fieldwork</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="tab-panel" id="panel-awards" role="tabpanel" aria-labelledby="tab-awards" hidden>
+              <div class="panel-header">
+                <h3>Accolades &amp; catalysts</h3>
+                <p>
+                  Recognitions that keep me iterating with gratitude, ranging from ROS camps to national innovation awards.
+                </p>
+              </div>
+              <div class="panel-grid">
+                <div class="panel-block">
+                  <h4>Selected highlights</h4>
+                  <p>
+                    Code Foundation for ROS (2024), ROS Summer Camp Dubai (2024), Project Management Foundations (2024), Excellence &amp; Creative
+                    Engineering Award by Society of Engineers UAE (2024).
+                  </p>
+                </div>
+                <div class="panel-block">
+                  <h4>Competition stage</h4>
+                  <p>
+                    Top 10 final Wyakom Initiative (2023), 2nd and 3rd place finishes at the 10th Undergraduate Research Conference (Biomedical),
+                    1st place NYU Biochip Hackathon.
+                  </p>
+                </div>
+                <div class="panel-block">
+                  <h4>Community</h4>
+                  <p>
+                    Mentor at Engineering &amp; Sustainability Hackathons, academic peer tutor in math, chemistry, AI, and engineering foundations
+                    from 2019 to 2022.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="tabs" id="projects">
+          <div class="section-heading">
+            <strong>Systems portfolio</strong>
+            <span>Blueprint cards from the GitHub archive</span>
+          </div>
+          <div class="project-gallery">
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">Arduino Ventilator System</h3>
+              <p class="project-card__summary">
+                A portable ventilator concept using an AMBU bag, servo choreography, and Arduino Uno control to simulate life-saving airflow when
+                critical care equipment is scarce.
+              </p>
+              <ul class="project-card__points">
+                <li>Servo-driven compression with adjustable cadence and tidal volume presets.</li>
+                <li>Field-ready chassis with printable fixtures, alarms, and build manual.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">C++</span>
+                <span class="badge">Arduino</span>
+                <span class="badge">Medical device</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/Arduino-Ventilator-System"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">Telemedicine Stethoscope</h3>
+              <p class="project-card__summary">
+                Bachelor thesis reimagining auscultation through WebRTC streaming, pose-guided robotics, and clinical-grade feedback loops for
+                remote physicians.
+              </p>
+              <ul class="project-card__points">
+                <li>React interface with latency-sensitive audio and video for Dobot arms.</li>
+                <li>PoseNet and MoveNet guidance reducing placement error to 4.27 mm.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">TypeScript</span>
+                <span class="badge">WebRTC</span>
+                <span class="badge">TensorFlow</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/BSc-Thesis-Telemedicine-Stethoscope"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2024</span>
+              </div>
+              <h3 class="project-card__title">Bahar Conversational Atlas</h3>
+              <p class="project-card__summary">
+                A bilingual chatbot experience powered by JAIS, designed during the Emirati AI Boot Camp to make large language models legible and
+                culturally grounded.
+              </p>
+              <ul class="project-card__points">
+                <li>Next.js front end with story-driven conversation flows and session replay.</li>
+                <li>Flask API orchestration with PyTorch fine-tuning and Dockerized delivery.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">JavaScript</span>
+                <span class="badge">Next.js</span>
+                <span class="badge">PyTorch</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/bahar"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">IoT Syringe Pump</h3>
+              <p class="project-card__summary">
+                Remote dosage control through Raspberry Pi, stepper motors, and a web console, enabling precise infusion management for caregivers.
+              </p>
+              <ul class="project-card__points">
+                <li>Python control suite with calibration scripts and live dosage telemetry.</li>
+                <li>HTML dashboard for scheduling, emergency stop, and user acknowledgements.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">Python</span>
+                <span class="badge">IoT</span>
+                <span class="badge">Healthcare</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/IoT-Syringe-Pump"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">MRI Volume Explorer</h3>
+              <p class="project-card__summary">
+                MATLAB App Designer interface for interactive visualization and renderings of volumetric MRI data, published in Applied Technology
+                in Medical Sciences.
+              </p>
+              <ul class="project-card__points">
+                <li>MIP, MinIP, isosurface rendering, and slice planes for rapid diagnostics.</li>
+                <li>Workflow-friendly export tools for clinicians, researchers, and students.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">MATLAB</span>
+                <span class="badge">Medical imaging</span>
+                <span class="badge">App Designer</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/GUI-for-the-Visualization-and-Volume-Rendering-of-MRI-Data"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2025</span>
+              </div>
+              <h3 class="project-card__title">My Mobile Robot</h3>
+              <p class="project-card__summary">
+                ROS 2 simulation suite fusing teleoperation, SLAM mapping, Nav2 autonomy, and OpenCV perception into a single learning environment.
+              </p>
+              <ul class="project-card__points">
+                <li>Gazebo worlds with configurable missions and autonomy scenarios.</li>
+                <li>Vision pipelines for object detection and camera calibration routines.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">Python</span>
+                <span class="badge">ROS 2</span>
+                <span class="badge">Robotics</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/My-Mobile-Robot"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__header">
+                <span>System sketch</span>
+                <span>2024</span>
+              </div>
+              <h3 class="project-card__title">Wearable IoT for Alzheimer Care</h3>
+              <p class="project-card__summary">
+                Smart hand-band concept blending GPS, fall detection, emergency alerts, and biomarker logging for caregivers supporting
+                Alzheimer patients.
+              </p>
+              <ul class="project-card__points">
+                <li>Firebase-backed telemetry and caregiver notifications.</li>
+                <li>Sensor fusion for location, motion, and distress patterns.</li>
+              </ul>
+              <div class="project-card__tags">
+                <span class="badge">C++</span>
+                <span class="badge">IoT</span>
+                <span class="badge">Assistive tech</span>
+              </div>
+              <a
+                class="project-card__cta"
+                href="https://github.com/Noora-Alhajeri/Wearable-IoT-Based-Device-for-Critical-Care-Alzheimer-s-Patients"
+                target="_blank"
+                rel="noreferrer noopener"
+                >Open repository</a
+              >
+            </article>
           </div>
         </section>
 
@@ -746,10 +2069,10 @@
         </section>
 
         <section class="contact" id="contact">
-          <strong>Let’s shape luminous tools together.</strong>
+          <strong>Let's shape luminous tools together.</strong>
           <a href="mailto:n.s3eedalhajeri@gmail.com">n.s3eedalhajeri@gmail.com</a>
-          <a href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">linkedin — nsh019</a>
-          <a href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">github — noora-alhajeri</a>
+          <a href="https://linkedin.com/in/nsh019" target="_blank" rel="noreferrer noopener">linkedin &mdash; nsh019</a>
+          <a href="https://github.com/Noora-Alhajeri" target="_blank" rel="noreferrer noopener">github &mdash; noora-alhajeri</a>
         </section>
       </main>
 
@@ -806,6 +2129,50 @@
         themeMedia.addEventListener("change", handlePrefChange);
       } else if (typeof themeMedia.addListener === "function") {
         themeMedia.addListener(handlePrefChange);
+      }
+
+      const tabButtons = Array.from(document.querySelectorAll(".tab-button"));
+      const tabPanels = Array.from(document.querySelectorAll(".tab-panel"));
+
+      const activateTab = (tabId) => {
+        tabButtons.forEach((button) => {
+          const isActive = button.dataset.tab === tabId;
+          button.setAttribute("aria-selected", String(isActive));
+        });
+
+        tabPanels.forEach((panel) => {
+          if (panel.id === `panel-${tabId}`) {
+            panel.removeAttribute("hidden");
+          } else {
+            panel.setAttribute("hidden", "true");
+          }
+        });
+      };
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activateTab(button.dataset.tab);
+        });
+
+        button.addEventListener("keydown", (event) => {
+          const currentIndex = tabButtons.indexOf(button);
+          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+            event.preventDefault();
+            const next = tabButtons[(currentIndex + 1) % tabButtons.length];
+            activateTab(next.dataset.tab);
+            next.focus();
+          } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+            event.preventDefault();
+            const prev = tabButtons[(currentIndex - 1 + tabButtons.length) % tabButtons.length];
+            activateTab(prev.dataset.tab);
+            prev.focus();
+          }
+        });
+      });
+
+      const defaultTab = tabButtons.find((button) => button.getAttribute("aria-selected") === "true");
+      if (defaultTab) {
+        activateTab(defaultTab.dataset.tab);
       }
 
       const progress = document.createElement("div");
