@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,6 +12,22 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function () {
+        const themeKey = "noora-theme";
+        const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+        let theme = prefersLight ? "light" : "dark";
+        try {
+          const stored = window.localStorage.getItem(themeKey);
+          if (stored === "light" || stored === "dark") {
+            theme = stored;
+          }
+        } catch (error) {
+          // Ignore access issues; fall back to media preference.
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
     <style>
       :root {
         --page-bg: #050505;
@@ -21,9 +37,49 @@
         --accent: #2a64ff;
         --accent-soft: rgba(42, 100, 255, 0.15);
         --grid-line: rgba(255, 255, 255, 0.08);
-        --grid-size: clamp(72px, 12vw, 140px);
+        --surface-sheen: rgba(255, 255, 255, 0.03);
+        --outline: rgba(255, 255, 255, 0.1);
+        --outline-strong: rgba(255, 255, 255, 0.35);
+        --outline-heavy: rgba(255, 255, 255, 0.45);
+        --outline-alt: rgba(255, 255, 255, 0.24);
+        --overlay: rgba(0, 0, 0, 0.55);
+        --overlay-soft: rgba(0, 0, 0, 0.1);
+        --overlay-strong: rgba(0, 0, 0, 0.65);
+        --glyph-color: rgba(255, 255, 255, 0.07);
+        --ink-soft: rgba(245, 245, 245, 0.84);
+        --ink-secondary: rgba(245, 245, 245, 0.82);
+        --contact-link: rgba(245, 245, 245, 0.9);
+        --caption-bg: rgba(0, 0, 0, 0.65);
+        --cta-hover-ink: #050505;
         --max-width: 1380px;
+        --grid-size: clamp(72px, 12vw, 140px);
         --transition: 220ms ease;
+        color-scheme: dark;
+      }
+
+      html[data-theme="light"] {
+        --page-bg: #f6f6f3;
+        --frame-bg: #ffffff;
+        --ink: #0a0a0a;
+        --muted: #4a4a4a;
+        --accent: #2740ff;
+        --accent-soft: rgba(39, 64, 255, 0.12);
+        --grid-line: rgba(0, 0, 0, 0.07);
+        --surface-sheen: rgba(0, 0, 0, 0.05);
+        --outline: rgba(0, 0, 0, 0.08);
+        --outline-strong: rgba(0, 0, 0, 0.28);
+        --outline-heavy: rgba(0, 0, 0, 0.42);
+        --outline-alt: rgba(0, 0, 0, 0.18);
+        --overlay: rgba(255, 255, 255, 0.82);
+        --overlay-soft: rgba(255, 255, 255, 0.55);
+        --overlay-strong: rgba(255, 255, 255, 0.9);
+        --glyph-color: rgba(0, 0, 0, 0.06);
+        --ink-soft: rgba(32, 32, 32, 0.78);
+        --ink-secondary: rgba(38, 38, 38, 0.72);
+        --contact-link: rgba(32, 32, 32, 0.82);
+        --caption-bg: rgba(255, 255, 255, 0.86);
+        --cta-hover-ink: #f6f6f3;
+        color-scheme: light;
       }
 
       *,
@@ -35,10 +91,14 @@
       html,
       body {
         margin: 0;
+      }
+
+      body {
         background: var(--page-bg);
         color: var(--ink);
         font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         letter-spacing: 0.02em;
+        transition: background-color 0.4s ease, color 0.4s ease;
       }
 
       img {
@@ -62,6 +122,11 @@
         z-index: 10;
       }
 
+      html[data-theme="light"] .grain {
+        mix-blend-mode: multiply;
+        opacity: 0.28;
+      }
+
       .page {
         position: relative;
         max-width: var(--max-width);
@@ -71,7 +136,7 @@
 
       .top-bar {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: 24px;
         align-items: center;
         text-transform: uppercase;
@@ -94,8 +159,14 @@
         background: var(--accent);
       }
 
+      .top-bar__actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(16px, 4vw, 32px);
+      }
+
       .top-bar nav {
-        justify-self: end;
         display: flex;
         gap: clamp(16px, 4vw, 36px);
       }
@@ -124,6 +195,41 @@
         transform-origin: left;
       }
 
+      .theme-toggle {
+        border: 1px solid var(--outline-strong);
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        padding: 10px 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: background var(--transition), color var(--transition), border-color var(--transition);
+      }
+
+      .theme-toggle::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: currentColor;
+        transition: transform var(--transition);
+      }
+
+      html[data-theme="light"] .theme-toggle::before {
+        transform: translateX(6px);
+      }
+
+      .theme-toggle:hover,
+      .theme-toggle:focus-visible {
+        background: var(--accent);
+        color: var(--cta-hover-ink);
+        border-color: transparent;
+      }
+
       .hero {
         position: relative;
         display: grid;
@@ -135,6 +241,7 @@
         background: var(--frame-bg);
         overflow: hidden;
         border-radius: clamp(32px, 6vw, 72px);
+        transition: background var(--transition), outline-color var(--transition);
       }
 
       .hero::before,
@@ -153,7 +260,7 @@
       }
 
       .hero::after {
-        background: linear-gradient(120deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.1) 70%);
+        background: linear-gradient(120deg, var(--overlay-strong) 0%, var(--overlay-soft) 70%);
         z-index: 1;
       }
 
@@ -162,7 +269,8 @@
         z-index: 2;
         overflow: hidden;
         border-radius: clamp(28px, 5vw, 56px);
-        outline: 1px solid rgba(255, 255, 255, 0.14);
+        outline: 1px solid var(--outline-strong);
+        transition: outline-color var(--transition);
       }
 
       .hero__media::before {
@@ -171,11 +279,11 @@
         top: 24px;
         left: 24px;
         padding: 6px 12px;
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        border: 1px solid var(--outline-strong);
         font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 0.26em;
-        background: rgba(0, 0, 0, 0.55);
+        background: var(--overlay);
       }
 
       .hero__media img {
@@ -199,9 +307,10 @@
         font-family: "Playfair Display", serif;
         font-weight: 600;
         text-transform: lowercase;
-        color: rgba(255, 255, 255, 0.07);
+        color: var(--glyph-color);
         letter-spacing: 0.08em;
         white-space: nowrap;
+        transition: color var(--transition);
       }
 
       .hero__content {
@@ -234,7 +343,7 @@
         display: grid;
         gap: 10px;
         font-size: 1rem;
-        color: rgba(245, 245, 245, 0.84);
+        color: var(--ink-soft);
       }
 
       .hero__meta strong {
@@ -252,14 +361,15 @@
         text-transform: uppercase;
         letter-spacing: 0.22em;
         padding: 14px 24px;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        transition: background var(--transition), color var(--transition);
+        border: 1px solid var(--outline-strong);
+        transition: background var(--transition), color var(--transition), border-color var(--transition);
       }
 
       .hero__cta:hover,
       .hero__cta:focus-visible {
         background: var(--accent);
-        color: #050505;
+        color: var(--cta-hover-ink);
+        border-color: transparent;
       }
 
       main {
@@ -290,10 +400,10 @@
       }
 
       .story {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+        background: linear-gradient(135deg, var(--surface-sheen) 0%, transparent 70%);
         border-radius: clamp(28px, 5vw, 48px);
         padding: clamp(32px, 6vw, 80px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--outline);
       }
 
       .story__grid {
@@ -313,7 +423,7 @@
         display: grid;
         gap: 18px;
         font-size: 1rem;
-        color: rgba(245, 245, 245, 0.82);
+        color: var(--ink-secondary);
       }
 
       .story__aside {
@@ -328,8 +438,8 @@
       .story__aside span {
         display: inline-block;
         padding: 8px 12px;
-        border: 1px solid rgba(255, 255, 255, 0.24);
-        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--outline-alt);
+        background: var(--overlay);
       }
 
       .cities {
@@ -348,7 +458,7 @@
         align-items: center;
         gap: 24px;
         padding-block: clamp(20px, 3vw, 36px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid var(--outline);
       }
 
       .cities__name {
@@ -366,14 +476,10 @@
         color: var(--muted);
       }
 
-      .cities__row:nth-child(odd) .cities__name {
-        color: rgba(255, 255, 255, 0.82);
-      }
-
       .cities__row:nth-child(even) .cities__name {
         color: transparent;
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
-        text-stroke: 1px rgba(255, 255, 255, 0.45);
+        -webkit-text-stroke: 1px var(--outline-heavy);
+        text-stroke: 1px var(--outline-heavy);
       }
 
       .field-notes {
@@ -390,7 +496,8 @@
         position: relative;
         border-radius: 22px;
         overflow: hidden;
-        outline: 1px solid rgba(255, 255, 255, 0.12);
+        outline: 1px solid var(--outline);
+        transition: outline-color var(--transition);
       }
 
       .field-note img {
@@ -410,7 +517,7 @@
         left: 16px;
         bottom: 16px;
         padding: 6px 12px;
-        background: rgba(0, 0, 0, 0.65);
+        background: var(--caption-bg);
         font-size: 0.72rem;
         letter-spacing: 0.22em;
         text-transform: uppercase;
@@ -421,8 +528,8 @@
         gap: 20px;
         padding: clamp(40px, 6vw, 72px);
         border-radius: clamp(28px, 5vw, 48px);
-        background: linear-gradient(128deg, rgba(42, 100, 255, 0.16), rgba(255, 255, 255, 0));
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: linear-gradient(128deg, var(--accent-soft), rgba(255, 255, 255, 0));
+        border: 1px solid var(--outline-strong);
         text-transform: uppercase;
         letter-spacing: 0.24em;
       }
@@ -434,7 +541,7 @@
 
       .contact a {
         font-size: 0.86rem;
-        color: rgba(245, 245, 245, 0.9);
+        color: var(--contact-link);
       }
 
       footer {
@@ -457,16 +564,22 @@
         width: 0%;
         background: var(--accent);
         z-index: 100;
+        transition: background var(--transition);
       }
 
       @media (max-width: 720px) {
         .top-bar {
           grid-template-columns: 1fr;
-          text-align: left;
+          gap: 16px;
+        }
+
+        .top-bar__actions {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 14px;
         }
 
         .top-bar nav {
-          justify-self: start;
           flex-wrap: wrap;
         }
 
@@ -497,12 +610,15 @@
     <div class="page">
       <header class="top-bar">
         <div class="top-bar__brand">Noora Alhajeri Studio</div>
-        <nav>
-          <a href="#practice">Practice</a>
-          <a href="#story">Story</a>
-          <a href="#field-notes">Field Notes</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div class="top-bar__actions">
+          <nav>
+            <a href="#practice">Practice</a>
+            <a href="#story">Story</a>
+            <a href="#field-notes">Field Notes</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <button type="button" class="theme-toggle" aria-label="Activate light mode">Light Mode</button>
+        </div>
       </header>
 
       <section class="hero" id="practice">
@@ -644,9 +760,52 @@
     </div>
 
     <script>
-      const yearEl = document.getElementById("year");
-      if (yearEl) {
-        yearEl.textContent = String(new Date().getFullYear());
+      const root = document.documentElement;
+      const themeKey = "noora-theme";
+      const toggle = document.querySelector(".theme-toggle");
+      const themeMedia = window.matchMedia("(prefers-color-scheme: dark)");
+
+      const applyTheme = (theme) => {
+        const nextTheme = theme === "light" ? "light" : "dark";
+        root.setAttribute("data-theme", nextTheme);
+        if (toggle) {
+          const opposite = nextTheme === "dark" ? "light" : "dark";
+          toggle.textContent = `${opposite.charAt(0).toUpperCase()}${opposite.slice(1)} Mode`;
+          toggle.setAttribute("aria-label", `Activate ${opposite} mode`);
+        }
+      };
+
+      let activeTheme = root.getAttribute("data-theme") || "dark";
+      applyTheme(activeTheme);
+
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          activeTheme = activeTheme === "dark" ? "light" : "dark";
+          applyTheme(activeTheme);
+          try {
+            window.localStorage.setItem(themeKey, activeTheme);
+          } catch (error) {
+            // Ignore storage write issues.
+          }
+        });
+      }
+
+      const handlePrefChange = (event) => {
+        try {
+          if (window.localStorage.getItem(themeKey)) {
+            return;
+          }
+        } catch (error) {
+          // If storage unavailable, fall back to media query.
+        }
+        activeTheme = event.matches ? "dark" : "light";
+        applyTheme(activeTheme);
+      };
+
+      if (typeof themeMedia.addEventListener === "function") {
+        themeMedia.addEventListener("change", handlePrefChange);
+      } else if (typeof themeMedia.addListener === "function") {
+        themeMedia.addListener(handlePrefChange);
       }
 
       const progress = document.createElement("div");
@@ -663,6 +822,11 @@
 
       document.addEventListener("scroll", updateProgress, { passive: true });
       updateProgress();
+
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = String(new Date().getFullYear());
+      }
     </script>
   </body>
 </html>
