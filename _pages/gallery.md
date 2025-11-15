@@ -4,14 +4,18 @@ title: Gallery
 permalink: /gallery/
 ---
 
-# 🎨 Sketches & Visual Notes
+# Visual Diary
 
-A visual diary of ideas, mechanical sketches, and conceptual art behind my robotics research.
-
+### Photography
 {% for image in site.static_files %}
-  {% if image.path contains '/images/' %}
-  <div style="margin-bottom:1em;">
-    <img src="{{ site.baseurl }}{{ image.path }}" alt="{{ image.name }}" style="max-width:100%; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
-  </div>
+  {% if image.path contains '/assets/photos/' %}
+  <img src="{{ image.path }}" style="width:100%;border-radius:12px;margin-bottom:1rem;">
+  {% endif %}
+{% endfor %}
+
+### Sketches
+{% for art in site.static_files %}
+  {% if art.path contains '/assets/sketches/' %}
+  <img src="{{ art.path }}" style="width:100%;border-radius:12px;margin-bottom:1rem;">
   {% endif %}
 {% endfor %}
