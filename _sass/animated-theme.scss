@@ -1,0 +1,118 @@
+// =====================================
+//  Animated Sketch Theme for Noora
+// =====================================
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+$paper: #f7f3ea;
+$ink: #1c1c1c;
+$accent: #b89a68;
+
+body {
+    background-color: $paper;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    color: $ink;
+    font-family: 'Work Sans', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+    animation: fadein 1.2s ease;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Kalam', cursive;
+    color: $ink;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+h1::after,
+h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background-color: $accent;
+    animation: drawLine 1s ease-in-out;
+}
+
+@keyframes drawLine {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+a {
+    color: $accent;
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: 0.3s ease;
+
+    &:hover {
+        border-bottom-color: $accent;
+    }
+}
+
+nav {
+    text-align: center;
+    margin: 2em 0;
+}
+
+nav a {
+    font-family: 'Kalam', cursive;
+    font-size: 1.1em;
+    margin: 0 1em;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: $accent;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.section-divider {
+    width: 90%;
+    margin: 3em auto;
+    border-top: 2px dashed $accent;
+    opacity: 0.4;
+    animation: dashMove 4s linear infinite;
+}
+
+@keyframes dashMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 1000px 0;
+    }
+}

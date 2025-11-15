@@ -1,6 +1,6 @@
-<header style="text-align:center; margin: 2em 0;">
-    <h1 style="font-family:'Kalam',cursive; font-size:2.5em;">Noora Saeed Alhajeri</h1>
-    <p style="font-family:'Work Sans',sans-serif;">Creative Technologist · Robotics Researcher</p>
+<header style="text-align:center; margin-top:2em;">
+    <h1 class="sketch-title">Noora Saeed Alhajeri</h1>
+    <p style="font-family:'Work Sans',sans-serif; color:#444;">Creative Technologist · Robotics Researcher</p>
     <nav>
         <a href="{{ site.baseurl }}/">Home</a>
         <a href="{{ site.baseurl }}/about/">About</a>
@@ -8,4 +8,16 @@
         <a href="{{ site.baseurl }}/publications/">Publications</a>
         <a href="{{ site.baseurl }}/gallery/">Gallery</a>
     </nav>
+    <hr class="section-divider">
 </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const title = document.querySelector('.sketch-title');
+        title.style.opacity = 0;
+        setTimeout(() => {
+            title.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }],
+                { duration: 1200, easing: 'ease-out', fill: 'forwards' });
+        }, 300);
+    });
+</script>
