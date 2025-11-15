@@ -4,18 +4,21 @@ title: About
 permalink: /about/
 ---
 
-# 👋 Noora Saeed Alhajeri  
-**Creative Technologist · Robotics Researcher · Biomedical Engineer**
+# About · 研究と創造  
+MSc Robotics @ MBZUAI · Researcher of Human-Robot Interaction & Cognitive Motion
 
-MSc Robotics student at **Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)**  
-Researching **Humanoid Motion Control, HRI, Cognitive Robotics, and Neuromuscular Modeling** under **Prof. Yoshihiko Nakamura**.  
+I explore **humanoid motion control, neuromuscular modeling, and artistic robotics** — where creativity meets control theory.  
+My research is supervised by **Prof. Yoshihiko Nakamura** and bridges **cognitive science** and **aesthetic movement**.
 
-My work bridges **art and science** — from building adaptive prosthetic systems and imitation learning models to sketch-inspired digital interfaces that visualize human–robot intelligence.
+---
 
-### 🎓 Education
-- **MSc Robotics**, MBZUAI (2024–Present)  
-- **BSc Biomedical Engineering**, Abu Dhabi University (Hons, 2023)  
-- **Postgraduate in Teaching**, Abu Dhabi University (2024–Present)
+### Research & Interests  
+- Humanoid robotics, imitation learning  
+- Human-robot interaction & affective systems  
+- Artistic prosthetics and bio-inspired design  
 
-### 🧠 Research Focus
-Humanoid Robotics · Cognitive Modeling · HRI · Assistive Technology · AI-driven Motion Learning
+---
+
+### Education  
+MBZUAI · MSc Robotics · 2024–  
+Abu Dhabi University · BSc Biomedical Engineering (Hons) · 2023
