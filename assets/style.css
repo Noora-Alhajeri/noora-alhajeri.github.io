@@ -1,78 +1,125 @@
+/* ========== Global Theme ========== */
 body {
     margin: 0;
     background: #f8f6f2 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
     color: #1a1a1a;
     font-family: 'Noto Serif JP', serif;
     line-height: 1.8;
+    scroll-behavior: smooth;
 }
 
 h1,
 h2,
 h3 {
     font-family: 'Kalam', cursive;
-    margin-bottom: .5em;
+    color: #1a1a1a;
 }
 
 a {
     color: #a87c4f;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 a:hover {
+    color: #7b5c32;
     border-bottom: 1px dashed #a87c4f;
 }
 
+/* ========== Header ========== */
 .hero {
     text-align: center;
-    padding: 3rem 1rem 2rem;
+    padding: 4rem 1rem 2rem;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.hero h1 {
+    font-size: 2.6rem;
+    margin-bottom: 0.3em;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    margin-bottom: 1.5em;
+    color: #444;
+    font-size: 1.05rem;
 }
 
 nav a {
     margin: 0 1em;
     font-family: 'Kalam', cursive;
     position: relative;
+    font-size: 1.05rem;
 }
 
 nav a::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -3px;
+    bottom: -4px;
     width: 0;
     height: 2px;
     background: #a87c4f;
-    transition: .3s;
+    transition: width 0.3s ease;
 }
 
 nav a:hover::after {
     width: 100%;
 }
 
+/* ========== Section Cards ========== */
 section {
-    max-width: 900px;
-    margin: 4rem auto;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 1em;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    max-width: 950px;
+    margin: 5rem auto;
+    padding: 2.5rem 3rem;
+    background: #fffaf6;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
+section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== Divider ========== */
+.divider {
+    width: 80%;
+    margin: 4rem auto;
+    height: 2px;
+    background: linear-gradient(to right, #a87c4f 40%, transparent 100%);
+    opacity: 0.5;
+}
+
+/* ========== Gallery ========== */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
 }
 
 .gallery img {
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.4s ease;
 }
 
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* ========== Scroll Animation ========== */
 [data-scroll] {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s ease;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 [data-scroll].visible {
@@ -80,8 +127,32 @@ section {
     transform: none;
 }
 
+/* ========== CV Two-Column Section ========== */
+.cv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.cv h3 {
+    border-left: 4px solid #a87c4f;
+    padding-left: 10px;
+    margin-top: 0;
+}
+
+.cv ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cv li {
+    margin-bottom: 0.6em;
+}
+
+/* ========== Footer ========== */
 footer {
     text-align: center;
+    padding: 3rem 0 2rem;
     color: #777;
-    margin: 3rem 0;
+    font-size: 0.9rem;
 }
