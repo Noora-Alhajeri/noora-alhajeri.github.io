@@ -1,23 +1,14 @@
-<header style="text-align:center; margin-top:2em;">
-    <h1 class="sketch-title">Noora Saeed Alhajeri</h1>
-    <p style="font-family:'Work Sans',sans-serif; color:#444;">Creative Technologist Â· Robotics Researcher</p>
-    <nav>
+<header class="site-header">
+    <div class="site-header__identity">
+        <p class="eyebrow">Noora Saeed Alhajeri</p>
+        <h1>Designer · Robotics Researcher</h1>
+        <p>Crafting expressive machines with a studio approach to research.</p>
+    </div>
+    <nav class="site-nav">
         <a href="{{ site.baseurl }}/">Home</a>
         <a href="{{ site.baseurl }}/about/">About</a>
         <a href="{{ site.baseurl }}/projects/">Projects</a>
         <a href="{{ site.baseurl }}/publications/">Publications</a>
         <a href="{{ site.baseurl }}/gallery/">Gallery</a>
     </nav>
-    <hr class="section-divider">
 </header>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const title = document.querySelector('.sketch-title');
-        title.style.opacity = 0;
-        setTimeout(() => {
-            title.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }],
-                { duration: 1200, easing: 'ease-out', fill: 'forwards' });
-        }, 300);
-    });
-</script>

@@ -1,3 +1,28 @@
+title: "Noora Saeed Alhajeri"
+description: "Creative Technologist · Robotics Researcher · Designer"
+baseurl: ""
+url: "https://noora-alhajeri.github.io"
+
+# Include the custom folders
+include:
+  - _pages
+  - _includes
+  - _sass
+  - assets
+
+# Markdown & build options
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
 sass:
   sass_dir: _sass
   style: compressed
+
+# Default layout
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
