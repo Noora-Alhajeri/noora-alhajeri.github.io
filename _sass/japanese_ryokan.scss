@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Zen+Maru+Gothic:wght@400;700&display=swap');
+
+$paper: #f8f6f2;
+$ink: #1a1a1a;
+$accent: #a87c4f;
+
+body {
+    background: $paper url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    color: $ink;
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.9;
+    letter-spacing: 0.3px;
+    margin: 0;
+    overflow-x: hidden;
+    animation: fadein 1.2s ease;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: $ink;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 6rem auto;
+    padding: 0 2rem;
+}
+
+.hero__content {
+    align-self: center;
+}
+
+.hero__panel {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.section {
+    max-width: 1000px;
+    margin: 5rem auto;
+    padding: 0 2rem;
+}
+
+.section h2 {
+    border-left: 3px solid $accent;
+    padding-left: .6rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: .7em 1.4em;
+    border-radius: .6em;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    transition: .3s ease;
+    text-decoration: none;
+}
+
+.btn--primary {
+    background: $accent;
+    color: #fff;
+
+    &:hover {
+        background: darken($accent, 10%);
+    }
+}
+
+.btn--ghost {
+    border: 1.5px solid $accent;
+    color: $ink;
+
+    &:hover {
+        background: $accent;
+        color: #fff;
+    }
+}
+
+.highlight {
+    background: rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 4rem 2rem;
+}
+
+.footer-cta {
+    text-align: center;
+    margin: 6rem auto;
+}
+
+.footer-cta__actions a {
+    margin: 0 .5rem;
+}

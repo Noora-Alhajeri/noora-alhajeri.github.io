@@ -3,14 +3,15 @@ description: "Creative Technologist · Robotics Researcher · Designer"
 baseurl: ""
 url: "https://noora-alhajeri.github.io"
 
-# Include the custom folders
+# folders to include in the build
 include:
   - _pages
   - _includes
+  - _layouts
   - _sass
   - assets
 
-# Markdown & build options
+# markdown & build options
 markdown: kramdown
 highlighter: rouge
 theme: minima
@@ -19,10 +20,20 @@ sass:
   sass_dir: _sass
   style: compressed
 
-# Default layout
+# defaults
 defaults:
   - scope:
       path: ""
       type: pages
     values:
       layout: default
+
+# site metadata for footer and SEO
+author:
+  name: "Noora Saeed Alhajeri"
+  email: "reach.noora@gmail.com"
+  github: "Noora-Alhajeri"
+  linkedin: "nsh019"
+  scholar: "https://scholar.google.com/citations?user=gtA5QBcAAAAJ"
+
+timezone: Asia/Dubai

@@ -1,20 +1,32 @@
+﻿// =====================================
+//  Neo Sketch Theme for Noora
 // =====================================
-//  Animated Sketch Theme for Noora
-// =====================================
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&family=Space+Grotesk:wght@400;500;600&display=swap');
 
-$paper: #f7f3ea;
-$ink: #1c1c1c;
-$accent: #b89a68;
+$paper: #f4e9d6;
+$night: #0f0e0d;
+$ink: #1e1c1a;
+$accent: #d65f3c;
+$accent-light: #f3b750;
 
 body {
-    background-color: $paper;
-    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    background: radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 60%),
+        linear-gradient(120deg, #f7f0e3, #f0e2cc);
     color: $ink;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Space Grotesk', 'Work Sans', sans-serif;
+    line-height: 1.8;
+    margin: 0;
     overflow-x: hidden;
-    line-height: 1.7;
     animation: fadein 1.2s ease;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    opacity: 0.08;
+    pointer-events: none;
 }
 
 @keyframes fadein {
@@ -31,88 +43,26 @@ body {
 
 h1,
 h2,
-h3 {
-    font-family: 'Kalam', cursive;
-    color: $ink;
-    position: relative;
-    display: inline-block;
-    margin-bottom: 0.5em;
-}
-
-h1::after,
-h2::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 100%;
-    height: 2px;
-    background-color: $accent;
-    animation: drawLine 1s ease-in-out;
-}
-
-@keyframes drawLine {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
+h3,
+h4 {
+    font-family: 'Zen Antique Soft', 'Kalam', cursive;
+    color: $night;
+    font-weight: 400;
+    letter-spacing: 0.04em;
 }
 
 a {
     color: $accent;
     text-decoration: none;
-    border-bottom: 1px dashed transparent;
-    transition: 0.3s ease;
+    transition: color 0.3s ease;
 
     &:hover {
-        border-bottom-color: $accent;
+        color: lighten($accent, 8%);
     }
-}
-
-nav {
-    text-align: center;
-    margin: 2em 0;
-}
-
-nav a {
-    font-family: 'Kalam', cursive;
-    font-size: 1.1em;
-    margin: 0 1em;
-    position: relative;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background: $accent;
-    transition: 0.3s;
-}
-
-nav a:hover::after {
-    width: 100%;
 }
 
 .section-divider {
     width: 90%;
-    margin: 3em auto;
-    border-top: 2px dashed $accent;
-    opacity: 0.4;
-    animation: dashMove 4s linear infinite;
-}
-
-@keyframes dashMove {
-    from {
-        background-position: 0 0;
-    }
-
-    to {
-        background-position: 1000px 0;
-    }
+    margin: 3rem auto;
+    border-top: 1px solid rgba($ink, 0.15);
 }
