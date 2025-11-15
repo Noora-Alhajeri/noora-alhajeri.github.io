@@ -1,27 +1,26 @@
 ﻿@import "animated-theme";
-@import "japanese_ryokan";
 
 :root {
     --max-width: 1240px;
     --gutter: clamp(1.5rem, 5vw, 4rem);
 }
 
-.jp-header,
-.jp-main,
-.jp-footer {
+.page-shell {
     width: min(var(--max-width), calc(100% - var(--gutter)));
     margin: 0 auto;
-}
-
-.jp-main {
     padding-bottom: 4rem;
 }
 
-.jp-footer {
+.page-main {
+    margin-top: 2rem;
+}
+
+.site-footer {
     text-align: center;
     font-size: 0.85rem;
     letter-spacing: 0.08em;
     color: rgba(0, 0, 0, 0.55);
+    margin-top: 3rem;
 }
 
 // header + global nav ---------------------------------------------------
@@ -126,7 +125,7 @@
     place-items: center;
     font-size: 0.8rem;
     font-weight: 600;
-    color: $ink;
+    color: inherit;
 }
 
 .hero-stage__sun {
@@ -299,6 +298,15 @@
     position: relative;
     z-index: 1;
     max-width: 260px;
+}
+
+.text-link {
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+        border-color: currentColor;
+    }
 }
 
 .scroll-cards {
