@@ -1,0 +1,45 @@
+// ===============
+// Custom Sketch Theme
+// ===============
+$canvas: #f7f3ea;
+$ink: #1c1c1c;
+$accent: #c2a675;
+
+body {
+    background-color: $canvas;
+    color: $ink;
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.7;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Kalam', cursive;
+    color: $ink;
+    border-left: 4px solid $accent;
+    padding-left: 10px;
+    margin-top: 1.5em;
+}
+
+a {
+    color: $accent;
+    text-decoration: none;
+    border-bottom: 1px dashed $accent;
+
+    &:hover {
+        color: darken($accent, 10%);
+    }
+}
+
+img {
+    border-radius: 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1em;
+}
+
+nav a {
+    font-family: 'Kalam', cursive;
+    font-weight: 600;
+    margin-right: 20px;
+}
