@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    background: #f8f6f2 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    color: #1a1a1a;
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.8;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Kalam', cursive;
+    margin-bottom: .5em;
+}
+
+a {
+    color: #a87c4f;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 1px dashed #a87c4f;
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+nav a {
+    margin: 0 1em;
+    font-family: 'Kalam', cursive;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: #a87c4f;
+    transition: .3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+section {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1em;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-scroll] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+
+[data-scroll].visible {
+    opacity: 1;
+    transform: none;
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    margin: 3rem 0;
+}
